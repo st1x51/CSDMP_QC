@@ -1,0 +1,35 @@
+/*
++-----+
+|Progs|
++-----+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=+
+| Scratch                                      Http://www.admdev.com/scratch |
++=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+
+| This file contains all a list of QuakeC files to compile into the final    |
+| output file (progs.dat by default)                                         |
++=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-+
+*/
+
+../progs.dat                                        // Output File
+
+defs.c                                             // Definitions
+csdefs.c
+main.c    
+subs.c                                         // Main subroutines
+damage.c
+player.c
+client.c                                           // Client subroutines
+teammenu.c
+lights.c
+impulses.c
+wpn_shared\wpn_knife.c
+wpn_shared\wpn_usp.c
+wpn_shared\wpn_glock.c
+wpn_shared\wpn_deagle.c
+wpn_shared\wpn_hegrenade.c
+weapons.c
+triggers.c
+bmodels.c
+func_ladder.c
+sound.c
+
+
