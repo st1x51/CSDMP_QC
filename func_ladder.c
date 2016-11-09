@@ -9,6 +9,7 @@ float LADDEROFS = 0.36;// touchy...
 void() ladder_touch =
 {
         local vector vel;
+        local float r,sound_on;
         float fvel, spd;
 
         if (other.classname != "player") return;
@@ -62,24 +63,40 @@ void() ladder_touch =
                 other.origin = other.origin - self.movedir*LADDEROFS;// Pull back to keep from hitting the backing wall
                 vel_z = fabs(other.v_angle_x)*6;// go faster when facing forward
                 if (vel_z < 90) vel_z = 90;// minimum speed
+				sound_on = 1;		
         }
         // Up (facing down)
-         else if ( other.v_angle_x >= 15 && fvel<0 ) {
+        else if ( other.v_angle_x >= 15 && fvel<0 ) {
                 other.origin = other.origin + self.movedir*LADDEROFS;// Pull in to keep from falling off
                 vel_z = other.v_angle_x*4;
+				sound_on = 1;
         }
         // Down (facing up/forward)
         else if (other.v_angle_x <= 15 && fvel<0 ) {
                 other.origin = other.origin + self.movedir*LADDEROFS;// Pull in to keep from falling off
                 vel_z = fabs(other.v_angle_x)*-5;// go faster when facing forward
                 if (vel_z > -80) vel_z = -80;// minimum speed
-        }
+				sound_on = 1;
+	   }
         // Down (facing down)
         else if ( other.v_angle_x >= 15 && fvel>0 ) {
                 other.origin = other.origin - self.movedir*LADDEROFS;// Pull back to keep from hitting the backing wall
                 vel_z = other.v_angle_x*-4;
-        }
-
+				sound_on = 1;
+		}
+	if(sound_on)
+	{
+		r = randomlong(0,3);
+		if (r == 0)
+			sound (self, CHAN_VOICE, "player/pl_ladder1.wav", 1, ATTN_NORM);
+		else if (r == 1)
+			sound (self, CHAN_VOICE, "player/pl_ladder2.wav", 1, ATTN_NORM);
+        else if (r == 2)
+			sound (self, CHAN_VOICE, "player/pl_ladder3.wav", 1, ATTN_NORM);
+		else if (r == 3)
+            sound (self, CHAN_VOICE, "player/pl_ladder4.wav", 1, ATTN_NORM);
+        sound_on = 0;
+	}
         // Cap vertical moves to the server limits
         spd = 200;
         if (vel_z > spd) vel_z = spd;
@@ -132,6 +149,11 @@ Avoid situations where more than one func_ladder can be touched at the same time
 */
 void() func_ladder =
 {
-        InitTrigger();
-        self.touch = ladder_touch;
+	precache_sound ("player/pl_ladder1.wav");
+    precache_sound ("player/pl_ladder2.wav");
+    precache_sound ("player/pl_ladder3.wav");
+    precache_sound ("player/pl_ladder4.wav");
+
+    InitTrigger();
+    self.touch = ladder_touch;
 };
