@@ -2,7 +2,7 @@ float() crandom;
 void() BounceSound=
 {
 	local float r;
-	r = floor(random() * 2);
+	r = randomfloat(0,2);
 	if (self.dmg > 50)
 	{
 		sound(self, CHAN_VOICE, "weapons/he_bounce-1.wav", 0.25, ATTN_NORM);
@@ -44,7 +44,7 @@ void() BounceTouch=
 
 		if (m_iBounceCount >= 10)
 		{
-			//self.groundentity = ENT(0);
+			self.groundentity = world;
 			self.flags |= FL_ONGROUND;
 			self.velocity = '0 0 0';
 		}
