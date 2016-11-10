@@ -407,7 +407,12 @@ entity damage_attacker;
 .float pain_finished, air_finished, dmg, dmgtime;
 entity lastspawn;
 void(entity targ, entity inflictor, entity attacker, float damage) T_Damage;
-
+//
+// LADDERS: Written by Frank Condello <pox@planetquake.com>
+//
+.float ladderjump;
+.float ladder_time;
+float LADDEROFS = 0.36;// touchy...
 //just some functions here
 float duration,holdTime,R,G,B,A,fadeFlags;
 void UTIL_ScreenFadeBuild(vector color, float fadeTime, float fadeHold, float alpha,float flags)

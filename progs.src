@@ -29,7 +29,6 @@ wpn_shared\wpn_hegrenade.c
 weapons.c
 triggers.c
 bmodels.c
-func_ladder.c
 sound.c
 
 
