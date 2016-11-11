@@ -115,6 +115,7 @@ typedef struct entvars_s
 	float	button0;
 	float	button1;
 	float	button2;
+	float	button3;
 	float	impulse;
 	float	fixangle;
 	vec3_t	v_angle;
@@ -153,4 +154,4 @@ typedef struct entvars_s
 	vec3_t	rendercolor;
 } entvars_t;
 
-#define PROGHEADER_CRC 10173
+#define PROGHEADER_CRC 18423

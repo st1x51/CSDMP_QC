@@ -1,6 +1,154 @@
 void() CheckImpulses;
 void() WeaponFrameAll;
 void() UpdateWeapon;
+.float crouch_time;
+.float crouch_stuck;
+void()TraceTexture=
+{
+	//============================texture trace test================================
+    local vector start;
+    local vector end;
+    local vector end_player;
+    
+	end_player = self.origin;
+
+	// Straight down
+	end_player_z = end_player_z - 64;
+	
+	traceline (self.origin, end_player, TRUE, self);
+	if (trace_fraction == 1.0)
+		return;
+
+	start = trace_endpos + trace_plane_normal * (-8);
+	end = trace_endpos + trace_plane_normal * 8;
+
+    local string trace_texture;
+	trace_texture = tracematerial( trace_ent, start, end );
+	if(trace_texture == "d" || trace_texture == "D" )
+	{
+    	sound_step1 = "player/pl_dirt1.wav";
+    	sound_step2 = "player/pl_dirt2.wav";
+    	sound_step3 = "player/pl_dirt3.wav";
+    	sound_step4 = "player/pl_dirt4.wav";
+    }
+    else if(trace_texture == "v" || trace_texture == "V" )
+    {
+    	sound_step1 = "player/pl_duct1.wav";
+    	sound_step2 = "player/pl_duct2.wav";
+    	sound_step3 = "player/pl_duct3.wav";
+    	sound_step4 = "player/pl_duct4.wav";
+	}
+	else if(trace_texture == "g" || trace_texture == "G")
+	{
+    	sound_step1 = "player/pl_grate1.wav";
+    	sound_step2 = "player/pl_grate2.wav";
+    	sound_step3 = "player/pl_grate3.wav";
+    	sound_step4 = "player/pl_grate4.wav";
+	}
+	else if(trace_texture == "m" || trace_texture == "M")
+	{
+    	sound_step1 = "player/pl_metal1.wav";
+    	sound_step2 = "player/pl_metal2.wav";
+    	sound_step3 = "player/pl_metal3.wav";
+    	sound_step4 = "player/pl_metal4.wav";
+	}
+	else if(trace_texture == "t" || trace_texture == "T")
+	{
+    	sound_step1 = "player/pl_tile1.wav";
+    	sound_step2 = "player/pl_tile2.wav";
+    	sound_step3 = "player/pl_tile3.wav";
+    	sound_step4 = "player/pl_tile4.wav";
+	}
+	else if(trace_texture == "n" || trace_texture =="N")
+	{
+    	sound_step1 = "player/pl_snow1.wav";
+    	sound_step2 = "player/pl_snow2.wav";
+    	sound_step3 = "player/pl_snow3.wav";
+    	sound_step4 = "player/pl_snow4.wav";
+	}
+	else 
+	{
+    	sound_step1 = "player/pl_step1.wav";
+    	sound_step2 = "player/pl_step2.wav";
+    	sound_step3 = "player/pl_step3.wav";
+    	sound_step4 = "player/pl_step4.wav";
+	}	
+}
+void()PlayerCrouching =
+{
+	if ( (self.health <= 0) )
+	{
+		return;
+	}
+	
+	setsize (self, VEC_HULLHL2_MIN, VEC_HULLHL2_MAX);
+	self.hull = 4;
+	self.crouch_time = time;
+    self.crouch_stuck = 0;
+};
+
+void()PlayerUnCrouching =
+{
+	tracearea ((self.origin), (self.origin + '0 0 36'), VEC_HULLHL2_MIN, VEC_HULLHL2_MAX, FALSE, self);
+
+	if ( (trace_fraction < 1) )
+	{
+		self.crouch_stuck = 1;
+		return ;
+	}
+
+	setsize (self, VEC_HULLHL_MIN, VEC_HULLHL_MAX);
+	self.hull = 2;
+	self.crouch_time = time;
+};
+
+void()PlayerCrouch =
+{
+   if ( (self.crouch_time && (self.crouch_time < time)) )
+   {
+      if ( (self.hull == 4) )
+	  {
+         self.crouch_stuck = 0;
+         self.view_ofs_z = self.view_ofs_z - 5;
+		 if ( (self.view_ofs_z < 8) )
+		 {
+            self.view_ofs_z = 12;
+		    self.crouch_time = 0;
+         }
+		 else
+		 {
+            self.crouch_time = (time + (0.05 / 4));
+         }
+      }
+	  else
+	  {
+         self.view_ofs_z = self.view_ofs_z + 5;
+		 if ((self.view_ofs_z > 28))
+		 {
+            self.view_ofs_z = 28;
+	        self.crouch_time = 0;
+         }
+		 else
+		 {
+            self.crouch_time = (time + (0.05 / 4));
+         }
+      }
+   }
+
+   if ( self.button3 )
+   {
+      PlayerCrouching ();
+      self.button3 = 0;
+   }
+   else
+   {
+      if ((self.hull == 4) || self.crouch_stuck )
+	  {
+         PlayerUnCrouching ();
+      }
+   }
+};
+
 void() PlayerJump =
 {
 	
@@ -108,74 +256,14 @@ void() PlayerPreThink =
 	if (self.m_iJoiningState != JOINED)
 		JoiningThink();
 
-	//============================texture trace test================================
-    local vector start;
-    local vector end;
-    local vector end_player;
-    
-	end_player = self.origin;
-
-	// Straight down
-	end_player_z = end_player_z - 64;
-	
-	traceline (self.origin, end_player, TRUE, self);
-	if (trace_fraction == 1.0)
-		return;
-
-	start = trace_endpos + trace_plane_normal * (-8);
-	end = trace_endpos + trace_plane_normal * 8;
-
-    local string trace_texture;
-	trace_texture = tracematerial( trace_ent, start, end );
-	if(trace_texture == "d" || trace_texture == "D" )
+	TraceTexture();
+	if (self.button2)
 	{
-    	sound_step1 = "player/pl_dirt1.wav";
-    	sound_step2 = "player/pl_dirt2.wav";
-    	sound_step3 = "player/pl_dirt3.wav";
-    	sound_step4 = "player/pl_dirt4.wav";
-    }
-    else if(trace_texture == "v" || trace_texture == "V" )
-    {
-    	sound_step1 = "player/pl_duct1.wav";
-    	sound_step2 = "player/pl_duct2.wav";
-    	sound_step3 = "player/pl_duct3.wav";
-    	sound_step4 = "player/pl_duct4.wav";
+		PlayerJump ();
 	}
-	else if(trace_texture == "g" || trace_texture == "G")
-	{
-    	sound_step1 = "player/pl_grate1.wav";
-    	sound_step2 = "player/pl_grate2.wav";
-    	sound_step3 = "player/pl_grate3.wav";
-    	sound_step4 = "player/pl_grate4.wav";
-	}
-	else if(trace_texture == "m" || trace_texture == "M")
-	{
-    	sound_step1 = "player/pl_metal1.wav";
-    	sound_step2 = "player/pl_metal2.wav";
-    	sound_step3 = "player/pl_metal3.wav";
-    	sound_step4 = "player/pl_metal4.wav";
-	}
-	else if(trace_texture == "t" || trace_texture == "T")
-	{
-    	sound_step1 = "player/pl_tile1.wav";
-    	sound_step2 = "player/pl_tile2.wav";
-    	sound_step3 = "player/pl_tile3.wav";
-    	sound_step4 = "player/pl_tile4.wav";
-	}
-	else if(trace_texture == "n" || trace_texture =="N")
-	{
-    	sound_step1 = "player/pl_snow1.wav";
-    	sound_step2 = "player/pl_snow2.wav";
-    	sound_step3 = "player/pl_snow3.wav";
-    	sound_step4 = "player/pl_snow4.wav";
-	}
-	else 
-	{
-    	sound_step1 = "player/pl_step1.wav";
-    	sound_step2 = "player/pl_step2.wav";
-    	sound_step3 = "player/pl_step3.wav";
-    	sound_step4 = "player/pl_step4.wav";
-	}
+	else
+		self.flags = self.flags | FL_JUMPRELEASED;
+	PlayerCrouch();
 };
 .float nextfootstep;
 
@@ -231,13 +319,6 @@ void() playerfootstep =
 	}
 
 	WeaponFrameAll();
-	if (self.button2)
-	{
-		PlayerJump ();
-	}
-	else
-		self.flags = self.flags | FL_JUMPRELEASED;
-	
 	playerfootstep();
 };
 /*
