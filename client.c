@@ -329,7 +329,7 @@ void() PutClientInServer =
 	self.health = 1;
 	//self.m_iTeam = 0;
 	self.fixangle = 1;
-	
+	setmodel (self, "progs/player.mdl");
 	local entity Target;
 	Target = find(world,classname,"trigger_camera");
 	m_pIntroCamera = Target;
