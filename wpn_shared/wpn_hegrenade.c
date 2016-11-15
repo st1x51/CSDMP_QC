@@ -53,7 +53,7 @@ void() BounceTouch=
 }
 void() GrenadeExplode =
 {
-	T_RadiusDamage (self, self.owner, 48, world);
+	_RadiusDamage(self,self.owner,self.dmg,0,0);
 	//RadiusFlash(self.origin, self, self.owner, 4, 0, 0);
 	WriteByte (MSG_BROADCAST, SVC_TEMPENTITY);
 	WriteByte (MSG_BROADCAST, TE_EXPLOSION);

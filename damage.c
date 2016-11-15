@@ -123,44 +123,49 @@ float(entity targ, entity inflictor) CanDamage =
 	return FALSE;
 };
 
-/*
-============
-T_RadiusDamage
-============
-*/
-void(entity inflictor, entity attacker, float damage, entity ignore) T_RadiusDamage =
+void(vector vecSrc, entity pevInflictor, entity pevAttacker, float flDamage, float flRadius, float iClassIgnore, float bitsDamageType)RadiusDamage=
 {
-	local	float points;
-	local	entity	head;
-	local	vector	org;
+	local entity pEntity;
+	local float flAdjustedDamage,falloff;
 
-	head = findradius(inflictor.origin, damage + 1500);
+	if(flRadius)
+		falloff = flDamage / flRadius;
+	else
+		falloff = 1;
 	
-	while (head)
+	local float bInWater = (pointcontents(vecSrc) == CONTENT_WATER);
+	vecSrc_z += 1;
+	
+	if (!pevAttacker)
+		pevAttacker = pevInflictor;
+	
+	pEntity = findradius(vecSrc,flRadius);
+	while(pEntity)
 	{
-		if (head != ignore)
-		{
-			if (head.takedamage)
-			{
-				org = head.origin + (head.mins + head.maxs)*0.5;
-				points = 0.5*vlen (inflictor.origin - org);
-				if (points < 0)
-					points = 0;
-				points = damage - points;
-				if (head == attacker)
-					points = points * 0.5;
-				if (points > 0)
-				{
-					if (CanDamage (head, inflictor))
-					{	
-						T_Damage (head, inflictor, attacker, points);
-					}
-				}
-			}
-		}
-	head = head.chain;
+		pEntity = checkclient();
+		if (!pEntity)
+			return;
+		
+		if (pEntity.takedamage == DAMAGE_NO || pEntity.deadflag != DEAD_NO)
+			continue;
+
+		if (bInWater && pEntity.waterlevel == 0)
+			continue;
+
+		if (!bInWater && pEntity.waterlevel == 3)
+			continue;
+
+		local float damageRatio = 1;
+		local float length = vlen(vecSrc - pEntity.origin);
+		
+		flAdjustedDamage = flDamage - length * falloff;
+		
+		if(flAdjustedDamage < 0)
+			flAdjustedDamage = 0;
+		T_Damage (pEntity, pevInflictor, pevAttacker, flAdjustedDamage);
+		pEntity = pEntity.chain;
 	}
-};
+}
 
 void RadiusFlash(vector vecSrc, entity Inflictor, entity pevAttacker, float flDamage, float iClassIgnore, float bitsDamageType) =
 {
@@ -174,7 +179,7 @@ void RadiusFlash(vector vecSrc, entity Inflictor, entity pevAttacker, float flDa
 	else
 		falloff = 1;
 	
-	float bInWater = (pointcontents(vecSrc) == CONTENT_WATER);
+	local float bInWater = (pointcontents(vecSrc) == CONTENT_WATER);
 	vecSrc_z += 1;
 	pEntity = findradius(vecSrc,1500);
 	while(pEntity)
@@ -285,3 +290,11 @@ void() WaterMove =
         T_Damage (self, world, world, 4*self.waterlevel);
     }
 };
+
+void(entity pevInflictor, entity pevAttacker, float flDamage, float iClassIgnore, float bitsDamageType) _RadiusDamage =
+{
+	if (flDamage > 80)
+		RadiusDamage(self.origin, pevInflictor, pevAttacker, flDamage, flDamage * 3.5, iClassIgnore, bitsDamageType);
+	//else
+	//	RadiusDamage2(pev->origin, pevInflictor, pevAttacker, flDamage, iClassIgnore, bitsDamageType);
+}
