@@ -170,3 +170,25 @@ void() func_ladder =
     InitTrigger();
     self.touch = ladder_touch;
 };
+
+void() BuyTouch=
+{
+	if(other.classname != "player")
+		return;
+	
+	if(self.team == UNASSIGNED || self.team == other.m_iTeam)
+	{
+		stuffcmd (other, "buyicon 1 \n");
+		other.m_bInBuyZone = 1;
+	}
+}
+void() func_buyzone=
+{
+	InitTrigger();
+	self.touch = BuyTouch;
+	if(self.team > CT || self.team < UNASSIGNED)
+	{
+		dprint("Bad team number in func_buyzone\n");
+		self.team = UNASSIGNED;
+	}
+}

@@ -20,6 +20,7 @@ float m_iNumTerrorist,m_iNumCT;
 .float he_grenades;
 .float attack_finished;
 .float iSlot;
+.float m_iMenu,m_iTeam;
 enum
 {
 	PRIMARY,
@@ -36,6 +37,21 @@ enum
 	SHOWTEAMSELECT,
 	PICKINGTEAM,
 	GETINTOGAME
+};
+enum
+{
+	Menu_OFF,
+	Menu_ChooseTeam,
+	Menu_IGChooseTeam,
+	Menu_ChooseAppearance,
+	Menu_Buy
+};
+enum
+{
+	UNASSIGNED,
+	TERRORIST,
+	CT,
+	SPECTATOR,
 };
 .float m_iJoiningState;
 entity m_pIntroCamera;
@@ -61,3 +77,6 @@ string sound_step1;
 string sound_step2;
 string sound_step3;
 string sound_step4;
+
+float m_bMapHasBuyZone,buyTime ;
+.float m_bInBuyZone;

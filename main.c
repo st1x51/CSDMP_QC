@@ -1,12 +1,17 @@
 void() precaches;
 void() LightStyles_setup;
-
 void() main = {};
+
+void()CheckRules=
+{
+	m_bMapHasBuyZone = find(world,classname,"func_buyzone") != 0;
+}
 void() worldspawn = 
 {
 	lastspawn = world;
 	precaches();
 	LightStyles_setup();
+	CheckRules();
 };
 void() SetNewParms = {};
 void() SetChangeParms = {};

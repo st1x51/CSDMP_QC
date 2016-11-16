@@ -3,6 +3,50 @@ void() WeaponFrameAll;
 void() UpdateWeapon;
 .float crouch_time;
 .float crouch_stuck;
+void() OLD_CheckBuyZone=
+{
+	local string pszSpawnClass;
+	if(self.m_iTeam == TERRORIST)
+		pszSpawnClass = "info_player_deathmatch";
+	else if(self.m_iTeam == CT)
+		pszSpawnClass = "info_player_start";
+	if(pszSpawnClass)
+	{
+		local entity pSpot;
+		pSpot = find(world,classname,pszSpawnClass);
+		while(pSpot)
+		{
+			pSpot = find(pSpot,classname,pszSpawnClass);
+			if(vlen(pSpot.origin - self.origin) < 200)
+				stuffcmd(self,"buyicon 1 \n");
+		}
+	}
+}
+void()CheckBuyZone=
+{
+	if(self.m_bInBuyZone == 1)
+		stuffcmd(self,"buyicon 1 \n");
+	else
+		stuffcmd(self,"buyicon 0 \n");
+}
+void() Show_Menu_Team=
+{
+	stuffcmd (self, "menu_team \n");
+}
+void()Menu_Commands=
+{
+		switch (self.m_iMenu)
+		{
+			case Menu_OFF:
+			break;	
+			
+			case Menu_ChooseTeam:	
+			Show_Menu_Team();
+			self.m_iMenu = Menu_ChooseTeam;
+			break;
+		}
+}
+
 void()TraceTexture=
 {
 	//============================texture trace test================================
@@ -210,6 +254,7 @@ void() PlayerJump =
 		
 		case READINGLTEXT:
 		self.m_iJoiningState = SHOWTEAMSELECT;
+		self.m_iMenu = Menu_ChooseTeam;
 		break;
 		
 		case GETINTOGAME:
@@ -251,11 +296,11 @@ void() PlayerJump =
  //Called every frame, before physics.
 void() PlayerPreThink = 
 {
+	Menu_Commands();
 	SetClientFrame ();
 	WaterMove ();
 	if (self.m_iJoiningState != JOINED)
 		JoiningThink();
-
 	TraceTexture();
 	if (self.button2)
 	{
@@ -312,7 +357,12 @@ void() playerfootstep =
    if(self.deadflag == DEAD_DYING)
 		return;
 	CheckImpulses();
- 	if(self.menu_team_on)
+	CheckBuyZone();
+	// Reset this.. css style
+	self.m_bInBuyZone = 0;
+	if(!m_bMapHasBuyZone)
+		OLD_CheckBuyZone();
+ 	if(self.m_iMenu == Menu_ChooseTeam)
 	{
 		self.angles = '0 0 0';
 		self.fixangle = TRUE;
@@ -394,11 +444,7 @@ entity() SelectSpawnPoint =
 	return spot;
 };
 //Called to spawn the clients player entity
-void() menu_team=
-{
-	stuffcmd (self, "menu_team \n");
-	self.menu_team_on = 1;
-}
+
 void() PutClientInServer =
 {
 	self.solid = SOLID_NOT;
@@ -408,9 +454,11 @@ void() PutClientInServer =
 	self.punchangle = '0 0 0';
 	self.m_iJoiningState = READINGLTEXT;
 	self.health = 1;
-	//self.m_iTeam = 0;
+	self.m_iTeam = UNASSIGNED;
 	self.fixangle = 1;
 	setmodel (self, "progs/player.mdl");
+	self.m_iMenu = Menu_OFF;
+	
 	local entity Target;
 	Target = find(world,classname,"trigger_camera");
 	m_pIntroCamera = Target;
@@ -435,7 +483,6 @@ void() PutClientInServer =
 		self.v_angle = '0 0 0';
 		self.angles = v_forward;
 	}
-	self.m_iJoiningState = SHOWLTEXT;
 };
 void() PutClientCTInServer =
 {
@@ -448,7 +495,6 @@ void() PutClientCTInServer =
 	self.movetype = MOVETYPE_WALK;
 	self.flags = FL_CLIENT;
 	self.team = CT_SIDE;
-	self.menu_team_on = 0;
 	self.uspclip = 12;
 	self.he_grenades = 0;
 	self.silencer = 1;
@@ -466,6 +512,7 @@ void() PutClientCTInServer =
 	self.items = self.items | IT_USP | IT_KNIFE;
 	m_iNumCT +=1;
 	self.m_iJoiningState = JOINED;
+	self.m_iMenu = Menu_OFF;
 	UpdateWeapon();
 }
 void() PutClientTInServer =
@@ -479,7 +526,6 @@ void() PutClientTInServer =
 	self.movetype = MOVETYPE_WALK;
 	self.flags = FL_CLIENT;
 	self.team = T_SIDE;
-	self.menu_team_on = 0;
 	self.glockclip = 20; 
 	self.he_grenades = 0;
 	self.burst = 0;
@@ -497,6 +543,7 @@ void() PutClientTInServer =
 	self.items = self.items | IT_GLOCK | IT_KNIFE;
 	m_iNumTerrorist +=1;
 	self.m_iJoiningState = JOINED;
+	self.m_iMenu = Menu_OFF;
 	UpdateWeapon();
 }
 void() trigger_camera=
