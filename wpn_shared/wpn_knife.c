@@ -10,6 +10,18 @@ void()anim_knife_attack=
 	self.think = anim_knife_attack;
 	self.nextthink = time + 0.005;
 }
+void()anim_sec_knife_attack=
+{
+	if(self.weaponframe == 95)
+		{
+			self.state = 0;
+			self.weaponframe = 0;
+			return;
+		}
+	self.weaponframe += 1;
+	self.think = anim_sec_knife_attack;
+	self.nextthink = time + 0.01;
+}
 void KnifeAttack(float iDamage,float iDistance)
 {
 	local vector org, end;
@@ -44,11 +56,19 @@ void KnifeAttack(float iDamage,float iDistance)
 		sound (self, CHAN_AUTO, "weapons/knife_hitwall1.wav", 1, ATTN_NORM);
 }
 
-void()KNIFE_Attack=
+void()KNIFE_PrimaryAttack=
 {
 		self.attack_finished = time + 0.5;
 		self.weaponframe = 155;
 		anim_knife_attack();
 		self.state = ATTACK;
 		KnifeAttack(20,48);	
+}
+void()KNIFE_SecondaryAttack=
+{
+		self.attack_finished = time + 1.1;
+		self.weaponframe = 48;
+		anim_sec_knife_attack();
+		self.state = ATTACK;
+		KnifeAttack(60,30);	
 }
