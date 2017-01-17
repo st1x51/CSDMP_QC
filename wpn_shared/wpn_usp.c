@@ -36,6 +36,7 @@ void()anim_usp_attack_sil=
 	if(self.weaponframe == 7)
 		{
 			self.weaponframe = 1;
+			self.state = 0;
 			return;
 		}
 	self.weaponframe += 1;
@@ -47,6 +48,7 @@ void()anim_usp_attack=
 	if(self.weaponframe == 122)
 		{
 			self.weaponframe = 0;
+			self.state = 0;
 			return;
 		}
 	self.weaponframe += 1;
@@ -97,6 +99,7 @@ void()USP_Attack=
 	local vector vorg, dir;
 	if(self.uspclip == 0)
 		{
+			self.state = RELOADING;
 			if(self.silencer == 1)
 				Reload(32);
 			else

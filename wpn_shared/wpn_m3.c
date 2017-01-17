@@ -4,6 +4,7 @@ void()anim_m3_attack=
 	if(self.weaponframe == 48)
 		{
 			self.weaponframe = 1;
+			self.state = 0;
 			return;
 		}
 	self.weaponframe += 1;
@@ -16,7 +17,8 @@ void() M3_Reload_End=
 		sound (self, CHAN_AUTO, "weapons/m3_pump.wav", 1, ATTN_NORM);
 	if(self.weaponframe == 147) 
 	{
-		self.weaponframe = 2;
+		self.weaponframe = 1;
+		self.state = 0;
 		return;
 	}
 	self.weaponframe += 1;
@@ -29,7 +31,6 @@ void() M3_Reload=
 	{
 		self.weaponframe = 116;
 		M3_Reload_End();
-		self.state = 0;
 		return;
 	}
 	if(self.weaponframe == 103) 

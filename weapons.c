@@ -161,7 +161,6 @@ void(float startframe)Reload=
 void() WeaponAttack =
 {
 	makevectors(self.v_angle);
-	self.state = ATTACK;
 	if(self.weapon == IT_KNIFE)
 	{
 		KNIFE_PrimaryAttack();

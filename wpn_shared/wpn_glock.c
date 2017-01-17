@@ -4,6 +4,7 @@ void()anim_glock_attack=
 	if(self.weaponframe == 102)
 		{
 			self.weaponframe = 1;
+			self.state = 0;
 			return;
 		}
 	self.weaponframe += 1;
