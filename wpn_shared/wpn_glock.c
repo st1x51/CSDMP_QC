@@ -97,7 +97,6 @@ void()GLOCK_Attack=
 	{
 		if(self.glockclip == 0)
 			{
-				self.state = RELOADING;
 				Reload(144); 
 				return;
 			}
@@ -124,7 +123,6 @@ void()GLOCK_Attack=
 		self.attack_finished = time + 0.3;
 		if(self.glockclip == 0)
 		{
-			self.state = RELOADING;
 			Reload(144); 
 			return;
 		}

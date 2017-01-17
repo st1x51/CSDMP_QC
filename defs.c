@@ -387,7 +387,8 @@ float	AS_MISSILE		= 4;
 
 void() SUB_Null = {};
 void() SUB_Null2 = {};
-
+#define RANDOM_LONG(x,y) (x + (y - x)*random())
+#define RANDOM_FLOAT(x) floor(random() * x)
 // Quake assumes these are defined.
 entity activator;
 string string_null;    // null string, nothing should be held here

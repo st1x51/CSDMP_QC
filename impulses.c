@@ -44,6 +44,15 @@ void() CheckImpulses =
 		self.he_grenades += 1;
 		UpdateWeapon();
 	}
+	if(self.impulse == 62)	
+	{
+		bprint("Bought M3 Shotgun \n");
+		self.iSlot = PRIMARY;
+		self.items = self.items - (self.items & GetWeaponId());
+		self.items = self.items | IT_M3;
+		self.weapon = IT_M3;
+		UpdateWeapon();
+	}
 	
 	if(self.impulse == 90)
 	{

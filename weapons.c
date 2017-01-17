@@ -68,29 +68,35 @@ void(float damage, vector dir) TraceAttack=
 		WriteCoord (MSG_BROADCAST, org_z);
 	}
 };
-void(float shotcount, vector dir, vector spread) FireBullets=
+void(float cShots,vector vecSrc,vector vecDirShooting,vector vecSpread,float flDistance,float iDamage)FireBullets=
 {
-	local	vector direction;
-	local	vector	src;
-	
-	makevectors(self.v_angle);
-
-	src = self.origin + v_forward*10;
-	src_z = self.absmin_z + self.size_z * 0.7;
-
+	local vector vecRight = v_right;
+	local vector vecUp = v_up;
+	local float x,y,z;
 	ClearMultiDamage ();
-	while (shotcount > 0)
+	for(float iShot = 1; iShot <= cShots; iShot++)
 	{
-		direction = dir + crandom()*spread_x*v_right + crandom()*spread_y*v_up;
-
-		traceline (src, src * 2048, FALSE, self);
-		if (trace_fraction != 1.0)
-			TraceAttack (30, direction);
-
-		shotcount = shotcount - 1;
+		
+		do{
+			x = RANDOM_LONG(-0.5,0.5) + RANDOM_LONG(-0.5,0.5);
+			y = RANDOM_LONG(-0.5,0.5) + RANDOM_LONG(-0.5,0.5);
+			z = x*x+y*y;
+		} while(z>1);
+	
+	local vector vecDir = vecDirShooting + x * vecSpread_x * vecRight + y * vecSpread_y * vecUp;
+	local vector vecEnd;
+	vecEnd = vecSrc + vecDir * flDistance;
+	traceline(vecSrc,vecEnd,0,self);
+	if (trace_fraction != 1.0)
+	{
+		if(iDamage)
+		{
+			TraceAttack(iDamage,vecDir);
+		}
+	}
 	}
 	ApplyMultiDamage ();
-};
+}
 
 void() UpdateWeapon=
 {
@@ -129,11 +135,18 @@ void() UpdateWeapon=
 		self.weaponframe = 1;
 		self.currentammo = self.uspclip;
 	}
+	if(self.weapon == IT_M3)
+	{
+		self.weaponmodel = "progs/v_m3.mdl";
+		self.weaponframe = 1;
+		self.currentammo = self.m3clip;
+	}
 }
 
 void(float startframe)Reload=
 {
 	self.weaponframe = startframe;
+	self.state = RELOADING;
 	if(self.weapon == IT_USP && self.silencer == 0)
 		USP_Reload();
 	if(self.weapon == IT_USP && self.silencer == 1)	
@@ -141,11 +154,14 @@ void(float startframe)Reload=
 	if(self.weapon == IT_GLOCK)	
 		Glock_Reload();	
 	if(self.weapon == IT_DEAGLE)	
-		Deagle_Reload();		
+		Deagle_Reload();	
+	if(self.weapon == IT_M3)	
+		M3_Reload();	
 }
 void() WeaponAttack =
 {
 	makevectors(self.v_angle);
+	self.state = ATTACK;
 	if(self.weapon == IT_KNIFE)
 	{
 		KNIFE_PrimaryAttack();
@@ -169,11 +185,15 @@ void() WeaponAttack =
 		{
 			HE_Attack();
 		}
+		if(self.weapon == IT_M3)
+		{
+			M3_PrimaryAttack();
+		}
 	}
 }
 void() WeaponFrameAll=
 {
-	if(time < self.attack_finished || self.state == RELOADING || self.state == SILENCER || self.state == ATTACK)
+	if(time < self.attack_finished || self.state > 0)
 		return;
 	if (!self.button0)
         self.semi = 0;			
@@ -182,6 +202,11 @@ void() WeaponFrameAll=
 }
 float() GetWeaponId=
 {
+	if(self.iSlot == PRIMARY)
+	{
+		if(self.items == self.items | IT_M3)
+			return IT_M3;	
+	}
 	if(self.iSlot == SECONDARY)
 	{
 		if(self.items == self.items | IT_USP)
@@ -196,6 +221,8 @@ float() GetWeaponId=
 		if(self.items == self.items | IT_HEGRENADE)
 			return IT_HEGRENADE;	
 	}
+	
+	return 0; //just shut up compiler warning
 }
 void() ChangeWeapon =
 {
@@ -207,7 +234,12 @@ void() ChangeWeapon =
 	while(1)
 	{
 		skip = 0;
-		if(self.iSlot == SECONDARY)
+		if(self.iSlot == PRIMARY)
+		{
+			self.iSlot = SECONDARY;
+			self.weapon = GetWeaponId();
+		}
+		else if(self.iSlot == SECONDARY)
 		{
 			self.iSlot = KNIFE;
 			self.weapon = IT_KNIFE;
@@ -219,7 +251,7 @@ void() ChangeWeapon =
 		}
 		else if(self.iSlot == GRENADES)
 		{
-			self.iSlot = SECONDARY;
+			self.iSlot = PRIMARY;
 			self.weapon = GetWeaponId();
 		}
 		if((self.items & self.weapon) && skip == 0)	

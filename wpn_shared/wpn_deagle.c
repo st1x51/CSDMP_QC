@@ -32,13 +32,11 @@ void()DEAGLE_Attack=
 	local vector vorg,dir;
 	if(self.deagleclip == 0)
 	{
-		self.state = RELOADING;
 		Reload(51);
 		return;
 	}
 	self.attack_finished = time + 0.2;
 	self.weaponframe = 1;
-	self.state = ATTACK;
 	anim_deagle_attack();
 	sound (self, CHAN_AUTO, "weapons/deagle-1.wav", 1, ATTN_NORM);
 	if(self.velocity_x || self.velocity_y)

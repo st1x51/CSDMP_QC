@@ -25,6 +25,7 @@ wpn_shared\wpn_knife.c
 wpn_shared\wpn_usp.c
 wpn_shared\wpn_glock.c
 wpn_shared\wpn_deagle.c
+wpn_shared\wpn_m3.c
 wpn_shared\wpn_hegrenade.c
 weapons.c
 triggers.c

@@ -97,7 +97,6 @@ void()USP_Attack=
 	local vector vorg, dir;
 	if(self.uspclip == 0)
 		{
-			self.state = RELOADING;
 			if(self.silencer == 1)
 				Reload(32);
 			else

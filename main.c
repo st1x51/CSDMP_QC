@@ -26,6 +26,7 @@ void() precaches =
 	precache_model("progs/v_usp_silencer.mdl");
 	precache_model("progs/v_glock18.mdl");
 	precache_model("progs/v_deagle.mdl");
+	precache_model("progs/v_m3.mdl");
 	precache_model("progs/v_hegrenade.mdl");
 	precache_model("progs/w_grenade.mdl");
 	 
@@ -63,7 +64,11 @@ void() precaches =
 	precache_sound("weapons/grenade_hit2.wav");
 	precache_sound("weapons/grenade_hit3.wav");
 	precache_sound("weapons/he_bounce-1.wav");
-	 
+	//m3
+	precache_sound("weapons/m3-1.wav");
+	precache_sound("weapons/m3_insertshell.wav");
+	precache_sound("weapons/m3_pump.wav");
+	
 	//footsteps
 	precache_sound ("player/pl_step1.wav");
 	precache_sound ("player/pl_step2.wav");
