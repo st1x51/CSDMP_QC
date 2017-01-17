@@ -148,7 +148,7 @@ void() WeaponAttack =
 	makevectors(self.v_angle);
 	if(self.weapon == IT_KNIFE)
 	{
-		KNIFE_Attack();
+		KNIFE_PrimaryAttack();
 	}
 	if(!self.semi)
 	{
