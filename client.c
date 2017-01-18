@@ -32,7 +32,9 @@ void()CheckBuyZone=
 void() Show_Menu_Team=
 {
 	stuffcmd (self, "menu_team \n");
+	self.m_iMenu = Menu_ChooseTeam;
 }
+/*
 void()Menu_Commands=
 {
 		switch (self.m_iMenu)
@@ -46,7 +48,7 @@ void()Menu_Commands=
 			break;
 		}
 }
-
+*/
 void()TraceTexture=
 {
 	//============================texture trace test================================
@@ -242,6 +244,7 @@ void() PlayerJump =
  };
  void() JoiningThink =
  {
+	 /*
 	switch (self.m_iJoiningState)
 	{
 		case JOINED:
@@ -262,6 +265,7 @@ void() PlayerJump =
 		break;
 		
 	}
+	*/
 	if (m_pIntroCamera && time >= self.m_fIntroCamTime)
 	{
 		 m_pIntroCamera = find(m_pIntroCamera,classname, "trigger_camera");
@@ -296,12 +300,12 @@ void() PlayerJump =
  //Called every frame, before physics.
 void() PlayerPreThink = 
 {
-	Menu_Commands();
+	//Menu_Commands();
 	SetClientFrame ();
 	WaterMove ();
 	if (self.m_iJoiningState != JOINED)
 		JoiningThink();
-	TraceTexture();
+	//TraceTexture();
 	if (self.button2)
 	{
 		PlayerJump ();
@@ -369,7 +373,7 @@ void() playerfootstep =
 	}
 
 	WeaponFrameAll();
-	playerfootstep();
+	//playerfootstep();
 };
 /*
 ============
@@ -444,7 +448,6 @@ entity() SelectSpawnPoint =
 	return spot;
 };
 //Called to spawn the clients player entity
-
 void() PutClientInServer =
 {
 	self.solid = SOLID_NOT;
@@ -457,8 +460,9 @@ void() PutClientInServer =
 	self.m_iTeam = UNASSIGNED;
 	self.fixangle = 1;
 	setmodel (self, "progs/player.mdl");
-	self.m_iMenu = Menu_OFF;
-	
+	//self.m_iMenu = Menu_OFF;
+	self.think = Show_Menu_Team;
+	self.nextthink = time + 2;
 	local entity Target;
 	Target = find(world,classname,"trigger_camera");
 	m_pIntroCamera = Target;

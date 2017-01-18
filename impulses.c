@@ -131,5 +131,19 @@ void() CheckImpulses =
 			}
 		}
 	}
+	
+	if(self.impulse == 105)
+	{
+		if(self.m_bInBuyZone)
+		{
+			if(self.team == CT_SIDE)
+				stuffcmd(self,"menu_buyct \n");
+			else
+				stuffcmd(self,"menu_buyt \n");
+		}
+		else
+			centerprint(self,"You are not in the buy zone\n");
+	}
+	
 	self.impulse = 0;                              // Clear impulse list.
 };
