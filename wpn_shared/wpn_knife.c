@@ -60,6 +60,7 @@ void()KNIFE_PrimaryAttack=
 {
 		self.attack_finished = time + 0.5;
 		self.weaponframe = 155;
+		self.state = ATTACK;
 		anim_knife_attack();
 		KnifeAttack(20,48);	
 }
@@ -67,6 +68,7 @@ void()KNIFE_SecondaryAttack=
 {
 		self.attack_finished = time + 1.1;
 		self.weaponframe = 48;
+		self.state = ATTACK;
 		anim_sec_knife_attack();
 		KnifeAttack(60,30);	
 }

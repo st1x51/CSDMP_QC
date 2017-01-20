@@ -10,6 +10,7 @@ void() CheckImpulses =
 	if(self.impulse == 20)	
 	{
 		bprint("Bought glock \n");
+		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = SECONDARY;
 		self.items = self.items - (self.items & GetWeaponId());
 		self.items = self.items | IT_GLOCK;
@@ -19,6 +20,7 @@ void() CheckImpulses =
 	if(self.impulse == 21)	
 	{
 		bprint("Bought usp \n");
+		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = SECONDARY;
 		self.items = self.items - (self.items & GetWeaponId());
 		self.items = self.items | IT_USP;
@@ -28,6 +30,7 @@ void() CheckImpulses =
 	if(self.impulse == 22)	
 	{
 		bprint("Bought Deagle \n");
+		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = SECONDARY;
 		self.items = self.items - (self.items & GetWeaponId());
 		self.items = self.items | IT_DEAGLE;
@@ -39,6 +42,7 @@ void() CheckImpulses =
 		if(self.he_grenades == 1)
 			return;
 		bprint("Bought HE \n");
+		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.items = self.items | IT_HEGRENADE;
 		self.weapon = IT_HEGRENADE;
 		self.he_grenades += 1;
@@ -47,6 +51,7 @@ void() CheckImpulses =
 	if(self.impulse == 62)	
 	{
 		bprint("Bought M3 Shotgun \n");
+		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = PRIMARY;
 		self.items = self.items - (self.items & GetWeaponId());
 		self.items = self.items | IT_M3;
@@ -69,7 +74,7 @@ void() CheckImpulses =
 			else	
 			{
 				bprint (self.netname);
-				bprint (" Joining Couter-Terrorist team\n");
+				bprint (" Joining Counter-Terrorist team\n");
 				counter1 ();
 			}
 	}

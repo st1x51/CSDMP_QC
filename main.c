@@ -40,6 +40,7 @@ void() precaches =
 	precache_sound("weapons/knife_hit3.wav");
 	precache_sound("weapons/knife_hit4.wav");
 	precache_sound("weapons/knife_hitwall1.wav");
+	precache_sound("items/gunpickup2.wav");
 	//usp
 	precache_sound("weapons/usp1.wav");
 	precache_sound("weapons/usp_unsil-1.wav");

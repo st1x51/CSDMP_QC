@@ -165,6 +165,10 @@ void() WeaponAttack =
 	{
 		KNIFE_PrimaryAttack();
 	}
+	if(self.weapon == IT_M3)
+	{
+		M3_PrimaryAttack();
+	}
 	if(!self.semi)
 	{
 		self.semi = 1;
@@ -183,10 +187,6 @@ void() WeaponAttack =
 		if(self.weapon == IT_HEGRENADE)
 		{
 			HE_Attack();
-		}
-		if(self.weapon == IT_M3)
-		{
-			M3_PrimaryAttack();
 		}
 	}
 }
