@@ -448,3 +448,19 @@ void UTIL_ScreenFade(entity pEntity,vector color, float fadeTime, float fadeHold
 	UTIL_ScreenFadeBuild(color, fadeTime, fadeHold, alpha,flags);
 	UTIL_ScreenFadeWrite(pEntity);
 }
+
+/*
+-----------------------------------------
+min
+
+Returns the lesser of two (or more) numbers
+
+-----------------------------------------
+*/
+float (float a, float b) mathlib_min =
+{
+	if (a<b)
+		return a;
+	else
+		return b;
+};

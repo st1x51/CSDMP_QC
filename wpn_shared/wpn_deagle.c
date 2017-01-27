@@ -16,6 +16,7 @@ void() Deagle_Reload=
 	{
 		self.weaponframe = 1;
 		self.deagleclip = 7;
+		self.currentammo = self.deagleclip;
 		self.state = 0;
 		return;
 	}	
@@ -29,27 +30,14 @@ void() Deagle_Reload=
 }
 void()DEAGLE_Attack=
 {
-	local vector vorg,dir;
 	if(self.deagleclip == 0)
 	{
 		Reload(51);
 		return;
 	}
-	self.attack_finished = time + 0.2;
+	self.attack_finished = time + 0.18;
 	self.weaponframe = 1;
 	anim_deagle_attack();
-	sound (self, CHAN_AUTO, "weapons/deagle-1.wav", 1, ATTN_NORM);
-	if(self.velocity_x || self.velocity_y)
-		dir = v_forward + (v_right * (random() - 0.5)*0.25) + (v_up * (random() - 0.5)*0.25); 
-	else	
-		dir = v_forward + (v_right * (random() - 0.5)*0.13) + (v_up * (random() - 0.5)*0.13); 
-	vorg = self.origin + '0 0 22';
-	traceline(vorg, vorg + dir * 16000, FALSE, self);
-	T_Damage (trace_ent, self, self, 54);
-	WriteByte (MSG_BROADCAST, SVC_TEMPENTITY);
-	WriteByte (MSG_BROADCAST, TE_GUNSHOT);
-	WriteCoord (MSG_BROADCAST, trace_endpos_x);
-	WriteCoord (MSG_BROADCAST, trace_endpos_y);
-	WriteCoord (MSG_BROADCAST, trace_endpos_z);
+	DefaultFire(1, 47, "weapons/deagle-1.wav");
 	self.deagleclip -=1;
 }

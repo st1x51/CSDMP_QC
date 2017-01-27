@@ -3,6 +3,11 @@ vector  VEC_DUCK_VIEW = '0 0 12';
 vector  VEC_DUCK_HULL_MIN = '-16 -16 -18';
 vector  VEC_DUCK_HULL_MAX =  '16 16 18';
 
+#define AUTOAIM_2DEGREES  0.0348994967025
+#define AUTOAIM_5DEGREES  0.08715574274766
+#define AUTOAIM_8DEGREES  0.1391731009601
+#define AUTOAIM_10DEGREES 0.1736481776669
+
 // screen fade flags
 float FFADE_IN		    = 0;		// Just here so we don't pass 0 into the function
 float FFADE_OUT		    = 1;		// Fade out (not in)
@@ -15,9 +20,10 @@ float m_iNumTerrorist,m_iNumCT;
 .float menu_team_on;
 .float semi;
 .float ammo_45acp,uspclip,silencer;
-.float ammo_glock,glockclip,burst;
+.float ammo_glock,glockclip,autofire;
 .float ammo_deagle,deagleclip;
 .float ammo_m3,m3clip;
+.float ammo_ak47,ak47clip;
 .float he_grenades;
 .float attack_finished;
 .float iSlot;
@@ -64,12 +70,15 @@ entity m_pIntroCamera;
 .float m_blindFadeTime;
 .float m_blindAlpha;
 
+float MaxSpreadY,MaxSpreadX,SpreadX,SpreadY;
+float LeftSpread;
 float IT_KNIFE = 1;
 float IT_USP = 2;
 float IT_GLOCK = 4;
 float IT_DEAGLE = 8;
 float IT_HEGRENADE = 16;
 float IT_M3 = 32;
+float IT_AK47 = 64;
 .float state;
 float RELOADING = 1;
 float SILENCER  = 2;

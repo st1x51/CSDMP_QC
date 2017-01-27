@@ -1,3 +1,17 @@
+void(float cShots,vector vecSrc,vector vecDirShooting,vector vecSpread,float flDistance,float iDamage)FireBullets;
+void(float damage, vector dir) TraceAttack;
+
+vector(float flDelta) GetAutoaimVector =
+{
+		makevectors( self.v_angle + self.punchangle );
+		return v_forward;
+}
+vector() GetGunPosition =
+{
+	local vector org;
+	org = self.origin + self.view_ofs;
+	return org;
+}
 /*
 =-=-=-=-=
  Killed
@@ -297,4 +311,48 @@ void(entity pevInflictor, entity pevAttacker, float flDamage, float iClassIgnore
 		RadiusDamage(self.origin, pevInflictor, pevAttacker, flDamage, flDamage * 3.5, iClassIgnore, bitsDamageType);
 	//else
 	//	RadiusDamage2(pev->origin, pevInflictor, pevAttacker, flDamage, iClassIgnore, bitsDamageType);
+}
+
+void(float cShots,float damage,string soundpath)DefaultFire=
+{
+	local float m_iClip = self.currentammo;
+	local float speed = vlen(self.velocity);
+	if (m_iClip <= 0)
+	{
+		return;
+	}
+	sound (self, CHAN_AUTO, soundpath, 1, ATTN_NORM);
+	cShots = mathlib_min(m_iClip,cShots);
+	self.currentammo -= cShots;
+	m_iClip -= cShots;
+	local vector vecSrc;
+	local vector vecAim;
+	local vector vecAcc;
+	vecSrc = GetGunPosition();
+	vecAcc = '0 0 0';
+	vecAim = GetAutoaimVector(AUTOAIM_2DEGREES);
+	if(cShots != 1)
+		vecAcc = [SpreadX / 100,SpreadY / 100,0];
+	if(speed)
+		vecAcc += [SpreadY / 5000,SpreadY / 5000,0] * speed;
+	if(cShots == 1)
+		vecAcc = vecAcc / 10;
+	if ( !( self.flags & FL_ONGROUND ) )
+		vecAcc += [SpreadY / 5000,SpreadY / 5000,0] * 250;
+
+	FireBullets(cShots,vecSrc,vecAim,vecAcc,8192,damage);
+	if(!LeftSpread)
+		LeftSpread = 1;
+	self.punchangle_x -= RANDOM_LONG(SpreadY / 2,SpreadY);
+	self.punchangle_y += SpreadX * RANDOM_LONG(-1,1) / 2;
+	if(self.punchangle_x < -MaxSpreadY)
+	{
+		self.punchangle_x = - MaxSpreadY + RANDOM_LONG(-2,2);
+		self.punchangle_y += SpreadX * LeftSpread; 
+	}
+	
+	if(self.punchangle_y <= -MaxSpreadX)
+		LeftSpread = 1;
+	else if(self.punchangle_y > MaxSpreadX)
+		LeftSpread = -1;
 }

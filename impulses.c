@@ -50,7 +50,7 @@ void() CheckImpulses =
 	}
 	if(self.impulse == 62)	
 	{
-		bprint("Bought M3 Shotgun \n");
+		bprint("Bought M3 \n");
 		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = PRIMARY;
 		self.items = self.items - (self.items & GetWeaponId());
@@ -58,7 +58,16 @@ void() CheckImpulses =
 		self.weapon = IT_M3;
 		UpdateWeapon();
 	}
-	
+	if(self.impulse == 43)
+	{
+		bprint("Bought AK-47 \n");
+		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
+		self.iSlot = PRIMARY;
+		self.items = self.items - (self.items & GetWeaponId());
+		self.items = self.items | IT_AK47;
+		self.weapon = IT_AK47;
+		UpdateWeapon();
+	}
 	if(self.impulse == 90)
 	{
 		bprint("CT Players:",ftos(m_iNumCT),"\n");
@@ -124,15 +133,15 @@ void() CheckImpulses =
 		}
 		if(self.weapon == IT_GLOCK)
 		{
-			if(self.burst == 1)
+			if(self.autofire  == 1)
 			{	
 				centerprint(self,"Switched to semi-automatic\n");
-				self.burst = 0;
+				self.autofire = 0;
 			}
 			else
 			{
 				centerprint(self,"Switched to Burst-fire mode\n");
-				self.burst = 1;
+				self.autofire = 1;
 			}
 		}
 	}

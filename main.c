@@ -69,7 +69,11 @@ void() precaches =
 	precache_sound("weapons/m3-1.wav");
 	precache_sound("weapons/m3_insertshell.wav");
 	precache_sound("weapons/m3_pump.wav");
-	
+	//ak47
+	precache_model("progs/v_ak47.mdl");
+	precache_sound("weapons/ak47-1.wav");
+	precache_sound("weapons/ak47_clipout.wav");
+	precache_sound("weapons/ak47_clipin.wav");
 	//footsteps
 	precache_sound ("player/pl_step1.wav");
 	precache_sound ("player/pl_step2.wav");

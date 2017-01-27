@@ -80,6 +80,7 @@ void() USP_Silencer_Reload=
 	{
 		self.weaponframe = 1;
 		self.uspclip = 12;
+		self.currentammo = self.uspclip;
 		self.state = 0;
 		return;
 	}
@@ -93,10 +94,8 @@ void() USP_Silencer_Reload=
 	self.think = USP_Silencer_Reload;
 	self.nextthink = time + 0.025;
 } 
-//TODO
 void()USP_Attack=
 {
-	local vector vorg, dir;
 	if(self.uspclip == 0)
 		{
 			self.state = RELOADING;
@@ -106,42 +105,18 @@ void()USP_Attack=
 				Reload(147);
 			return;
 		}
-	self.attack_finished = time + 0.2;
-	if(self.silencer)
-	{
-		self.weaponframe = 1;
-		anim_usp_attack_sil();
-		sound (self, CHAN_AUTO, "weapons/usp1.wav", 1, ATTN_NORM);
-		if(self.velocity_x || self.velocity_y)
-			dir = v_forward + (v_right * (random() - 0.5)*0.1) + (v_up * (random() - 0.5)*0.1); 
-		else	
-			dir = v_forward + (v_right * (random() - 0.5)*0.05) + (v_up * (random() - 0.5)*0.05); 
-		vorg = self.origin + '0 0 22';
-		traceline(vorg, vorg + dir * 16000, FALSE, self);
-		T_Damage (trace_ent, self, self, 30);
-		WriteByte (MSG_BROADCAST, SVC_TEMPENTITY);
-		WriteByte (MSG_BROADCAST, TE_GUNSHOT);
-		WriteCoord (MSG_BROADCAST, trace_endpos_x);
-		WriteCoord (MSG_BROADCAST, trace_endpos_y);
-		WriteCoord (MSG_BROADCAST, trace_endpos_z);
-	}
-	else
+	self.attack_finished = time + 0.085;
+	if(!self.silencer )
 	{
 		self.weaponframe = 115;
 		anim_usp_attack();
-		sound (self, CHAN_AUTO, "weapons/usp_unsil-1.wav", 1, ATTN_NORM);
-		if(self.velocity_x || self.velocity_y)
-			dir = v_forward + (v_right * (random() - 0.5)*0.1) + (v_up * (random() - 0.5)*0.1); 
-		else	
-			dir = v_forward + (v_right * (random() - 0.5)*0.05) + (v_up * (random() - 0.5)*0.05); 
-		vorg = self.origin + '0 0 22';
-		traceline(vorg, vorg + dir * 16000, FALSE, self);
-		T_Damage (trace_ent, self, self, 30);
-		WriteByte (MSG_BROADCAST, SVC_TEMPENTITY);
-		WriteByte (MSG_BROADCAST, TE_GUNSHOT);
-		WriteCoord (MSG_BROADCAST, trace_endpos_x);
-		WriteCoord (MSG_BROADCAST, trace_endpos_y);
-		WriteCoord (MSG_BROADCAST, trace_endpos_z);
+		DefaultFire(1, 30, "weapons/usp_unsil-1.wav");
+	}
+	else
+	{
+		self.weaponframe = 1;
+		anim_usp_attack_sil();
+		DefaultFire(1, 30, "weapons/usp1.wav");
 	}
 	self.uspclip -=1;
 }

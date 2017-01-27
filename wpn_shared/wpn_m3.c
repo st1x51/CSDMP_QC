@@ -56,7 +56,7 @@ void()M3_PrimaryAttack=
 	self.attack_finished = time + 0.875;
 	vecSrc = self.origin + self.view_ofs;
 	vecAcc = '0.08716 0.04362 0.00';
-	vecAim = aim(self,1000);
+	vecAim = GetAutoaimVector(AUTOAIM_2DEGREES);
 	FireBullets(9,vecSrc,vecAim,vecAcc,8192,20);
 	self.punchangle_x -= 5;
 	self.weaponframe = 10;

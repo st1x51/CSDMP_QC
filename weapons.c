@@ -116,18 +116,33 @@ void() UpdateWeapon=
 		else
 			self.weaponframe = 0;
 		self.currentammo = self.uspclip;
+		
+		MaxSpreadX = 5;
+		MaxSpreadY = 5;
+		SpreadX = 2;
+		SpreadY = 2;
 	}
 	if(self.weapon == IT_GLOCK)
 	{
 		self.weaponmodel = "progs/v_glock18.mdl";
 		self.weaponframe = 1;
 		self.currentammo = self.glockclip;
+		
+		MaxSpreadX = 2;
+		MaxSpreadY = 3;
+		SpreadX = 1.7;
+		SpreadY = 1.7;
 	}
 	if(self.weapon == IT_DEAGLE)
 	{
 		self.weaponmodel = "progs/v_deagle.mdl";
 		self.weaponframe = 0;
 		self.currentammo = self.deagleclip;
+		
+		MaxSpreadX = 2;
+		MaxSpreadY = 5;
+		SpreadX = 3.5;
+		SpreadY = 3.5;
 	}
 	if(self.weapon == IT_HEGRENADE)
 	{
@@ -140,7 +155,23 @@ void() UpdateWeapon=
 		self.weaponmodel = "progs/v_m3.mdl";
 		self.weaponframe = 1;
 		self.currentammo = self.m3clip;
+		
+		MaxSpreadX = 2;
+		MaxSpreadY = 5;
+		SpreadX = 2;
+		SpreadY = 2;
 	}
+	if(self.weapon == IT_AK47)
+	{
+		self.weaponmodel = "progs/v_ak47.mdl";
+		self.weaponframe = 1;
+		self.currentammo = self.ak47clip;
+
+		MaxSpreadX = 2;
+		MaxSpreadY = 5;
+		SpreadX = 2;
+		SpreadY = 2;
+	}	
 }
 
 void(float startframe)Reload=
@@ -157,6 +188,8 @@ void(float startframe)Reload=
 		Deagle_Reload();	
 	if(self.weapon == IT_M3)	
 		M3_Reload();	
+	if(self.weapon == IT_AK47)
+		AK47_Reload();
 }
 void() WeaponAttack =
 {
@@ -168,6 +201,10 @@ void() WeaponAttack =
 	if(self.weapon == IT_M3)
 	{
 		M3_PrimaryAttack();
+	}
+	if(self.weapon == IT_AK47)
+	{
+		AK47_PrimaryAttack();
 	}
 	if(!self.semi)
 	{
@@ -205,6 +242,8 @@ float() GetWeaponId=
 	{
 		if(self.items == self.items | IT_M3)
 			return IT_M3;	
+		if(self.items == self.items | IT_AK47)
+			return IT_AK47;
 	}
 	if(self.iSlot == SECONDARY)
 	{
