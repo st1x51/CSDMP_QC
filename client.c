@@ -371,7 +371,6 @@ void() playerfootstep =
 		self.angles = '0 0 0';
 		self.fixangle = TRUE;
 	}
-
 	WeaponFrameAll();
 	//playerfootstep();
 };
@@ -517,6 +516,7 @@ void() PutClientCTInServer =
 	m_iNumCT +=1;
 	self.m_iJoiningState = JOINED;
 	self.m_iMenu = Menu_OFF;
+	self.anim_priority = ANIM_BASIC;
 	UpdateWeapon();
 }
 void() PutClientTInServer =
@@ -548,6 +548,7 @@ void() PutClientTInServer =
 	m_iNumTerrorist +=1;
 	self.m_iJoiningState = JOINED;
 	self.m_iMenu = Menu_OFF;
+	self.anim_priority = ANIM_BASIC;
 	UpdateWeapon();
 }
 void() trigger_camera=

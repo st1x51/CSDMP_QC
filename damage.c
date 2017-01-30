@@ -20,7 +20,7 @@ vector() GetGunPosition =
 void(entity targ, entity attacker) Killed =
 {
 	local entity oself;
-
+	
 	if (targ.health < -99)
 		targ.health = -99;		// don't let sbar look bad if a player
 

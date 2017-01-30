@@ -1,5 +1,6 @@
 void()PutClientCTInServer;
 void()PutClientTInServer;
+void()RespawnCounter;
 .float anim_time; // used for animation timing
 .float anim_end; // end frame for current scene
 .float anim_priority; // prioritize animations
@@ -56,8 +57,8 @@ void () SetClientFrame =
 
     if (self.anim_time > time)
         return; //don't call every frame, if it is the animations will play too fast
-
-    self.anim_time = time + 0.1;
+	
+    self.anim_time = time + 0.02;
 
     local float anim_change, run;
 
@@ -80,33 +81,31 @@ void () SetClientFrame =
             self.frame = self.frame + 1;
             return;
         }
-
         if (self.anim_priority == ANIM_DEATH)
         {
+					
             if (self.deadflag == DEAD_DYING)
             {
-                self.nextthink = -1;
+              //  self.nextthink = -1;
                 self.deadflag = DEAD_DEAD;
             }
             return;    // stay there
         }
     }
 
-
     // return to either a running or standing frame
     self.anim_priority = ANIM_BASIC;
     self.anim_run = run;
-
-
+	
     if (self.velocity_x || self.velocity_y)
     {   // running
-        self.frame = $rockrun1;
-        self.anim_end = $rockrun6;
+        self.frame = 62;
+        self.anim_end = 98;
     }
     else
     {   // standing
-        self.frame = $stand1;
-        self.anim_end = $stand5;
+        self.frame = 1;
+        self.anim_end = 61;
     }
 
 };
@@ -128,6 +127,17 @@ void() RespawnCounter =
 	self.think = RespawnCounter;
 	self.nextthink = time + 1;
 }
+void()DieAnim=
+{
+	if(self.frame == 199)
+	{
+		RespawnCounter();
+			return;
+	}	
+	self.frame += 1;
+	self.think = DieAnim;
+	self.nextthink = time + 0.02;
+}
 void () PlayerDie =
 {
     self.view_ofs = '0 0 -8';
@@ -139,5 +149,7 @@ void () PlayerDie =
     if (self.velocity_z < 10)
         self.velocity_z = self.velocity_z + random()*300;
 	rcount = 5;
-	RespawnCounter();
+	self.anim_priority = ANIM_DEATH;
+	self.frame = 160;
+	DieAnim();
 };

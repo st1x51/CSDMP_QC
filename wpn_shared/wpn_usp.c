@@ -61,6 +61,7 @@ void() USP_Reload=
 	{
 		self.weaponframe = 0;
 		self.uspclip = 12;
+		self.currentammo = self.uspclip;
 		self.state = 0;
 		return;
 	}
