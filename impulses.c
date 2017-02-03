@@ -1,4 +1,5 @@
-     void()ChangeWeapon;
+void()ChangeWeapon;
+void()KNIFE_SecondaryAttack;
 void()usp_unsilencer;
 void()usp_silencer;
 float()GetWeaponId;
@@ -68,6 +69,27 @@ void() CheckImpulses =
 		self.weapon = IT_AK47;
 		UpdateWeapon();
 	}
+	if(self.impulse == 46)
+	{
+		bprint("Bought AWP \n");
+		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
+		self.iSlot = PRIMARY;
+		self.items = self.items - (self.items & GetWeaponId());
+		self.items = self.items | IT_AWP;
+		self.weapon = IT_AWP;
+		self.crosshair = cvar("crosshair");
+		UpdateWeapon();	
+	}
+	if(self.impulse == 89)
+	{
+		bprint("Bought Galil \n");
+		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
+		self.iSlot = PRIMARY;
+		self.items = self.items - (self.items & GetWeaponId());
+		self.items = self.items | IT_GALIL;
+		self.weapon = IT_GALIL;
+		UpdateWeapon();
+	}
 	if(self.impulse == 90)
 	{
 		bprint("CT Players:",ftos(m_iNumCT),"\n");
@@ -115,37 +137,6 @@ void() CheckImpulses =
 					terror3 ();
 	if (self.impulse == 57)
 				   terror4 ();
-	if(self.impulse == 50)
-	{
-		if(self.weapon == IT_USP)
-		{
-			self.state = SILENCER;
-			if(self.silencer == 1)
-			{
-				self.weaponframe = 134;
-				usp_unsilencer();
-			}	
-			else		
-			{		
-				self.weaponframe = 1;
-				usp_silencer();
-			}
-		}
-		if(self.weapon == IT_GLOCK)
-		{
-			if(self.autofire  == 1)
-			{	
-				centerprint(self,"Switched to semi-automatic\n");
-				self.autofire = 0;
-			}
-			else
-			{
-				centerprint(self,"Switched to Burst-fire mode\n");
-				self.autofire = 1;
-			}
-		}
-	}
-	
 	if(self.impulse == 105)
 	{
 		if(self.m_bInBuyZone)

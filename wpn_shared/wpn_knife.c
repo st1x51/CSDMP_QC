@@ -12,7 +12,7 @@ void()anim_knife_attack=
 }
 void()anim_sec_knife_attack=
 {
-	if(self.weaponframe == 95)
+	if(self.weaponframe == 92)
 		{
 			self.state = 0;
 			self.weaponframe = 0;
@@ -20,7 +20,7 @@ void()anim_sec_knife_attack=
 		}
 	self.weaponframe += 1;
 	self.think = anim_sec_knife_attack;
-	self.nextthink = time + 0.01;
+	self.nextthink = time + 0.025;
 }
 void KnifeAttack(float iDamage,float iDistance)
 {
@@ -66,7 +66,7 @@ void()KNIFE_PrimaryAttack=
 }
 void()KNIFE_SecondaryAttack=
 {
-		self.attack_finished = time + 1.1;
+		self.m_flNextSecondaryAttack = time + 1.1;
 		self.weaponframe = 48;
 		self.state = ATTACK;
 		anim_sec_knife_attack();

@@ -318,9 +318,7 @@ void(float cShots,float damage,string soundpath)DefaultFire=
 	local float m_iClip = self.currentammo;
 	local float speed = vlen(self.velocity);
 	if (m_iClip <= 0)
-	{
 		return;
-	}
 	sound (self, CHAN_AUTO, soundpath, 1, ATTN_NORM);
 	cShots = mathlib_min(m_iClip,cShots);
 	self.currentammo -= cShots;
@@ -347,7 +345,7 @@ void(float cShots,float damage,string soundpath)DefaultFire=
 	self.punchangle_y += SpreadX * RANDOM_LONG(-1,1) / 2;
 	if(self.punchangle_x < -MaxSpreadY)
 	{
-		self.punchangle_x = - MaxSpreadY + RANDOM_LONG(-2,2);
+		self.punchangle_x = -MaxSpreadY + RANDOM_LONG(-2,2);
 		self.punchangle_y += SpreadX * LeftSpread; 
 	}
 	

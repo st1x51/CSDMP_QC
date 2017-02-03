@@ -97,9 +97,76 @@ void(float cShots,vector vecSrc,vector vecDirShooting,vector vecSpread,float flD
 	}
 	ApplyMultiDamage ();
 }
-
+void()SecondaryAttack=
+{
+	if(time < self.m_flNextSecondaryAttack)
+		return;
+	if(self.weapon == IT_KNIFE)
+	{
+		KNIFE_SecondaryAttack();
+	}
+	if(self.weapon == IT_USP)
+	{
+		self.m_flNextSecondaryAttack = time + 0.3;
+		self.state = SILENCER;
+		if(self.silencer == 1)
+		{
+			self.weaponframe = 134;
+			usp_unsilencer();
+		}	
+		else		
+		{		
+			self.weaponframe = 1;
+			usp_silencer();
+		}
+	}
+	if(self.weapon == IT_GLOCK)
+	{
+		self.m_flNextSecondaryAttack = time + 0.3;
+		if(self.autofire  == 1)
+		{	
+			centerprint(self,"Switched to semi-automatic\n");
+			self.autofire = 0;
+		}
+		else
+		{
+			centerprint(self,"Switched to Burst-fire mode\n");
+			self.autofire = 1;
+		}
+	}
+	if(self.weapon == IT_AWP)
+	{
+		if(self.state > 0)
+			return;
+		self.m_flNextSecondaryAttack = time + 0.3;
+		//self.fov = cvar("fov");
+		if(self.fov == 90)
+		{
+			stuffcmd(self,"fov 40\n");
+			stuffcmd(self,"scope 1\n");
+			self.scope = 1;
+			self.fov = 40;
+		}
+		else if(self.fov == 40)
+		{
+			self.fov = 10;
+			stuffcmd(self,"fov 10\n");
+		}
+		else
+		{
+			self.fov = 90;
+			stuffcmd(self,"fov 90\n");
+			stuffcmd(self,"scope 0\n");
+			self.scope = 0;
+		}
+		sound (self, CHAN_AUTO, "weapons/zoom.wav", 1, ATTN_NORM);
+	}
+}
 void() UpdateWeapon=
 {
+	stuffcmd(self,"crosshair ");
+	stuffcmd(self,ftos(self.crosshair));
+	stuffcmd(self,"\n");
 	if(self.weapon == IT_KNIFE)
 	{
 		self.weaponmodel = "progs/v_knife.mdl";
@@ -172,6 +239,30 @@ void() UpdateWeapon=
 		SpreadX = 2;
 		SpreadY = 2;
 	}	
+	if(self.weapon == IT_AWP)
+	{
+		self.weaponmodel = "progs/v_awp.mdl";
+		self.weaponframe = 1;
+		self.currentammo = self.awpclip;
+		self.crosshair = cvar("crosshair");
+		stuffcmd(self,"crosshair 0\n");
+		
+		MaxSpreadX = 5;
+		MaxSpreadY = 5;
+		SpreadX = 5;
+		SpreadY = 5;
+	}
+	if(self.weapon == IT_GALIL)
+	{
+		self.weaponmodel = "progs/v_galil.mdl";
+		self.weaponframe = 1;
+		self.currentammo = self.galilclip;
+		
+		MaxSpreadX = 2;
+		MaxSpreadY = 5;
+		SpreadX = 1.6;
+		SpreadY = 1.6;
+	}
 }
 
 void(float startframe)Reload=
@@ -190,6 +281,10 @@ void(float startframe)Reload=
 		M3_Reload();	
 	if(self.weapon == IT_AK47)
 		AK47_Reload();
+	if(self.weapon == IT_AWP)
+		AWP_Reload();
+	if(self.weapon == IT_GALIL)
+		Galil_Reload();
 }
 void() WeaponAttack =
 {
@@ -206,6 +301,10 @@ void() WeaponAttack =
 	{
 		AK47_PrimaryAttack();
 	}
+	if(self.weapon == IT_GALIL)
+	{
+		Galil_PrimaryAttack();
+	}
 	if(!self.semi)
 	{
 		self.semi = 1;
@@ -221,6 +320,10 @@ void() WeaponAttack =
 		{
 			DEAGLE_Attack();
 		}
+		if(self.weapon == IT_AWP)
+		{
+			AWP_PrimaryAttack();
+		}
 		if(self.weapon == IT_HEGRENADE)
 		{
 			HE_Attack();
@@ -235,6 +338,8 @@ void() WeaponFrameAll=
         self.semi = 0;			
 	if(self.button0)
 		WeaponAttack();
+	if(self.button3 || self.button1) //etopizdos na samom dele
+		SecondaryAttack();
 }
 float() GetWeaponId=
 {
@@ -242,8 +347,12 @@ float() GetWeaponId=
 	{
 		if(self.items == self.items | IT_M3)
 			return IT_M3;	
-		if(self.items == self.items | IT_AK47)
+		else if(self.items == self.items | IT_AK47)
 			return IT_AK47;
+		else if(self.items == self.items | IT_AWP)
+			return IT_AWP;
+		else if(self.items == self.items | IT_GALIL)
+			return IT_GALIL; 
 	}
 	if(self.iSlot == SECONDARY)
 	{
@@ -264,14 +373,11 @@ float() GetWeaponId=
 }
 void() ChangeWeapon =
 {
-	local float skip;
-	
 	if(time < self.attack_finished || self.state > 0)
 		return;
 		
 	while(1)
 	{
-		skip = 0;
 		if(self.iSlot == PRIMARY)
 		{
 			self.iSlot = SECONDARY;
@@ -292,7 +398,7 @@ void() ChangeWeapon =
 			self.iSlot = PRIMARY;
 			self.weapon = GetWeaponId();
 		}
-		if((self.items & self.weapon) && skip == 0)	
+		if((self.items & self.weapon))	
 		{
 			UpdateWeapon();
 			return;	

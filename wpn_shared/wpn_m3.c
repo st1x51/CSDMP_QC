@@ -18,6 +18,8 @@ void() M3_Reload_End=
 	if(self.weaponframe == 147) 
 	{
 		self.weaponframe = 1;
+		self.m3clip = 7;
+		self.currentammo = self.m3clip;
 		self.state = 0;
 		return;
 	}
@@ -62,4 +64,5 @@ void()M3_PrimaryAttack=
 	self.weaponframe = 10;
 	anim_m3_attack();
 	self.m3clip -=1;
+	self.currentammo -= 1;
 }

@@ -74,6 +74,18 @@ void() precaches =
 	precache_sound("weapons/ak47-1.wav");
 	precache_sound("weapons/ak47_clipout.wav");
 	precache_sound("weapons/ak47_clipin.wav");
+	//awp
+	precache_model("progs/v_awp.mdl");
+	precache_sound("weapons/awp1.wav");
+	precache_sound("weapons/zoom.wav");
+	precache_sound("weapons/boltup.wav");
+	precache_sound("weapons/boltpull1.wav");
+	precache_sound("weapons/boltdown.wav");
+	precache_sound("weapons/awp_clipin.wav");
+	precache_sound("weapons/awp_clipout.wav");
+	//galil
+	precache_model("progs/v_galil.mdl");
+	precache_sound("weapons/galil-1.wav");
 	//footsteps
 	precache_sound ("player/pl_step1.wav");
 	precache_sound ("player/pl_step2.wav");

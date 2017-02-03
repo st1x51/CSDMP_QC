@@ -1,6 +1,7 @@
 void() CheckImpulses;
 void() WeaponFrameAll;
 void() UpdateWeapon;
+void() SecondaryAttack;
 .float crouch_time;
 .float crouch_stuck;
 void() OLD_CheckBuyZone=
@@ -18,7 +19,10 @@ void() OLD_CheckBuyZone=
 		{
 			pSpot = find(pSpot,classname,pszSpawnClass);
 			if(vlen(pSpot.origin - self.origin) < 200)
+			{
 				stuffcmd(self,"buyicon 1 \n");
+				self.m_bInBuyZone = 1;
+			}
 		}
 	}
 }
@@ -180,7 +184,7 @@ void()PlayerCrouch =
          }
       }
    }
-
+/*
    if ( self.button3 )
    {
       PlayerCrouching ();
@@ -193,6 +197,7 @@ void()PlayerCrouch =
          PlayerUnCrouching ();
       }
    }
+  */
 };
 
 void() PlayerJump =
@@ -459,6 +464,7 @@ void() PutClientInServer =
 	self.m_iTeam = UNASSIGNED;
 	self.fixangle = 1;
 	setmodel (self, "progs/player.mdl");
+	self.crosshair = cvar("crosshair");
 	//self.m_iMenu = Menu_OFF;
 	self.think = Show_Menu_Team;
 	self.nextthink = time + 2;
@@ -499,6 +505,7 @@ void() PutClientCTInServer =
 	self.flags = FL_CLIENT;
 	self.team = CT_SIDE;
 	self.uspclip = 12;
+	self.ammo_shells = 24;
 	self.he_grenades = 0;
 	self.silencer = 1;
 	self.th_die = PlayerDie;
@@ -517,6 +524,7 @@ void() PutClientCTInServer =
 	self.m_iJoiningState = JOINED;
 	self.m_iMenu = Menu_OFF;
 	self.anim_priority = ANIM_BASIC;
+	self.fov = 90;
 	UpdateWeapon();
 }
 void() PutClientTInServer =
@@ -549,6 +557,7 @@ void() PutClientTInServer =
 	self.m_iJoiningState = JOINED;
 	self.m_iMenu = Menu_OFF;
 	self.anim_priority = ANIM_BASIC;
+	self.fov = 90;
 	UpdateWeapon();
 }
 void() trigger_camera=

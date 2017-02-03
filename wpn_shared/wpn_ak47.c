@@ -1,4 +1,3 @@
-//140-156 fire
 void()anim_ak47_attack=
 {
 	if(self.weaponframe == 156)
