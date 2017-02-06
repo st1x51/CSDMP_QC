@@ -1,4 +1,72 @@
+#define AMBIENT_SOUND_STATIC			0	// medium radius attenuation
+#define AMBIENT_SOUND_EVERYWHERE		1
+#define AMBIENT_SOUND_SMALLRADIUS		2
+#define AMBIENT_SOUND_MEDIUMRADIUS		4
+#define AMBIENT_SOUND_LARGERADIUS		8
+#define AMBIENT_SOUND_START_SILENT		16
+#define AMBIENT_SOUND_NOT_LOOPING		32
+float m_flAttenuation,m_fActive,m_fLooping;
 .float Radius,roomtype;
+void()PrecacheSounds=
+{
+	precache_sound(self.message);
+	if (!(self.spawnflags & AMBIENT_SOUND_START_SILENT))
+	{
+		// start the sound ASAP
+		if (m_fLooping)
+		{
+			m_fActive = TRUE;
+		}
+	}
+	if (m_fActive)
+	{
+		ambientsound(self.origin,self.message,1,m_flAttenuation);
+	}
+}
+//incomplete,do we need a use?	
+void()ambient_generic=
+{
+	if (self.spawnflags & AMBIENT_SOUND_EVERYWHERE)
+	{
+		m_flAttenuation = ATTN_NONE;
+	}
+	else if (self.spawnflags & AMBIENT_SOUND_SMALLRADIUS)
+	{
+		m_flAttenuation = ATTN_IDLE;
+	}
+	else if (self.spawnflags & AMBIENT_SOUND_MEDIUMRADIUS)
+	{
+		m_flAttenuation = ATTN_STATIC;
+	}
+	else if (self.spawnflags & AMBIENT_SOUND_LARGERADIUS)
+	{
+		m_flAttenuation = ATTN_NORM;
+	}
+	else
+	{
+		// if the designer didn't set a sound attenuation, default to one.
+		m_flAttenuation = ATTN_STATIC;
+	}
+	
+	if(self.message == "")
+	{
+		bprint("Empty ambient at: ",vtos(self.origin),"\n");
+		self.nextthink = time + 0.1;
+		self.think = SUB_Remove;
+	}
+	
+	self.solid = SOLID_NOT;
+	self.movetype = MOVETYPE_NONE;
+	m_fActive = FALSE;
+
+	if (self.spawnflags & AMBIENT_SOUND_NOT_LOOPING)
+		m_fLooping = FALSE;
+	else
+		m_fLooping = TRUE;
+	
+	PrecacheSounds();
+}
+
 float (entity ent, entity enttarget)sound_inrange =
 {
     local vector vecSpot1;
