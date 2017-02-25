@@ -1,7 +1,46 @@
 void() precaches;
 void() LightStyles_setup;
+float total_ways;
 void() main = {};
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+void() way_touch =
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{
+	if (other.classname != "bot")
+		return;
 
+	if (other.goalentity == self)
+		{
+			other.waypoint = self.waypoint;
+			other.goalentity = world;
+			other.enemy = world;
+		}
+
+// reached highest waypoint and is turning around
+	if (other.waypoint >= total_ways)
+		other.direction = 1;
+
+// he returned to first waypoint
+	if (other.waypoint <= 1 && other.direction == 1)
+		other.direction = 0;
+
+};
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+void(vector here, float which) create_waypoint =
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+{
+	local entity ent;
+
+	ent = spawn();
+	ent.solid = SOLID_TRIGGER;
+	ent.movetype = MOVETYPE_NONE;
+	setorigin(ent, here);
+	ent.touch = way_touch;
+	ent.flags = FL_ITEM;
+	ent.classname = "waypoint";
+	ent.waypoint = which;
+	total_ways = total_ways + 1;
+};
 void()CheckRules=
 {
 	m_bMapHasBuyZone = find(world,classname,"func_buyzone") != 0;
@@ -86,6 +125,23 @@ void() precaches =
 	//galil
 	precache_model("progs/v_galil.mdl");
 	precache_sound("weapons/galil-1.wav");
+	precache_sound("weapons/galil_clipout.wav");
+	precache_sound("weapons/galil_clipin.wav");
+	precache_sound("weapons/galil_boltpull.wav");
+	//aug
+	precache_model("progs/v_aug.mdl");
+	precache_sound("weapons/aug-1.wav");
+	precache_sound("weapons/aug_boltpull.wav");
+	precache_sound("weapons/aug_clipout.wav");
+	precache_sound("weapons/aug_clipin.wav");
+	precache_sound("weapons/aug_boltslap.wav");
+	//famas
+	precache_model("progs/v_famas.mdl");
+	precache_sound("weapons/famas-1.wav");
+	precache_sound("weapons/famas-burst.wav");
+	precache_sound("weapons/famas_boltslap.wav");
+	precache_sound("weapons/famas_clipin.wav");
+	precache_sound("weapons/famas_clipout.wav");
 	//footsteps
 	precache_sound ("player/pl_step1.wav");
 	precache_sound ("player/pl_step2.wav");

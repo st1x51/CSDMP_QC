@@ -75,7 +75,7 @@ void(entity targ, entity inflictor, entity attacker, float damage) T_Damage=
     }
 
 // team play damage avoidance
-    if ( (teamplay == 1) && (targ.team > 0)&&(targ.team == attacker.team) )
+    if (targ.team == attacker.team)
         return;
 
 // do the damage
@@ -319,7 +319,8 @@ void(float cShots,float damage,string soundpath)DefaultFire=
 	local float speed = vlen(self.velocity);
 	if (m_iClip <= 0)
 		return;
-	sound (self, CHAN_AUTO, soundpath, 1, ATTN_NORM);
+	if(soundpath)
+		sound (self, CHAN_AUTO, soundpath, 1, ATTN_NORM);
 	cShots = mathlib_min(m_iClip,cShots);
 	self.currentammo -= cShots;
 	m_iClip -= cShots;

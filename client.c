@@ -305,6 +305,8 @@ void() PlayerJump =
  //Called every frame, before physics.
 void() PlayerPreThink = 
 {
+	 if(self.deadflag == DEAD_DEAD)
+		return;
 	//Menu_Commands();
 	SetClientFrame ();
 	WaterMove ();
@@ -363,7 +365,7 @@ void() playerfootstep =
  //Called every frame, AFTER physics.
  void() PlayerPostThink = 
  {
-   if(self.deadflag == DEAD_DYING)
+   if(self.deadflag == DEAD_DEAD)
 		return;
 	CheckImpulses();
 	CheckBuyZone();
@@ -456,7 +458,7 @@ void() PutClientInServer =
 {
 	self.solid = SOLID_NOT;
 	self.takedamage = DAMAGE_NO;
-	self.deadflag = DEAD_DEAD;
+	//self.deadflag = DEAD_DEAD;
 	self.velocity = '0 0 0';
 	self.punchangle = '0 0 0';
 	self.m_iJoiningState = READINGLTEXT;
@@ -507,6 +509,7 @@ void() PutClientCTInServer =
 	self.uspclip = 12;
 	self.ammo_shells = 24;
 	self.he_grenades = 0;
+	self.famasburst = 0;
 	self.silencer = 1;
 	self.th_die = PlayerDie;
 	self.deadflag = DEAD_NO;
@@ -515,8 +518,9 @@ void() PutClientCTInServer =
 	self.fixangle = TRUE;
 	setmodel (self, "progs/gign.mdl");
 	self.hull = 2;
+	self.state = 0;
 	self.view_ofs = DEFAULT_VIEWHEIGHT;
-	setsize(self,VEC_HULLHL_MIN,VEC_HULLHL_MAX);
+	setsize(self,VEC_HULL_MIN,VEC_HULLHL_MAX);
 	self.iSlot = SECONDARY;
 	self.weapon = IT_USP;
 	self.items = self.items | IT_USP | IT_KNIFE;
@@ -548,8 +552,9 @@ void() PutClientTInServer =
 	self.fixangle = TRUE;
 	setmodel (self, "progs/leet.mdl");
 	self.hull = 2;
+	self.state = 0;
 	self.view_ofs = DEFAULT_VIEWHEIGHT;
-	setsize(self,VEC_HULLHL_MIN,VEC_HULLHL_MAX);
+	setsize(self,VEC_HULL_MIN,VEC_HULLHL_MAX);
 	self.iSlot = SECONDARY;
 	self.weapon = IT_GLOCK; 
 	self.items = self.items | IT_GLOCK | IT_KNIFE;

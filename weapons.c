@@ -73,6 +73,8 @@ void(float cShots,vector vecSrc,vector vecDirShooting,vector vecSpread,float flD
 	local vector vecRight = v_right;
 	local vector vecUp = v_up;
 	local float x,y,z;
+	local float newDamage = iDamage;
+	
 	ClearMultiDamage ();
 	for(float iShot = 1; iShot <= cShots; iShot++)
 	{
@@ -93,7 +95,30 @@ void(float cShots,vector vecSrc,vector vecDirShooting,vector vecSpread,float flD
 		{
 			TraceAttack(iDamage,vecDir);
 		}
-	}
+		if(cShots == 1)
+		{
+			local float unit = iDamage;
+			while(newDamage > 0)
+			{
+				if(pointcontents(trace_endpos + vecDir * iDamage) == CONTENT_SOLID)
+					break;
+				traceline(trace_endpos + vecDir * iDamage,vecSrc,0,self);
+				if(trace_allsolid)
+					break;
+				WriteByte (MSG_BROADCAST, SVC_TEMPENTITY);
+				WriteByte (MSG_BROADCAST, TE_GUNSHOT);
+				WriteCoord (MSG_BROADCAST, trace_endpos_x);
+				WriteCoord (MSG_BROADCAST, trace_endpos_y);
+				WriteCoord (MSG_BROADCAST, trace_endpos_z);
+				newDamage /= 2;
+				unit /= 2;
+				vecSrc = trace_endpos;
+				traceline(trace_endpos,vecEnd,0,self);
+				newDamage -= vlen(trace_endpos - vecSrc) * 0.01;
+				TraceAttack(newDamage,vecDir);
+			}
+		}
+	}	
 	}
 	ApplyMultiDamage ();
 }
@@ -139,7 +164,6 @@ void()SecondaryAttack=
 		if(self.state > 0)
 			return;
 		self.m_flNextSecondaryAttack = time + 0.3;
-		//self.fov = cvar("fov");
 		if(self.fov == 90)
 		{
 			stuffcmd(self,"fov 40\n");
@@ -160,6 +184,38 @@ void()SecondaryAttack=
 			self.scope = 0;
 		}
 		sound (self, CHAN_AUTO, "weapons/zoom.wav", 1, ATTN_NORM);
+	}
+	if(self.weapon == IT_AUG)
+	{
+		if(self.state > 0)
+			return;
+		self.m_flNextSecondaryAttack = time + 0.3;
+		if(self.fov == 90)
+		{
+			stuffcmd(self,"fov 55\n");
+			self.scope = 1;
+			self.fov = 40;
+		}
+		else
+		{
+			self.fov = 90;
+			stuffcmd(self,"fov 90\n");
+			self.scope = 0;
+		}
+	}
+	if(self.weapon == IT_FAMAS)
+	{
+		self.m_flNextSecondaryAttack = time + 0.3;
+		if(self.famasburst  == 1)
+		{	
+			centerprint(self,"Switched to Full Auto\n");
+			self.famasburst = 0;
+		}
+		else
+		{
+			centerprint(self,"Switched to Burst Fire\n");
+			self.famasburst = 1;
+		}
 	}
 }
 void() UpdateWeapon=
@@ -263,6 +319,28 @@ void() UpdateWeapon=
 		SpreadX = 1.6;
 		SpreadY = 1.6;
 	}
+	if(self.weapon == IT_AUG)
+	{
+		self.weaponmodel = "progs/v_aug.mdl";
+		self.weaponframe = 1;
+		self.currentammo = self.augclip;
+		
+		MaxSpreadX = 2;
+		MaxSpreadY = 5;
+		SpreadX = 2;
+		SpreadY = 2;
+	}
+	if(self.weapon == IT_FAMAS)
+	{
+		self.weaponmodel = "progs/v_famas.mdl";
+		self.weaponframe = 1;
+		self.currentammo = self.famasclip;
+		
+		MaxSpreadX = 2;
+		MaxSpreadY = 5;
+		SpreadX = 1.6;
+		SpreadY = 1.6;
+	}
 }
 
 void(float startframe)Reload=
@@ -285,6 +363,10 @@ void(float startframe)Reload=
 		AWP_Reload();
 	if(self.weapon == IT_GALIL)
 		Galil_Reload();
+	if(self.weapon == IT_AUG)
+		Aug_Reload();
+	if(self.weapon == IT_FAMAS)
+		Famas_Reload();
 }
 void() WeaponAttack =
 {
@@ -304,6 +386,14 @@ void() WeaponAttack =
 	if(self.weapon == IT_GALIL)
 	{
 		Galil_PrimaryAttack();
+	}
+	if(self.weapon == IT_AUG)
+	{
+		Aug_PrimaryAttack();
+	}
+	if(self.weapon == IT_FAMAS)
+	{
+		Famas_PrimaryAttack();
 	}
 	if(!self.semi)
 	{
@@ -353,6 +443,10 @@ float() GetWeaponId=
 			return IT_AWP;
 		else if(self.items == self.items | IT_GALIL)
 			return IT_GALIL; 
+		else if(self.items == self.items | IT_AUG)
+			return IT_AUG;
+		else if(self.items == self.items | IT_FAMAS)
+			return IT_FAMAS;
 	}
 	if(self.iSlot == SECONDARY)
 	{
@@ -375,7 +469,14 @@ void() ChangeWeapon =
 {
 	if(time < self.attack_finished || self.state > 0)
 		return;
-		
+	
+	if(self.scope)
+	{
+		stuffcmd(self,"fov 90\n");
+		self.fov = 90;
+		self.scope = 0;		
+	}
+	
 	while(1)
 	{
 		if(self.iSlot == PRIMARY)

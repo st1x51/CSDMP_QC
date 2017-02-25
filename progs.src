@@ -30,9 +30,12 @@ wpn_shared\wpn_hegrenade.c
 wpn_shared\wpn_ak47.c
 wpn_shared\wpn_awp.c
 wpn_shared\wpn_galil.c
+wpn_shared\wpn_aug.c
+wpn_shared\wpn_famas.c
 weapons.c
 triggers.c
 bmodels.c
 sound.c
+dumbots.c
 
 

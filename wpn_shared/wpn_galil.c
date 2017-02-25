@@ -12,6 +12,12 @@ void()anim_galil_attack=
 }
 void()Galil_Reload=
 {
+	if(self.weaponframe == 17)
+		sound (self, CHAN_AUTO, "weapons/galil_clipout.wav", 1, ATTN_NORM);	
+	if(self.weaponframe == 52)
+		sound (self, CHAN_AUTO, "weapons/galil_clipin.wav", 1, ATTN_NORM);	
+	if(self.weaponframe == 69)
+		sound (self, CHAN_AUTO, "weapons/galil_boltpull.wav", 1, ATTN_NORM);	
 	if(self.weaponframe == 92)
 	{
 		self.state = 0;

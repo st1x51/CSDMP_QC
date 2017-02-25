@@ -3,11 +3,15 @@ void()KNIFE_SecondaryAttack;
 void()usp_unsilencer;
 void()usp_silencer;
 float()GetWeaponId;
+void(float teem) create_bot;
 void() CheckImpulses =
 {
 	if (self.impulse == 121)
 		ChangeWeapon ();
-	
+	if(self.impulse == 100)
+		create_bot(T_SIDE);
+	if(self.impulse == 101)
+		create_bot(CT_SIDE);
 	if(self.impulse == 20)	
 	{
 		bprint("Bought glock \n");
@@ -88,6 +92,26 @@ void() CheckImpulses =
 		self.items = self.items - (self.items & GetWeaponId());
 		self.items = self.items | IT_GALIL;
 		self.weapon = IT_GALIL;
+		UpdateWeapon();
+	}
+	if(self.impulse == 82)
+	{
+		bprint("Bought AUG \n");
+		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
+		self.iSlot = PRIMARY;
+		self.items = self.items - (self.items & GetWeaponId());
+		self.items = self.items | IT_AUG;
+		self.weapon = IT_AUG;
+		UpdateWeapon();
+	}
+	if(self.impulse == 84)
+	{
+		bprint("Bought Famas \n");
+		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
+		self.iSlot = PRIMARY;
+		self.items = self.items - (self.items & GetWeaponId());
+		self.items = self.items | IT_FAMAS;
+		self.weapon = IT_FAMAS;
 		UpdateWeapon();
 	}
 	if(self.impulse == 90)
