@@ -121,6 +121,7 @@ void(vector ang) makevectors			= #1;	// sets v_forward, etc globals
 void(entity e, vector o) setorigin		= #2;
 void(entity e, string m) setmodel		= #3;	// set movetype and solid first
 void(entity e, vector min, vector max) setsize	= #4;
+vector(vector start, vector end) pathfind			= #5;	//returns next move target towards end
 void() break					= #6;
 float() random					= #7;	// returns 0 - 1
 void(entity e, float chan, string samp, float vol, float atten) sound = #8;
@@ -193,6 +194,7 @@ void (vector a, vector b, vector c, vector d, float e, entity f)tracearea = #39;
 float(entity s) etoi = #71;
 float(vector v) vlen2d = #79;
 string( entity e, vector start, vector end ) tracematerial = #80; //material trace
+
 //
 // constants
 //

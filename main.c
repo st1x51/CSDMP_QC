@@ -1,46 +1,6 @@
 void() precaches;
 void() LightStyles_setup;
-float total_ways;
 void() main = {};
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-void() way_touch =
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{
-	if (other.classname != "bot")
-		return;
-
-	if (other.goalentity == self)
-		{
-			other.waypoint = self.waypoint;
-			other.goalentity = world;
-			other.enemy = world;
-		}
-
-// reached highest waypoint and is turning around
-	if (other.waypoint >= total_ways)
-		other.direction = 1;
-
-// he returned to first waypoint
-	if (other.waypoint <= 1 && other.direction == 1)
-		other.direction = 0;
-
-};
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-void(vector here, float which) create_waypoint =
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{
-	local entity ent;
-
-	ent = spawn();
-	ent.solid = SOLID_TRIGGER;
-	ent.movetype = MOVETYPE_NONE;
-	setorigin(ent, here);
-	ent.touch = way_touch;
-	ent.flags = FL_ITEM;
-	ent.classname = "waypoint";
-	ent.waypoint = which;
-	total_ways = total_ways + 1;
-};
 void()CheckRules=
 {
 	m_bMapHasBuyZone = find(world,classname,"func_buyzone") != 0;

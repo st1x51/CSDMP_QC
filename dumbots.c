@@ -399,66 +399,6 @@ void() bot_stand =
 		self.angles_y = self.angles_y + 15;
 };
 
-// ******************************
-void() coffee_move =
-// ******************************
-{
-
-// this is the best subroutine i've ever written, and probably the
-// most powerful bot roaming function. i hope you credit me if you use
-// it. basically he strafes along a wall, then turns at a 45 or -45
-// degree angle at the wall's corner. i have seen my bots do laps
-// around entire levels with these three lines of code
-
-	if (walkmove (self.angles_y, 20) == FALSE)
-		if (walkmove (self.angles_y + self.button1, 20) == FALSE)
-			self.angles_y = self.angles_y + (self.button1 / 2);
-
-// every so often, he'll change his wall-hugging direction
-
-	if (random() <= 0.02)
-		if (self.button1 == 90)
-			self.button1 = -90;
-			else self.button1 = 90;
-
-};
-void() waypoint_find =
-{
-	local entity point;
-
-	point = find(world, classname, "waypoint");
-	while(point)
-	{
-		if (point.waypoint == self.waypoint + 1 && self.direction == 0)
-			self.goalentity = point;
-		if (point.waypoint == self.waypoint - 1 && self.direction == 1)
-			self.goalentity = point;
-		if (self.waypoint == 0 && visible(point))
-			self.goalentity = point;
-		point = find(point, classname, "waypoint");
-	}
-
-	self.search_time = time + 15;
-};
-
-
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-void() waypoint_walk =
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-{
-	if (visible(self.goalentity))
-		{
-			self.angles_y = vectoyaw(self.goalentity.origin - self.origin);
-			if (walkmove(self.angles_y, 20) == FALSE)
-				movetogoal(15);
-		}
-		else
-			movetogoal(15);
-
-	makevectors(self.angles);
-	self.flags = self.flags - (self.flags & FL_ONGROUND);
-	//self.velocity = v_forward * 250;
-};
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void() bot_walk =
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -477,30 +417,14 @@ void() bot_walk =
 	//check_for_ledge();
 	//check_for_water();
 
-// of course movetogoal() is id's C function, it moves randomly
-// toward what his self.goalentity is; don't let it worry you,
-// this function takes a long time to get where its going
-// the coffee_move is his cool running function
-/*
-	if (self.goalentity != world)
-		movetogoal(20);
-		//bot_walkmove();
-		else coffee_move();
-		*/
-	if (time > self.search_time)
-	{
-		self.goalentity = world;
-		self.waypoint = 0;
-		self.direction = 0;
-	}
 
-	if (self.goalentity == world)
-		waypoint_find();
-
-	if (self.goalentity.classname == "waypoint")
-		waypoint_walk();
-	else 
-		movetogoal(15);
+	entity pl = find(world, classname, "player");
+	if(pl.health <= 0)
+		 pl = find(world, classname, "info_player_deathmatch");
+	vector pf = pathfind(self.origin + '0 0 28', pl.origin + '0 0 28');
+	self.ideal_yaw = vectoyaw(pf - self.origin);
+	ChangeYaw();
+	movetogoal(15);
 };
 
 // --------------------------------
@@ -773,6 +697,7 @@ void()	bot_walk32=[94, bot_walk33]{self.nextthink = time + 0.02;};
 void()	bot_walk33=[95, bot_walk34]{self.nextthink = time + 0.02;};
 void()	bot_walk34=[96, bot_walk35]{bot_walk();self.nextthink = time + 0.02;};
 void()	bot_walk35=[97, bot_walk1]{self.nextthink = time + 0.02;};
+
 
 /*
 void() bot_walk1=
@@ -1161,10 +1086,9 @@ local entity bot, spot, plr;
 // polishing him up
 	setsize (bot, '-16 -16 -32', '16 16 32');
 	bot.ideal_yaw = bot.angles * '0 1 0';
-	bot.yaw_speed = 60;
+	bot.yaw_speed = 15;
 	bot.view_ofs = '0 0 28';
 	bot.takedamage = DAMAGE_AIM;
-	bot.button1 = 90;
 	bot.nextthink = time + 5;
 	bot.think = bot.th_walk;
 };
