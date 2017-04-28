@@ -428,7 +428,7 @@ void() WeaponFrameAll=
         self.semi = 0;			
 	if(self.button0)
 		WeaponAttack();
-	if(self.button3 || self.button1) //etopizdos na samom dele
+	if(self.button1)
 		SecondaryAttack();
 }
 float() GetWeaponId=

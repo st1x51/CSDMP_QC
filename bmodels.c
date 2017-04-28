@@ -4,7 +4,7 @@ void() func_illusionary =
 	self.movetype = MOVETYPE_NONE;
 	self.solid = SOLID_NOT;
 	setmodel (self, self.model);
-	//makestatic (self); //because oldstyle rendermodes dont work with makestatic
+	makestatic (self);
 };
 void() func_wall_use =
 {	

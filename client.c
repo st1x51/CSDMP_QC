@@ -184,7 +184,6 @@ void()PlayerCrouch =
          }
       }
    }
-/*
    if ( self.button3 )
    {
       PlayerCrouching ();
@@ -197,7 +196,7 @@ void()PlayerCrouch =
          PlayerUnCrouching ();
       }
    }
-  */
+
 };
 
 void() PlayerJump =
@@ -312,7 +311,7 @@ void() PlayerPreThink =
 	WaterMove ();
 	if (self.m_iJoiningState != JOINED)
 		JoiningThink();
-	//TraceTexture();
+	TraceTexture();
 	if (self.button2)
 	{
 		PlayerJump ();
@@ -379,7 +378,7 @@ void() playerfootstep =
 		self.fixangle = TRUE;
 	}
 	WeaponFrameAll();
-	//playerfootstep();
+	playerfootstep();
 };
 /*
 ============

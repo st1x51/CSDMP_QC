@@ -37,7 +37,6 @@ enum
 	PRIMARY,
 	SECONDARY,
 	KNIFE,
-	GRENADES,
 	GRENADES
 };
 enum
@@ -62,7 +61,7 @@ enum
 	UNASSIGNED,
 	TERRORIST,
 	CT,
-	SPECTATOR,
+	SPECTATOR
 };
 .float m_iJoiningState;
 entity m_pIntroCamera;
