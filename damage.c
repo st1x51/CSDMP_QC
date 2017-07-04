@@ -75,7 +75,7 @@ void(entity targ, entity inflictor, entity attacker, float damage) T_Damage=
     }
 
 // team play damage avoidance
-    if (targ.team == attacker.team)
+    if (targ.team == attacker.team && targ.classname != "player")
         return;
 
 // do the damage

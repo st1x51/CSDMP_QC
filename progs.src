@@ -32,6 +32,7 @@ wpn_shared\wpn_awp.c
 wpn_shared\wpn_galil.c
 wpn_shared\wpn_aug.c
 wpn_shared\wpn_famas.c
+wpn_shared\wpn_m4a1.c
 weapons.c
 triggers.c
 bmodels.c

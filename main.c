@@ -31,6 +31,8 @@ void() precaches =
 	 
 	precache_model ("progs/gign.mdl"); 
 	precache_model ("progs/leet.mdl"); 
+	
+	precache_model ("progs/glass.mdl"); 
 	//sounds
 	precache_sound("player/jump.wav");
 	precache_sound("weapons/knife_slash1.wav");
@@ -102,6 +104,12 @@ void() precaches =
 	precache_sound("weapons/famas_boltslap.wav");
 	precache_sound("weapons/famas_clipin.wav");
 	precache_sound("weapons/famas_clipout.wav");
+	//m4a1
+	precache_model("progs/v_m4a1.mdl");
+	precache_sound("weapons/m4a1-1.wav");
+	precache_sound("weapons/m4a1_clipout.wav");
+	precache_sound("weapons/m4a1_clipin.wav");
+	precache_sound("weapons/m4a1_boltpull.wav");
 	//footsteps
 	precache_sound ("player/pl_step1.wav");
 	precache_sound ("player/pl_step2.wav");
@@ -139,4 +147,6 @@ void() precaches =
 	precache_sound ("player/pl_snow2.wav");
 	precache_sound ("player/pl_snow3.wav");
 	precache_sound ("player/pl_snow4.wav");
+	
+	precache_sound ("debris/bustglass2.wav");
 };

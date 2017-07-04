@@ -42,7 +42,7 @@ void() CheckImpulses =
 		self.weapon = IT_DEAGLE;
 		UpdateWeapon();
 	}
-	if(self.impulse == 23)	
+	if(self.impulse == 41)	
 	{
 		if(self.he_grenades == 1)
 			return;
@@ -112,6 +112,16 @@ void() CheckImpulses =
 		self.items = self.items - (self.items & GetWeaponId());
 		self.items = self.items | IT_FAMAS;
 		self.weapon = IT_FAMAS;
+		UpdateWeapon();
+	}
+	if(self.impulse == 45)
+	{
+		bprint("Bought M4A1 \n");
+		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
+		self.iSlot = PRIMARY;
+		self.items = self.items - (self.items & GetWeaponId());
+		self.items = self.items | IT_M4A1;
+		self.weapon = IT_M4A1;
 		UpdateWeapon();
 	}
 	if(self.impulse == 90)

@@ -22,13 +22,13 @@ void() BounceTouch=
 	// don't hit the guy that launched this grenade
 	if (other == self.owner)
 		return;
-/*
-	if (FClassnameIs(pOther->pev, "func_breakable") && pOther->pev->rendermode != kRenderNormal)
+	
+	if(other.classname == "func_breakable")
 	{
-		pev->velocity = pev->velocity * -2.0f;
-		return;
+		self.velocity *= -2;
+		return;		
 	}
-*/
+	
 	if (self.flags & FL_ONGROUND)
 	{
 		// add a bit of static friction

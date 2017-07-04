@@ -569,14 +569,22 @@ void(entity targ) give_random_weapon =
 {
 local float it;
 
-	it = floor(random() * 1);
+	it = floor(random() * 2);
 
 	if (it == 0)
-		{
+	{
 		//targ.items = targ.items | IT_SHOTGUN;
 		//targ.currentammo = targ.ammo_shells = targ.ammo_shells + 25;
-		//targ.weapon = IT_SHOTGUN;
-		}
+		targ.weapon = IT_GLOCK;
+	}
+	else if(it == 1)
+	{
+		targ.weapon = IT_USP;
+	}
+	else
+	{
+		targ.weapon = IT_DEAGLE;
+	}
 };
 
 // --------------------------------
@@ -903,15 +911,23 @@ void() bot_attack =
 		self.th_walk();
 		return;
 	}
-	self.attack_finished = time + 0.875;
-	makevectors(self.v_angle);
-	vecSrc = self.origin + self.view_ofs;
-	vecAcc = '0.08716 0.04362 0.00';
-	vecAim = bot_aim_at_enemy();
-	sound (self, CHAN_AUTO, "weapons/m3-1.wav", 1, ATTN_NORM);
-	FireBullets(1,vecSrc,vecAim,vecAcc,8192,20);
 	//self.think = bot_attack;
 	//bot_check_ammo();
+	if(self.weapon == IT_GLOCK)
+	{
+		self.attack_finished = time + 0.085;
+		DefaultFire(1,21, "weapons/glock18-2.wav" );
+	}
+	else if(self.weapon == IT_USP)
+	{
+		self.attack_finished = time + 0.085;
+		DefaultFire(1, 30, "weapons/usp1.wav");
+	}
+	else if(self.weapon == IT_DEAGLE)
+	{
+		self.attack_finished = time + 0.18;
+		DefaultFire(1, 47, "weapons/deagle-1.wav");
+	}
 /*
 	if (self.weapon == IT_SHOTGUN)
 		{

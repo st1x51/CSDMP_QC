@@ -341,6 +341,17 @@ void() UpdateWeapon=
 		SpreadX = 1.6;
 		SpreadY = 1.6;
 	}
+	if(self.weapon == IT_M4A1)
+	{
+		self.weaponmodel = "progs/v_m4a1.mdl";
+		self.weaponframe = 1;
+		self.currentammo = self.m4a1clip;
+		
+		MaxSpreadX = 5;
+		MaxSpreadY = 5;
+		SpreadX = 1.5;
+		SpreadY = 1.5;
+	}
 }
 
 void(float startframe)Reload=
@@ -367,6 +378,8 @@ void(float startframe)Reload=
 		Aug_Reload();
 	if(self.weapon == IT_FAMAS)
 		Famas_Reload();
+	if(self.weapon == IT_M4A1)
+		M4A1_Reload();
 }
 void() WeaponAttack =
 {
@@ -394,6 +407,10 @@ void() WeaponAttack =
 	if(self.weapon == IT_FAMAS)
 	{
 		Famas_PrimaryAttack();
+	}
+	if(self.weapon == IT_M4A1)
+	{
+		M4A1_PrimaryAttack();
 	}
 	if(!self.semi)
 	{
@@ -447,6 +464,8 @@ float() GetWeaponId=
 			return IT_AUG;
 		else if(self.items == self.items | IT_FAMAS)
 			return IT_FAMAS;
+		else if(self.items == self.items | IT_M4A1)
+			return IT_M4A1;
 	}
 	if(self.iSlot == SECONDARY)
 	{

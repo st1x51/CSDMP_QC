@@ -7,7 +7,11 @@ vector  VEC_DUCK_HULL_MAX =  '16 16 18';
 #define AUTOAIM_5DEGREES  0.08715574274766
 #define AUTOAIM_8DEGREES  0.1391731009601
 #define AUTOAIM_10DEGREES 0.1736481776669
-
+// func breakable
+#define SF_BREAK_TRIGGER_ONLY		1	// may only be broken by trigger
+#define	SF_BREAK_TOUCH			2	// can be 'crashed through' by running player (plate glass)
+#define SF_BREAK_PRESSURE		4	// can be broken by a player standing on it
+#define SF_BREAK_CROWBAR	256	// instant break if hit with crowbar
 // screen fade flags
 float FFADE_IN		    = 0;		// Just here so we don't pass 0 into the function
 float FFADE_OUT		    = 1;		// Fade out (not in)
@@ -28,6 +32,7 @@ float m_iNumTerrorist,m_iNumCT;
 .float ammo_galil,galilclip;
 .float ammo_aug,augclip;
 .float ammo_famas,famasclip,famasburst;
+.float ammo_m4a1,m4a1clip;
 .float he_grenades;
 .float attack_finished;
 .float iSlot;
@@ -87,6 +92,7 @@ float IT_AWP = 128;
 float IT_GALIL = 256;
 float IT_AUG = 512;
 float IT_FAMAS = 1024;
+float IT_M4A1 = 2048;
 .float state;
 float RELOADING = 1;
 float SILENCER  = 2;

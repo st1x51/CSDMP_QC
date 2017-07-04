@@ -21,7 +21,7 @@ void()anim_burst_famas_attack=
 	if(self.weaponframe == 187 || self.weaponframe == 188|| self.weaponframe == 189)	
 	{
 		self.famasclip -=1;
-		DefaultFire(1,29);
+		DefaultFire(1,29,string_null);
 	}
 	self.weaponframe += 1;
 	self.think = anim_burst_famas_attack;
