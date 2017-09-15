@@ -16,3 +16,35 @@ vector() SetMovedir =
 	
 	self.angles = '0 0 0';
 };
+
+void UTIL_ScreenFadeBuild(vector color, float fadeTime, float fadeHold, float alpha,float flags)
+{
+	duration = fadeTime;
+	holdTime = fadeHold;
+	R = color_x;
+	G = color_y;
+	B = color_z;
+	A = alpha;
+	fadeFlags = flags;
+}
+void UTIL_ScreenFadeWrite(entity pEntity)
+{
+	if (!pEntity)
+		return;
+	
+	msg_entity = pEntity; 
+	
+	WriteByte (MSG_ONE, SVC_SCREENFADE);
+	WriteShort(MSG_ONE,duration);
+	WriteShort(MSG_ONE,holdTime);
+	WriteShort(MSG_ONE,fadeFlags);
+	WriteByte(MSG_ONE,R);
+	WriteByte(MSG_ONE,G);
+	WriteByte(MSG_ONE,B);
+	WriteByte(MSG_ONE,A);
+}
+void UTIL_ScreenFade(entity pEntity,vector color, float fadeTime, float fadeHold, float alpha,float flags)
+{
+	UTIL_ScreenFadeBuild(color, fadeTime, fadeHold, alpha,flags);
+	UTIL_ScreenFadeWrite(pEntity);
+}

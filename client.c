@@ -411,7 +411,7 @@ entity() SelectSpawnPoint =
 				if (spot == lastspawn)
 					return lastspawn;
 				pcount = 0;
-				thing = findradius(spot.origin, 32);
+				thing = findradius(spot.origin, 64);
 				while(thing)
 				{
 					if (thing.classname == "player")
@@ -437,7 +437,7 @@ entity() SelectSpawnPoint =
 				if (spot == lastspawn)
 					return lastspawn;
 				pcount = 0;
-				thing = findradius(spot.origin, 32);
+				thing = findradius(spot.origin, 64);
 				while(thing)
 				{
 					if (thing.classname == "player")
@@ -534,6 +534,8 @@ void() PutClientCTInServer =
 	self.m_iMenu = Menu_OFF;
 	self.anim_priority = ANIM_BASIC;
 	self.fov = 90;
+	stuffcmd(self,"fov 90\n");
+	stuffcmd(self,"scope 0\n");
 	UpdateWeapon();
 }
 void() PutClientTInServer =
@@ -568,6 +570,8 @@ void() PutClientTInServer =
 	self.m_iMenu = Menu_OFF;
 	self.anim_priority = ANIM_BASIC;
 	self.fov = 90;
+	stuffcmd(self,"fov 90\n");
+	stuffcmd(self,"scope 0\n");
 	UpdateWeapon();
 }
 void() trigger_camera=
