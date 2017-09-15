@@ -3,15 +3,10 @@ void()KNIFE_SecondaryAttack;
 void()usp_unsilencer;
 void()usp_silencer;
 float()GetWeaponId;
-void(float teem) create_bot;
 void() CheckImpulses =
 {
 	if (self.impulse == 121)
 		ChangeWeapon ();
-	if(self.impulse == 100)
-		create_bot(T_SIDE);
-	if(self.impulse == 101)
-		create_bot(CT_SIDE);
 	if(self.impulse == 20)	
 	{
 		bprint("Bought glock \n");
@@ -140,16 +135,11 @@ void() CheckImpulses =
 			{
 				bprint (self.netname);
 				bprint (" Joining Counter-Terrorist team\n");
-				counter1 ();
+				self.team = CT_SIDE;
+				self.m_iTeam = CT;
+				PutClientCTInServer();
 			}
 	}
-	if (self.impulse == 95)
-				   counter2 ();
-	if (self.impulse == 96)
-					counter3 ();
-	if (self.impulse == 97)
-				   counter4 ();
-			
 	if (self.impulse == 54)
 	{
 		if(self.team == CT_SIDE)
@@ -162,15 +152,11 @@ void() CheckImpulses =
 		{
 			bprint (self.netname);
 			bprint (" Joining Terrorist team\n");
-			terror1 ();
+			self.team = T_SIDE;
+			self.m_iTeam = TERRORIST;
+			PutClientTInServer();
 		}
 	}
-	if (self.impulse == 55)
-				   terror2 ();
-	if (self.impulse == 56)
-					terror3 ();
-	if (self.impulse == 57)
-				   terror4 ();
 	if(self.impulse == 105)
 	{
 		if(self.m_bInBuyZone)

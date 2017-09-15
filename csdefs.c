@@ -17,12 +17,11 @@ float FFADE_IN		    = 0;		// Just here so we don't pass 0 into the function
 float FFADE_OUT		    = 1;		// Fade out (not in)
 float FFADE_MODULATE	= 2;		// Modulate (don't blend)
 float FFADE_STAYOUT	    = 4;		// ignores the duration, stays faded out until new ScreenFade message received
-
 float T_SIDE = 1;
 float CT_SIDE = 2;
+
 float m_iNumTerrorist,m_iNumCT;
 .float menu_team_on;
-.float semi;
 .float ammo_45acp,uspclip,silencer;
 .float ammo_glock,glockclip,autofire;
 .float ammo_deagle,deagleclip;
@@ -106,4 +105,51 @@ string sound_step4;
 float m_bMapHasBuyZone,buyTime;
 .float m_bInBuyZone;
 .float fov,crosshair;
-.float direction,waypoint;
+.float direction,wp;
+void UTIL_ScreenFadeBuild(vector color, float fadeTime, float fadeHold, float alpha,float flags)
+{
+	duration = fadeTime;
+	holdTime = fadeHold;
+	R = color_x;
+	G = color_y;
+	B = color_z;
+	A = alpha;
+	fadeFlags = flags;
+}
+void UTIL_ScreenFadeWrite(entity pEntity)
+{
+	if (!pEntity)
+		return;
+	
+	msg_entity = pEntity; 
+	
+	WriteByte (MSG_ONE, SVC_SCREENFADE);
+	WriteShort(MSG_ONE,duration);
+	WriteShort(MSG_ONE,holdTime);
+	WriteShort(MSG_ONE,fadeFlags);
+	WriteByte(MSG_ONE,R);
+	WriteByte(MSG_ONE,G);
+	WriteByte(MSG_ONE,B);
+	WriteByte(MSG_ONE,A);
+}
+void UTIL_ScreenFade(entity pEntity,vector color, float fadeTime, float fadeHold, float alpha,float flags)
+{
+	UTIL_ScreenFadeBuild(color, fadeTime, fadeHold, alpha,flags);
+	UTIL_ScreenFadeWrite(pEntity);
+}
+
+/*
+-----------------------------------------
+min
+
+Returns the lesser of two (or more) numbers
+
+-----------------------------------------
+*/
+float (float a, float b) mathlib_min =
+{
+	if (a<b)
+		return a;
+	else
+		return b;
+};

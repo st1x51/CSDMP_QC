@@ -131,7 +131,11 @@ void()DieAnim=
 {
 	if(self.frame == 199)
 	{
-		RespawnCounter();
+		//RespawnCounter();
+			if(self.team == CT_SIDE)	
+				PutClientCTInServer();
+			else
+				PutClientTInServer();
 			return;
 	}	
 	self.frame += 1;
@@ -140,6 +144,7 @@ void()DieAnim=
 }
 void () PlayerDie =
 {
+	self.items = 0; 
     self.view_ofs = '0 0 -8';
     self.angles_x = self.angles_z = 0;
     self.deadflag = DEAD_DYING;

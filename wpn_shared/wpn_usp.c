@@ -106,7 +106,7 @@ void()USP_Attack=
 				Reload(147);
 			return;
 		}
-	self.attack_finished = time + 0.085;
+	self.attack_finished = time + 0.15;
 	if(!self.silencer )
 	{
 		self.weaponframe = 115;

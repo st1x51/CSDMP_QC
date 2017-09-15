@@ -99,7 +99,7 @@ void() ladder_touch =
 	if (self.ladder_time < time)
 	{
 		self.ladder_time = time + 0.4;
-		r = randomlong(0,3);
+		r = floor(random()*4);
 		if (r == 0)
 			sound (self, CHAN_VOICE, "player/pl_ladder1.wav", 1, ATTN_NORM);
 		else if (r == 1)

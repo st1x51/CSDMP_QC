@@ -11,10 +11,14 @@ void() worldspawn =
 	precaches();
 	LightStyles_setup();
 	CheckRules();
+	BotInit();
 };
 void() SetNewParms = {};
 void() SetChangeParms = {};
-void() StartFrame = {};
+void() StartFrame = 
+{
+	BotFrame();
+};
  
 void() precaches =
 {

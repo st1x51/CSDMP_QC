@@ -235,12 +235,14 @@ void() PlayerJump =
  {
 	bprint (self.netname);
 	bprint (" entered the game\n");
+	ClientInRankings();
 };
  //Called when a client disconnects from the server
  void() ClientDisconnect = 
  {
  	bprint (self.netname);
 	bprint (" left the game\n");
+	ClientDisconnected();
 	if(self.team == CT_SIDE)
 		m_iNumCT -= 1;
 	if(self.team == T_SIDE)
@@ -304,7 +306,9 @@ void() PlayerJump =
  //Called every frame, before physics.
 void() PlayerPreThink = 
 {
-	 if(self.deadflag == DEAD_DEAD)
+	if (BotPreFrame()) // FrikBot
+		return;
+	if(self.deadflag == DEAD_DEAD)
 		return;
 	//Menu_Commands();
 	SetClientFrame ();
@@ -338,7 +342,7 @@ void() playerfootstep =
 
 	self.nextfootstep = time + 0.4;
 
-	r = randomlong(0,3);
+	r = floor(random()*4);
 	// ATTN_IDLE to make them short range
 	if (r == 0)
 	{
@@ -364,7 +368,9 @@ void() playerfootstep =
  //Called every frame, AFTER physics.
  void() PlayerPostThink = 
  {
-   if(self.deadflag == DEAD_DEAD)
+	if (BotPostFrame()) // FrikBot
+		return;
+    if(self.deadflag == DEAD_DEAD)
 		return;
 	CheckImpulses();
 	CheckBuyZone();
@@ -519,7 +525,7 @@ void() PutClientCTInServer =
 	self.hull = 2;
 	self.state = 0;
 	self.view_ofs = DEFAULT_VIEWHEIGHT;
-	setsize(self,VEC_HULL_MIN,VEC_HULLHL_MAX);
+	setsize(self,VEC_HULLHL_MIN,VEC_HULLHL_MAX);
 	self.iSlot = SECONDARY;
 	self.weapon = IT_USP;
 	self.items = self.items | IT_USP | IT_KNIFE;
@@ -553,7 +559,7 @@ void() PutClientTInServer =
 	self.hull = 2;
 	self.state = 0;
 	self.view_ofs = DEFAULT_VIEWHEIGHT;
-	setsize(self,VEC_HULL_MIN,VEC_HULLHL_MAX);
+	setsize(self,VEC_HULLHL_MIN,VEC_HULLHL_MAX);
 	self.iSlot = SECONDARY;
 	self.weapon = IT_GLOCK; 
 	self.items = self.items | IT_GLOCK | IT_KNIFE;

@@ -84,7 +84,6 @@ void(float cShots,vector vecSrc,vector vecDirShooting,vector vecSpread,float flD
 			y = RANDOM_LONG(-0.5,0.5) + RANDOM_LONG(-0.5,0.5);
 			z = x*x+y*y;
 		} while(z>1);
-	
 	local vector vecDir = vecDirShooting + x * vecSpread_x * vecRight + y * vecSpread_y * vecUp;
 	local vector vecEnd;
 	vecEnd = vecSrc + vecDir * flDistance;

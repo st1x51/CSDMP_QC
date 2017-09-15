@@ -57,7 +57,8 @@ void()GLOCK_Attack=
 				Reload(144); 
 				return;
 			}
-		self.attack_finished = time + 0.085;
+		//self.attack_finished = time + 0.085;
+		self.attack_finished = time + 0.2;
 		DefaultFire(1,21, "weapons/glock18-2.wav" );
 		self.weaponframe = 94;
 		anim_glock_attack();

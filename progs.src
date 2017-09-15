@@ -12,13 +12,20 @@
 ../progs.dat                                        // Output File
 
 defs.c                                             // Definitions
+frikbot/bot.qc
+frikbot/bot_way.qc
+frikbot/bot_fight.qc 
+frikbot/bot_ai.qc
+frikbot/bot_misc.qc
+frikbot/bot_phys.qc
+frikbot/bot_move.qc
+frikbot/bot_ed.qc
 csdefs.c
 main.c    
 subs.c                                         // Main subroutines
 damage.c
 player.c
 client.c                                           // Client subroutines
-teammenu.c
 lights.c
 impulses.c
 wpn_shared\wpn_knife.c
@@ -37,6 +44,4 @@ weapons.c
 triggers.c
 bmodels.c
 sound.c
-dumbots.c
-
 

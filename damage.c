@@ -1,6 +1,5 @@
 void(float cShots,vector vecSrc,vector vecDirShooting,vector vecSpread,float flDistance,float iDamage)FireBullets;
 void(float damage, vector dir) TraceAttack;
-
 vector(float flDelta) GetAutoaimVector =
 {
 		makevectors( self.v_angle + self.punchangle );

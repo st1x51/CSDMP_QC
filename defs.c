@@ -124,7 +124,7 @@ void(entity e, vector min, vector max) setsize	= #4;
 vector(vector start, vector end) pathfind			= #5;	//returns next move target towards end
 void() break					= #6;
 float() random					= #7;	// returns 0 - 1
-void(entity e, float chan, string samp, float vol, float atten) sound = #8;
+//void(entity e, float chan, string samp, float vol, float atten) sound = #8;
 vector(vector v) normalize			= #9;
 void(string e) error				= #10;
 void(string e) objerror				= #11;
@@ -137,7 +137,7 @@ entity() checkclient				= #17;		// returns a client to look for
 entity(entity start, .string fld, string match) find = #18;
 string(string s) precache_sound			= #19;
 string(string s) precache_model			= #20;
-void(entity client, string s)stuffcmd		= #21;
+//void(entity client, string s)stuffcmd		= #21;
 entity(vector org, float rad) findradius	= #22;
 void(string s) dprint				= #25;
 string(float f) ftos				= #26;
@@ -155,26 +155,26 @@ float(float v) ceil				= #38;		// smallest integer >= v
 float(entity e) checkbottom			= #40;		// true if self is on ground
 float(vector v) pointcontents			= #41;		// returns a CONTENT_*
 float(float f) fabs				= #43;
-vector(entity e, float speed) aim		= #44;		// returns the shooting vector
+//vector(entity e, float speed) aim		= #44;		// returns the shooting vector
 float(string s) cvar				= #45;		// return cvar.value
 void(string s) localcmd				= #46;		// put string into local que
 entity(entity e) nextent			= #47;		// for looping through all ents
 void() ChangeYaw 				= #49;		// turn towards self.ideal_yaw
 vector(vector v) vectoangles			= #51;
-void(float to, float f) WriteByte		= #52;
-void(float to, float f) WriteChar		= #53;
-void(float to, float f) WriteShort		= #54;
-void(float to, float f) WriteLong		= #55;
-void(float to, float f) WriteCoord		= #56;
-void(float to, float f) WriteAngle		= #57;
-void(float to, string s) WriteString		= #58;
-void(float to, entity s) WriteEntity		= #59;
+//void(float to, float f) WriteByte		= #52;
+//void(float to, float f) WriteChar		= #53;
+//void(float to, float f) WriteShort		= #54;
+//void(float to, float f) WriteLong		= #55;
+//void(float to, float f) WriteCoord		= #56;
+//void(float to, float f) WriteAngle		= #57;
+//void(float to, string s) WriteString		= #58;
+//void(float to, entity s) WriteEntity		= #59;
 void(float step) movetogoal			= #67;
 string(string s) precache_file			= #68;		// no effect except for -copy
 void(entity e) makestatic			= #69;
 void(string s) changelevel			= #70;
 void(string var, string val) cvar_set		= #72;		// sets cvar.value
-void(entity client, string s) centerprint 	= #73;		// sprint, but in middle
+//void(entity client, string s) centerprint 	= #73;		// sprint, but in middle
 void(entity client, string s, string s) centerprint2 = #73;
 void(entity client, string s, string s, string s) centerprint3 = #73;
 void(entity client, string s, string s, string s, string s) centerprint4 = #73;
@@ -185,7 +185,7 @@ void(vector pos, string samp, float vol, float atten) ambientsound = #74;
 string(string s) precache_model2		= #75;	// registered version only
 string(string s) precache_sound2		= #76;	// registered version only
 string(string s) precache_file2			= #77;	// registered version only
-void(entity e) setspawnparms			= #78;	// set parm1... to the
+//void(entity e) setspawnparms			= #78;	// set parm1... to the
 //new
 float(float l, float h)randomlong = #33; // randomlong
 float(float l, float h)randomfloat = #50; // randomfloat
@@ -402,7 +402,7 @@ string string_null;    // null string, nothing should be held here
 
 void(vector o, vector d, float color, float count) particle = #48;// start a particle effect
 void(string s) bprint				= #23;
-void(entity client, string s) sprint		= #24;
+//void(entity client, string s) sprint		= #24;
 void() SUB_Remove = {remove(self);};
 // End
 
@@ -419,50 +419,6 @@ void(entity targ, entity inflictor, entity attacker, float damage) T_Damage;
 float LADDEROFS = 0.36;// touchy...
 //just some functions here
 float duration,holdTime,R,G,B,A,fadeFlags;
-void UTIL_ScreenFadeBuild(vector color, float fadeTime, float fadeHold, float alpha,float flags)
-{
-	duration = fadeTime;
-	holdTime = fadeHold;
-	R = color_x;
-	G = color_y;
-	B = color_z;
-	A = alpha;
-	fadeFlags = flags;
-}
-void UTIL_ScreenFadeWrite(entity pEntity)
-{
-	if (!pEntity)
-		return;
-	
-	msg_entity = pEntity; 
-	
-	WriteByte (MSG_ONE, SVC_SCREENFADE);
-	WriteShort(MSG_ONE,duration);
-	WriteShort(MSG_ONE,holdTime);
-	WriteShort(MSG_ONE,fadeFlags);
-	WriteByte(MSG_ONE,R);
-	WriteByte(MSG_ONE,G);
-	WriteByte(MSG_ONE,B);
-	WriteByte(MSG_ONE,A);
-}
-void UTIL_ScreenFade(entity pEntity,vector color, float fadeTime, float fadeHold, float alpha,float flags)
-{
-	UTIL_ScreenFadeBuild(color, fadeTime, fadeHold, alpha,flags);
-	UTIL_ScreenFadeWrite(pEntity);
-}
-
-/*
------------------------------------------
-min
-
-Returns the lesser of two (or more) numbers
-
------------------------------------------
-*/
-float (float a, float b) mathlib_min =
-{
-	if (a<b)
-		return a;
-	else
-		return b;
-};
+.float count,search_time,state;
+.vector dest1,dest2;
+.float semi;
