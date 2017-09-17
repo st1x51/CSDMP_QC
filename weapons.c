@@ -238,7 +238,7 @@ void() UpdateWeapon=
 		else
 			self.weaponframe = 0;
 		self.currentammo = self.uspclip;
-		
+		self.ammo_shells = self.ammo_45acp;
 		MaxSpreadX = 5;
 		MaxSpreadY = 5;
 		SpreadX = 2;
@@ -249,7 +249,7 @@ void() UpdateWeapon=
 		self.weaponmodel = "progs/v_glock18.mdl";
 		self.weaponframe = 1;
 		self.currentammo = self.glockclip;
-		
+		self.ammo_shells = self.ammo_glock;
 		MaxSpreadX = 2;
 		MaxSpreadY = 3;
 		SpreadX = 1.7;

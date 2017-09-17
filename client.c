@@ -131,7 +131,7 @@ void()PlayerCrouching =
 		return;
 	}
 	
-	setsize (self, VEC_HULLHL2_MIN, VEC_HULLHL2_MAX);
+	setsize (self, VEC_DUCK_HULL_MIN, VEC_DUCK_HULL_MAX);
 	self.hull = 4;
 	self.crouch_time = time;
     self.crouch_stuck = 0;
@@ -139,7 +139,7 @@ void()PlayerCrouching =
 
 void()PlayerUnCrouching =
 {
-	tracearea ((self.origin), (self.origin + '0 0 36'), VEC_HULLHL2_MIN, VEC_HULLHL2_MAX, FALSE, self);
+	tracearea ((self.origin), (self.origin + '0 0 36'), VEC_DUCK_HULL_MIN, VEC_DUCK_HULL_MAX, FALSE, self);
 
 	if ( (trace_fraction < 1) )
 	{
@@ -512,7 +512,7 @@ void() PutClientCTInServer =
 	self.flags = FL_CLIENT;
 	self.team = CT_SIDE;
 	self.uspclip = 12;
-	self.ammo_shells = 24;
+	self.ammo_45acp = 24;
 	self.he_grenades = 0;
 	self.famasburst = 0;
 	self.silencer = 1;
@@ -549,6 +549,7 @@ void() PutClientTInServer =
 	self.movetype = MOVETYPE_WALK;
 	self.flags = FL_CLIENT;
 	self.team = T_SIDE;
+	self.ammo_glock = 40;
 	self.glockclip = 20; 
 	self.he_grenades = 0;
 	self.autofire  = 0;

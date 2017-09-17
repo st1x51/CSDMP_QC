@@ -86,7 +86,7 @@ void () SetClientFrame =
 					
             if (self.deadflag == DEAD_DYING)
             {
-              //  self.nextthink = -1;
+               // self.nextthink = -1;
                 self.deadflag = DEAD_DEAD;
             }
             return;    // stay there
@@ -127,34 +127,66 @@ void() RespawnCounter =
 	self.think = RespawnCounter;
 	self.nextthink = time + 1;
 }
-void()DieAnim=
+void()rest=
 {
-	if(self.frame == 199)
-	{
-		//RespawnCounter();
-			if(self.team == CT_SIDE)	
-				PutClientCTInServer();
-			else
-				PutClientTInServer();
-			return;
-	}	
-	self.frame += 1;
-	self.think = DieAnim;
-	self.nextthink = time + 0.02;
+	if(self.team == CT_SIDE)	
+		PutClientCTInServer();
+	else
+		PutClientTInServer();
+	return;
 }
+void()	die_anim1=[160, die_anim2]{self.nextthink = time + 0.02;};
+void()	die_anim2=[161, die_anim3]{self.nextthink = time + 0.02;};
+void()	die_anim3=[162, die_anim4]{self.nextthink = time + 0.02;};
+void()	die_anim4=[163, die_anim5]{self.nextthink = time + 0.02;};
+void()	die_anim5=[164, die_anim6]{self.nextthink = time + 0.02;};
+void()	die_anim6=[165, die_anim7]{self.nextthink = time + 0.02;};
+void()	die_anim7=[166, die_anim8]{self.nextthink = time + 0.02;};
+void()	die_anim8=[167, die_anim9]{self.nextthink = time + 0.02;};
+void()	die_anim9=[168, die_anim10]{self.nextthink = time + 0.02;};
+void()	die_anim10=[169, die_anim11]{self.nextthink = time + 0.02;};
+void()	die_anim11=[170, die_anim12]{self.nextthink = time + 0.02;};
+void()	die_anim12=[171, die_anim13]{self.nextthink = time + 0.02;};
+void()	die_anim13=[172, die_anim14]{self.nextthink = time + 0.02;};
+void()	die_anim14=[173, die_anim15]{self.nextthink = time + 0.02;};
+void()	die_anim15=[174, die_anim16]{self.nextthink = time + 0.02;};
+void()	die_anim16=[175, die_anim17]{self.nextthink = time + 0.02;};
+void()	die_anim17=[176, die_anim18]{self.nextthink = time + 0.02;};
+void()	die_anim18=[177, die_anim19]{self.nextthink = time + 0.02;};
+void()	die_anim19=[178, die_anim20]{self.nextthink = time + 0.02;};
+void()	die_anim20=[179, die_anim21]{self.nextthink = time + 0.02;};
+void()	die_anim21=[180, die_anim22]{self.nextthink = time + 0.02;};
+void()	die_anim22=[181, die_anim23]{self.nextthink = time + 0.02;};
+void()	die_anim23=[182, die_anim24]{self.nextthink = time + 0.02;};
+void()	die_anim24=[183, die_anim25]{self.nextthink = time + 0.02;};
+void()	die_anim25=[184, die_anim26]{self.nextthink = time + 0.02;};
+void()	die_anim26=[185, die_anim27]{self.nextthink = time + 0.02;};
+void()	die_anim27=[186, die_anim28]{self.nextthink = time + 0.02;};
+void()	die_anim28=[187, die_anim29]{self.nextthink = time + 0.02;};
+void()	die_anim29=[188, die_anim30]{self.nextthink = time + 0.02;};
+void()	die_anim30=[189, die_anim31]{self.nextthink = time + 0.02;};
+void()	die_anim31=[190, die_anim32]{self.nextthink = time + 0.02;};
+void()	die_anim32=[191, die_anim33]{self.nextthink = time + 0.02;};
+void()	die_anim33=[192, die_anim34]{self.nextthink = time + 0.02;};
+void()	die_anim34=[193, die_anim35]{self.nextthink = time + 0.02;};
+void()	die_anim35=[194, die_anim36]{self.nextthink = time + 0.02;};
+void()	die_anim36=[195, die_anim37]{self.nextthink = time + 0.02;};
+void()	die_anim37=[196, die_anim38]{self.nextthink = time + 0.02;};
+void()	die_anim38=[197, die_anim39]{self.nextthink = time + 0.02;};
+void()	die_anim39=[198, die_anim40]{self.nextthink = time + 0.02;};
+void()	die_anim40=[199, rest]{};
 void () PlayerDie =
 {
+	self.anim_priority = ANIM_DEATH;
+	self.deadflag = DEAD_DYING;
 	self.items = 0; 
     self.view_ofs = '0 0 -8';
     self.angles_x = self.angles_z = 0;
-    self.deadflag = DEAD_DYING;
     self.solid = SOLID_NOT;
     self.movetype = MOVETYPE_TOSS;
     self.flags = self.flags - (self.flags & FL_ONGROUND);
     if (self.velocity_z < 10)
         self.velocity_z = self.velocity_z + random()*300;
 	rcount = 5;
-	self.anim_priority = ANIM_DEATH;
-	self.frame = 160;
-	DieAnim();
+	die_anim1();
 };
