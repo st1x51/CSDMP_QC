@@ -1308,7 +1308,7 @@ void(float whichteam, float whatbot, float whatskill) BotConnect =
 	self.team = self.b_pants + 1;
 	*/
 	self.team = whichteam;
-	UpdateClient(self);
+	//UpdateClient(self); //st1x51:wtf what is this
 //	SetNewParms();
 	self.ishuman = 2;
 	ClientConnect();
@@ -1375,7 +1375,7 @@ void(entity bot) BotDisconnect =
 		self.b_pants = 0;
 		self.b_shirt = 0;
 		self.ammo_shells = self.ammo_nails = self.ammo_rockets = self.ammo_cells = 0;
-		UpdateClient(self);
+		//UpdateClient(self);
 		active_clients = active_clients - (active_clients & ClientBitFlag(self.b_clientno));
 	      self.b_clientno = -1;
    	}

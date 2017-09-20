@@ -135,6 +135,13 @@ void()rest=
 		PutClientTInServer();
 	return;
 }
+void() PlayerDead =
+{
+	self.nextthink = -5;
+// allow respawn after a certain time
+	self.deadflag = DEAD_DEAD;
+	rest();
+};
 void()	die_anim1=[160, die_anim2]{self.nextthink = time + 0.02;};
 void()	die_anim2=[161, die_anim3]{self.nextthink = time + 0.02;};
 void()	die_anim3=[162, die_anim4]{self.nextthink = time + 0.02;};
@@ -174,7 +181,7 @@ void()	die_anim36=[195, die_anim37]{self.nextthink = time + 0.02;};
 void()	die_anim37=[196, die_anim38]{self.nextthink = time + 0.02;};
 void()	die_anim38=[197, die_anim39]{self.nextthink = time + 0.02;};
 void()	die_anim39=[198, die_anim40]{self.nextthink = time + 0.02;};
-void()	die_anim40=[199, rest]{};
+void()	die_anim40=[199, PlayerDead]{};
 void () PlayerDie =
 {
 	self.anim_priority = ANIM_DEATH;

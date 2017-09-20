@@ -121,6 +121,7 @@ void() he_anim_attack=
 void()HE_Attack=
 {
 			self.weaponframe = 1;
+			self.state = ATTACK;
 			he_anim_attack();
 			self.attack_finished = time + 0.2;
 }

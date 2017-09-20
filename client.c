@@ -306,9 +306,9 @@ void() PlayerJump =
  //Called every frame, before physics.
 void() PlayerPreThink = 
 {
-	if (BotPreFrame()) // FrikBot
-		return;
 	if(self.deadflag == DEAD_DEAD)
+		return;
+	if (BotPreFrame()) // FrikBot
 		return;
 	//Menu_Commands();
 	SetClientFrame ();
