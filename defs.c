@@ -285,15 +285,12 @@ vector	VEC_HULL_MAX = '16 16 32';
 vector	VEC_HULL2_MIN = '-32 -32 -24';
 vector	VEC_HULL2_MAX = '32 32 64';
 
-vector	VEC_HULL_MIN    = '-16 -16 -24';
-vector	VEC_HULL_MAX    = ' 16  16 32';
-
 vector VEC_HULLHL_MIN   = '-16 -16 -36';
 vector VEC_HULLHL_MAX   = '16 16 36';
 vector VEC_HULLHL2_MIN  = '-16 -16 -18';
 vector VEC_HULLHL2_MAX	= '16 16 18';
-vector	VEC_HULL3_MIN = '-16 -16 -12';
-vector	VEC_HULL3_MAX = '16 16 16';
+vector VEC_HULL3_MIN = '-16 -16 -12';
+vector VEC_HULL3_MAX = '16 16 16';
 
 // protocol bytes
 float	SVC_BAD			= 0;

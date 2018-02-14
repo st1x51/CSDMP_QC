@@ -311,8 +311,8 @@ void() PlayerPreThink =
 	if (BotPreFrame()) // FrikBot
 		return;
 	//Menu_Commands();
-	SetClientFrame ();
 	WaterMove ();
+	SetClientFrame();
 	if (self.m_iJoiningState != JOINED)
 		JoiningThink();
 	TraceTexture();
@@ -532,7 +532,6 @@ void() PutClientCTInServer =
 	m_iNumCT +=1;
 	self.m_iJoiningState = JOINED;
 	self.m_iMenu = Menu_OFF;
-	self.anim_priority = ANIM_BASIC;
 	self.fov = 90;
 	stuffcmd(self,"fov 90\n");
 	stuffcmd(self,"scope 0\n");
@@ -569,7 +568,6 @@ void() PutClientTInServer =
 	m_iNumTerrorist +=1;
 	self.m_iJoiningState = JOINED;
 	self.m_iMenu = Menu_OFF;
-	self.anim_priority = ANIM_BASIC;
 	self.fov = 90;
 	stuffcmd(self,"fov 90\n");
 	stuffcmd(self,"scope 0\n");

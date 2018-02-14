@@ -3,7 +3,6 @@ float() crandom =
 	return 2*(random() - 0.5);
 };
 
-
 void(vector org, vector vel, float damage) SpawnBlood =
 {
 	particle (org, vel*0.1, 73, damage*4);
@@ -147,7 +146,7 @@ void()SecondaryAttack=
 	if(self.weapon == IT_GLOCK)
 	{
 		self.m_flNextSecondaryAttack = time + 0.3;
-		if(self.autofire  == 1)
+		if(self.autofire == 1)
 		{	
 			centerprint(self,"Switched to semi-automatic\n");
 			self.autofire = 0;
