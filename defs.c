@@ -419,3 +419,19 @@ float duration,holdTime,R,G,B,A,fadeFlags;
 .float count,search_time,state;
 .vector dest1,dest2;
 .float semi;
+float(string s) stof = #81;	// 2001-09-20 QuakeC string manipulation by FrikaC
+//QuakeC file access by FrikaC  start
+float(string filename, float mode) fopen = #110;
+void(float fhandle) fclose = #111;
+string(float fhandle) fgets = #112;
+void(float fhandle, string s) fputs = #113;
+float(string s) strlen = #114;
+string(string s1, string s2) strcat = #115;
+string(string s, float start, float length) substring = #116;
+vector(string s) stov = #117;
+string(string s) strzone = #118;
+string(string s) strunzone = #119;
+float FILE_READ = 0;
+float FILE_APPEND = 1;
+float FILE_WRITE = 2;
+//QuakeC string manipulation by FrikaC  end
