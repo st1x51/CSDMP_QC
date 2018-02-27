@@ -500,6 +500,40 @@ void() PutClientInServer =
 		self.angles = v_forward;
 	}
 };
+void() ResetAmmo =
+{
+	if(self.team = CT_SIDE)
+	{
+		self.ammo_glock = 0;
+		self.glockclip = 0;
+		self.famasburst = 0;
+		self.silencer = 1;
+	}
+	else
+	{
+		self.ammo_45acp = 0;
+		self.uspclip = 0;
+		self.autofire  = 0;
+	}
+	self.ammo_deagle = 0;
+	self.deagleclip = 0;
+	self.ammo_m3 = 0;
+	self.m3clip = 0;
+	self.ammo_ak47 = 0;
+	self.ak47clip = 0;
+	self.ammo_awp = 0;
+	self.awpclip = 0;
+	self.ammo_galil = 0;
+	self.galilclip = 0;
+	self.ammo_aug = 0;
+	self.augclip = 0;
+	self.ammo_famas = 0;
+	self.famasclip = 0;
+	self.ammo_m4a1 = 0;
+	self.m4a1clip = 0;
+	self.he_grenades = 0;
+}
+
 void() PutClientCTInServer =
 {
 	local	entity spot;
@@ -513,9 +547,7 @@ void() PutClientCTInServer =
 	self.team = CT_SIDE;
 	self.uspclip = 12;
 	self.ammo_45acp = 24;
-	self.he_grenades = 0;
-	self.famasburst = 0;
-	self.silencer = 1;
+	ResetAmmo();
 	self.th_die = PlayerDie;
 	self.deadflag = DEAD_NO;
 	self.origin = spot.origin + '0 0 10';
@@ -550,8 +582,7 @@ void() PutClientTInServer =
 	self.team = T_SIDE;
 	self.ammo_glock = 40;
 	self.glockclip = 20; 
-	self.he_grenades = 0;
-	self.autofire  = 0;
+	ResetAmmo();
 	self.th_die = PlayerDie;
 	self.deadflag = DEAD_NO;
 	self.origin = spot.origin + '0 0 10';
