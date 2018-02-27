@@ -225,6 +225,8 @@ void() UpdateWeapon=
 	{
 		self.weaponmodel = "progs/v_knife.mdl";
 		self.weaponframe = 0;
+		self.currentammo = 0;
+		self.ammo_shells = 0;
 	}
 	if(self.weapon == IT_USP)
 	{

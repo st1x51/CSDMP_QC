@@ -25,6 +25,7 @@ void()anim_sec_knife_attack=
 void KnifeAttack(float iDamage,float iDistance)
 {
 	local vector org, end;
+	local float r;
 	makevectors(self.v_angle);
 	org = self.origin + self.view_ofs;
 	end = org + v_forward * iDistance;
@@ -32,10 +33,10 @@ void KnifeAttack(float iDamage,float iDistance)
 	sound (self, CHAN_AUTO, "weapons/knife_slash1.wav", 1, ATTN_NORM);
 	if(trace_fraction ==1)
 		return;
-
+	r = floor(random()*4);
 	if(trace_ent.takedamage)
 	{
-		switch(randomfloat(0,3))
+		switch(r)
 		{
 		case 0:
 			sound (self, CHAN_AUTO, "weapons/knife_hit1.wav", 1, ATTN_NORM);
