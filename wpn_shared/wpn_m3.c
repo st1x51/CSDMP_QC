@@ -19,7 +19,8 @@ void() M3_Reload_End=
 	{
 		self.weaponframe = 1;
 		self.m3clip = 7;
-		self.currentammo = self.m3clip;
+		self.ammo_m3 -= 7;
+		UpdateWeapon();
 		self.state = 0;
 		return;
 	}

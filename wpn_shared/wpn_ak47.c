@@ -30,7 +30,8 @@ void()AK47_Reload=
 	{
 		self.weaponframe = 1;
 		self.ak47clip = 30;
-		self.currentammo = self.ak47clip;
+		self.ammo_ak47 -=30;
+		UpdateWeapon();
 		self.state = 0;
 		return;
 	}	

@@ -36,7 +36,8 @@ void()Aug_Reload=
 	{
 		self.weaponframe = 1;
 		self.augclip = 30;
-		self.currentammo = self.augclip;
+		self.ammo_aug -= 30;
+		UpdateWeapon();
 		self.state = 0;
 		return;
 	}	

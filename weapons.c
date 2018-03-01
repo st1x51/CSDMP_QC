@@ -261,7 +261,7 @@ void() UpdateWeapon=
 		self.weaponmodel = "progs/v_deagle.mdl";
 		self.weaponframe = 0;
 		self.currentammo = self.deagleclip;
-		
+		self.ammo_shells = self.ammo_deagle;
 		MaxSpreadX = 2;
 		MaxSpreadY = 5;
 		SpreadX = 3.5;
@@ -278,7 +278,7 @@ void() UpdateWeapon=
 		self.weaponmodel = "progs/v_m3.mdl";
 		self.weaponframe = 1;
 		self.currentammo = self.m3clip;
-		
+		self.ammo_shells = self.ammo_m3;
 		MaxSpreadX = 2;
 		MaxSpreadY = 5;
 		SpreadX = 2;
@@ -289,7 +289,7 @@ void() UpdateWeapon=
 		self.weaponmodel = "progs/v_ak47.mdl";
 		self.weaponframe = 1;
 		self.currentammo = self.ak47clip;
-
+		self.ammo_shells = self.ammo_ak47;
 		MaxSpreadX = 2;
 		MaxSpreadY = 5;
 		SpreadX = 2;
@@ -302,7 +302,7 @@ void() UpdateWeapon=
 		self.currentammo = self.awpclip;
 		self.crosshair = cvar("crosshair");
 		stuffcmd(self,"crosshair 0\n");
-		
+		self.ammo_shells = self.ammo_awp;
 		MaxSpreadX = 5;
 		MaxSpreadY = 5;
 		SpreadX = 5;
@@ -313,7 +313,7 @@ void() UpdateWeapon=
 		self.weaponmodel = "progs/v_galil.mdl";
 		self.weaponframe = 1;
 		self.currentammo = self.galilclip;
-		
+		self.ammo_shells = self.ammo_galil;
 		MaxSpreadX = 2;
 		MaxSpreadY = 5;
 		SpreadX = 1.6;
@@ -324,7 +324,7 @@ void() UpdateWeapon=
 		self.weaponmodel = "progs/v_aug.mdl";
 		self.weaponframe = 1;
 		self.currentammo = self.augclip;
-		
+		self.ammo_shells = self.ammo_aug;
 		MaxSpreadX = 2;
 		MaxSpreadY = 5;
 		SpreadX = 2;
@@ -335,7 +335,7 @@ void() UpdateWeapon=
 		self.weaponmodel = "progs/v_famas.mdl";
 		self.weaponframe = 1;
 		self.currentammo = self.famasclip;
-		
+		self.ammo_shells = self.ammo_famas;
 		MaxSpreadX = 2;
 		MaxSpreadY = 5;
 		SpreadX = 1.6;
@@ -346,7 +346,7 @@ void() UpdateWeapon=
 		self.weaponmodel = "progs/v_m4a1.mdl";
 		self.weaponframe = 1;
 		self.currentammo = self.m4a1clip;
-		
+		self.ammo_shells = self.ammo_m4a1;
 		MaxSpreadX = 5;
 		MaxSpreadY = 5;
 		SpreadX = 1.5;
@@ -355,7 +355,9 @@ void() UpdateWeapon=
 }
 
 void(float startframe)Reload=
-{
+{	
+	if(self.ammo_shells == 0)
+		return;
 	self.weaponframe = startframe;
 	self.state = RELOADING;
 	if(self.weapon == IT_USP && self.silencer == 0)

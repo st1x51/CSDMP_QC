@@ -30,7 +30,8 @@ void()M4A1_Reload=
 	{
 		self.weaponframe = 1;
 		self.m4a1clip = 30;
-		self.currentammo = self.m4a1clip;
+		self.ammo_m4a1 -=30;
+		UpdateWeapon();
 		self.state = 0;
 		return;
 	}	

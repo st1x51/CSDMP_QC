@@ -22,7 +22,8 @@ void()Galil_Reload=
 	{
 		self.state = 0;
 		self.galilclip = 35;
-		self.currentammo = self.galilclip;
+		self.ammo_galil -= 35;
+		UpdateWeapon();
 		self.weaponframe = 1;
 		return;
 	}

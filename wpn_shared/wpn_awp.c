@@ -26,7 +26,8 @@ void()AWP_Reload=
 	{
 		self.weaponframe = 1;
 		self.awpclip = 10;
-		self.currentammo = self.awpclip;
+		self.ammo_awp -= 10;
+		UpdateWeapon();
 		self.state = 0;
 		return;
 	}

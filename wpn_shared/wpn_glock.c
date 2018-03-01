@@ -34,7 +34,8 @@ void() Glock_Reload=
 	{
 		self.weaponframe = 1;
 		self.glockclip = 20;
-		self.currentammo = self.glockclip;
+		self.ammo_glock -= 20;
+		UpdateWeapon();
 		self.state = 0;
 		return;
 	}

@@ -39,7 +39,8 @@ void()Famas_Reload=
 	{
 		self.state = 0;
 		self.famasclip = 25;
-		self.currentammo = self.famasclip;
+		self.ammo_famas -= 25;
+		UpdateWeapon();
 		self.weaponframe = 1;
 		return;
 	}

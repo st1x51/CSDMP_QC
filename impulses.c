@@ -16,6 +16,7 @@ void() CheckImpulses =
 		self.items = self.items | IT_GLOCK;
 		self.weapon = IT_GLOCK;
 		self.glockclip = 20;
+		self.ammo_glock = 120;
 		UpdateWeapon();
 	}
 	if(self.impulse == 21)	
@@ -27,6 +28,7 @@ void() CheckImpulses =
 		self.items = self.items | IT_USP;
 		self.weapon = IT_USP;
 		self.uspclip = 12;
+		self.ammo_45acp = 100;
 		UpdateWeapon();
 	}
 	if(self.impulse == 22)	
@@ -38,6 +40,7 @@ void() CheckImpulses =
 		self.items = self.items | IT_DEAGLE;
 		self.weapon = IT_DEAGLE;
 		self.deagleclip = 7;
+		self.ammo_deagle = 35;
 		UpdateWeapon();
 	}
 	if(self.impulse == 41)	
@@ -59,6 +62,7 @@ void() CheckImpulses =
 		self.items = self.items - (self.items & GetWeaponId());
 		self.items = self.items | IT_M3;
 		self.weapon = IT_M3;
+		self.ammo_m3 = 32;
 		self.m3clip = 7;
 		UpdateWeapon();
 	}
@@ -71,6 +75,7 @@ void() CheckImpulses =
 		self.items = self.items | IT_AK47;
 		self.weapon = IT_AK47;
 		self.ak47clip = 30;
+		self.ammo_ak47 = 90;
 		UpdateWeapon();
 	}
 	if(self.impulse == 46)
@@ -82,6 +87,7 @@ void() CheckImpulses =
 		self.items = self.items | IT_AWP;
 		self.weapon = IT_AWP;
 		self.awpclip = 10;
+		self.ammo_awp = 30;
 		self.crosshair = cvar("crosshair");
 		UpdateWeapon();	
 	}
@@ -94,6 +100,7 @@ void() CheckImpulses =
 		self.items = self.items | IT_GALIL;
 		self.weapon = IT_GALIL;
 		self.galilclip = 35;
+		self.ammo_galil = 90;
 		UpdateWeapon();
 	}
 	if(self.impulse == 82)
@@ -105,6 +112,7 @@ void() CheckImpulses =
 		self.items = self.items | IT_AUG;
 		self.weapon = IT_AUG;
 		self.augclip = 30;
+		self.ammo_aug = 90;
 		UpdateWeapon();
 	}
 	if(self.impulse == 84)
@@ -116,6 +124,7 @@ void() CheckImpulses =
 		self.items = self.items | IT_FAMAS;
 		self.weapon = IT_FAMAS;
 		self.famasclip = 25;
+		self.ammo_famas = 90;
 		UpdateWeapon();
 	}
 	if(self.impulse == 45)
@@ -127,6 +136,7 @@ void() CheckImpulses =
 		self.items = self.items | IT_M4A1;
 		self.weapon = IT_M4A1;
 		self.m4a1clip = 30;
+		self.ammo_m4a1 = 90;
 		UpdateWeapon();
 	}
 	if (self.impulse == 94)

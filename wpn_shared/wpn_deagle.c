@@ -16,7 +16,8 @@ void() Deagle_Reload=
 	{
 		self.weaponframe = 1;
 		self.deagleclip = 7;
-		self.currentammo = self.deagleclip;
+		self.ammo_deagle -=7;
+		UpdateWeapon();
 		self.state = 0;
 		return;
 	}	

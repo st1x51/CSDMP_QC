@@ -60,8 +60,9 @@ void() USP_Reload=
 	if(self.weaponframe == 246)
 	{
 		self.weaponframe = 0;
+		self.ammo_45acp -= 12;
 		self.uspclip = 12;
-		self.currentammo = self.uspclip;
+		UpdateWeapon();
 		self.state = 0;
 		return;
 	}
@@ -81,7 +82,8 @@ void() USP_Silencer_Reload=
 	{
 		self.weaponframe = 1;
 		self.uspclip = 12;
-		self.currentammo = self.uspclip;
+		self.ammo_45acp -= 12;
+		UpdateWeapon();
 		self.state = 0;
 		return;
 	}
@@ -99,7 +101,6 @@ void()USP_Attack=
 {
 	if(self.uspclip == 0)
 		{
-			self.state = RELOADING;
 			if(self.silencer == 1)
 				Reload(32);
 			else
