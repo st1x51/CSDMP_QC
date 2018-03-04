@@ -92,12 +92,6 @@ void()ThrowGrenade=
 	setorigin (he, vecSrc);
 	he.touch = BounceTouch;
 	he.dmg = 100;
-	/*
-	//missile.touch = GrenadeTouch;
-	// set missile duration
-	//missile.nextthink = time + 2.5;
-	//missile.think = GrenadeExplode;
-	*/
 	he.nextthink = time + 1.5;
 	he.think = GrenadeExplode;
 }

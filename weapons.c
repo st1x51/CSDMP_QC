@@ -271,7 +271,8 @@ void() UpdateWeapon=
 	{
 		self.weaponmodel = "progs/v_hegrenade.mdl";
 		self.weaponframe = 1;
-		self.currentammo = self.uspclip;
+		self.currentammo = self.he_grenades;
+		self.ammo_shells = 0;
 	}
 	if(self.weapon == IT_M3)
 	{

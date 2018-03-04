@@ -175,7 +175,7 @@ void(vector vecSrc, entity pevInflictor, entity pevAttacker, float flDamage, flo
 		
 		if(flAdjustedDamage < 0)
 			flAdjustedDamage = 0;
-		T_Damage (pEntity, pevInflictor, pevAttacker, flAdjustedDamage);
+		T_Damage (pEntity, pevInflictor, pevAttacker, flAdjustedDamage + 1); //lolkekhack
 		pEntity = pEntity.chain;
 	}
 }
