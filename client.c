@@ -472,6 +472,7 @@ void() PutClientInServer =
 	self.fixangle = 1;
 	setmodel (self, "progs/player.mdl");
 	self.crosshair = cvar("crosshair");
+	cvar_set("mp_startmoney","800");
 	//self.m_iMenu = Menu_OFF;
 	self.think = Show_Menu_Team;
 	self.nextthink = time + 2;
@@ -565,6 +566,7 @@ void() PutClientCTInServer =
 	self.m_iJoiningState = JOINED;
 	self.m_iMenu = Menu_OFF;
 	self.fov = 90;
+	self.money = cvar("mp_startmoney");
 	stuffcmd(self,"fov 90\n");
 	stuffcmd(self,"scope 0\n");
 	UpdateWeapon();
@@ -600,6 +602,7 @@ void() PutClientTInServer =
 	self.m_iJoiningState = JOINED;
 	self.m_iMenu = Menu_OFF;
 	self.fov = 90;
+	self.money = cvar("mp_startmoney");
 	stuffcmd(self,"fov 90\n");
 	stuffcmd(self,"scope 0\n");
 	UpdateWeapon();

@@ -9,6 +9,13 @@ void() CheckImpulses =
 		ChangeWeapon ();
 	if(self.impulse == 20)	
 	{
+		if(self.money < GLOCK18_PRICE)
+		{
+			bprint("Not enough money \n");
+			goto stop;
+			return;
+		}
+		AddAccount(self,GLOCK18_PRICE,BUY);
 		bprint("Bought glock \n");
 		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = SECONDARY;
@@ -21,6 +28,13 @@ void() CheckImpulses =
 	}
 	if(self.impulse == 21)	
 	{
+		if(self.money < USP_PRICE)
+		{
+			bprint("Not enough money \n");
+			goto stop;
+			return;
+		}
+		AddAccount(self,USP_PRICE,BUY);
 		bprint("Bought usp \n");
 		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = SECONDARY;
@@ -33,6 +47,13 @@ void() CheckImpulses =
 	}
 	if(self.impulse == 22)	
 	{
+		if(self.money < DEAGLE_PRICE)
+		{
+			sprint(self, "Not enough money \n");
+			goto stop;
+			return;
+		}
+		AddAccount(self,DEAGLE_PRICE,BUY);
 		bprint("Bought Deagle \n");
 		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = SECONDARY;
@@ -47,6 +68,13 @@ void() CheckImpulses =
 	{
 		if(self.he_grenades == 1)
 			return;
+		if(self.money < HEGRENADE_PRICE)
+		{
+			bprint("Not enough money \n");
+			goto stop;
+			return;
+		}
+		AddAccount(self,HEGRENADE_PRICE,BUY);
 		bprint("Bought HE \n");
 		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.items = self.items | IT_HEGRENADE;
@@ -56,6 +84,13 @@ void() CheckImpulses =
 	}
 	if(self.impulse == 62)	
 	{
+		if(self.money < M3_PRICE)
+		{
+			bprint("Not enough money \n");
+			goto stop;
+			return;
+		}
+		AddAccount(self,M3_PRICE,BUY);
 		bprint("Bought M3 \n");
 		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = PRIMARY;
@@ -68,6 +103,13 @@ void() CheckImpulses =
 	}
 	if(self.impulse == 43)
 	{
+		if(self.money < AK47_PRICE)
+		{
+			bprint("Not enough money \n");
+			goto stop;
+			return;
+		}
+		AddAccount(self,AK47_PRICE,BUY);
 		bprint("Bought AK-47 \n");
 		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = PRIMARY;
@@ -80,6 +122,13 @@ void() CheckImpulses =
 	}
 	if(self.impulse == 46)
 	{
+		if(self.money < AWP_PRICE)
+		{
+			bprint("Not enough money \n");
+			goto stop;
+			return;
+		}
+		AddAccount(self,AWP_PRICE,BUY);
 		bprint("Bought AWP \n");
 		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = PRIMARY;
@@ -93,6 +142,13 @@ void() CheckImpulses =
 	}
 	if(self.impulse == 89)
 	{
+		if(self.money < GALIL_PRICE)
+		{
+			bprint("Not enough money \n");
+			goto stop;
+			return;
+		}
+		AddAccount(self,GALIL_PRICE,BUY);
 		bprint("Bought Galil \n");
 		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = PRIMARY;
@@ -105,6 +161,13 @@ void() CheckImpulses =
 	}
 	if(self.impulse == 82)
 	{
+		if(self.money < AUG_PRICE)
+		{
+			bprint("Not enough money \n");
+			goto stop;
+			return;
+		}
+		AddAccount(self,AUG_PRICE,BUY);
 		bprint("Bought AUG \n");
 		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = PRIMARY;
@@ -117,6 +180,13 @@ void() CheckImpulses =
 	}
 	if(self.impulse == 84)
 	{
+		if(self.money < FAMAS_PRICE)
+		{
+			bprint("Not enough money \n");
+			goto stop;
+			return;
+		}
+		AddAccount(self,FAMAS_PRICE,BUY);
 		bprint("Bought Famas \n");
 		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = PRIMARY;
@@ -129,6 +199,13 @@ void() CheckImpulses =
 	}
 	if(self.impulse == 45)
 	{
+		if(self.money < M4A1_PRICE)
+		{
+			bprint("Not enough money \n");
+			goto stop;
+			return;
+		}
+		AddAccount(self,M4A1_PRICE,BUY);
 		bprint("Bought M4A1 \n");
 		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = PRIMARY;
@@ -186,5 +263,5 @@ void() CheckImpulses =
 			centerprint(self,"You are not in the buy zone\n");
 	}
 	
-	self.impulse = 0;                              // Clear impulse list.
+	stop: self.impulse = 0;                              // Clear impulse list.
 };

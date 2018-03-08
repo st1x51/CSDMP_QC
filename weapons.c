@@ -495,6 +495,7 @@ void() ChangeWeapon =
 	if(self.scope)
 	{
 		stuffcmd(self,"fov 90\n");
+		stuffcmd(self,"scope 0\n");
 		self.fov = 90;
 		self.scope = 0;		
 	}

@@ -82,6 +82,15 @@ void(entity targ, entity inflictor, entity attacker, float damage) T_Damage=
 
     if (targ.health <= 0)
     {
+		 if(targ.classname != "player")
+		 {
+			Killed (targ, attacker);
+			return;
+		 }
+		if(targ.team == attacker.team )
+			AddAccount(attacker,-500,ADDMONEY);
+		else
+			AddAccount(attacker,1000,ADDMONEY);
         Killed (targ, attacker);
         return;
     }
@@ -175,7 +184,7 @@ void(vector vecSrc, entity pevInflictor, entity pevAttacker, float flDamage, flo
 		
 		if(flAdjustedDamage < 0)
 			flAdjustedDamage = 0;
-		T_Damage (pEntity, pevInflictor, pevAttacker, flAdjustedDamage + 1); //lolkekhack
+		T_Damage (pEntity, pevInflictor, pevAttacker, flAdjustedDamage);
 		pEntity = pEntity.chain;
 	}
 }

@@ -67,6 +67,45 @@ enum
 	CT,
 	SPECTATOR
 };
+enum
+{
+	ASSAULTSUIT_PRICE   = 1000,
+	FLASHBANG_PRICE     = 200,
+	HEGRENADE_PRICE     = 300,
+	SMOKEGRENADE_PRICE  = 300,
+	KEVLAR_PRICE        = 650,
+	HELMET_PRICE        = 350,
+	NVG_PRICE           = 1250,
+	DEFUSEKIT_PRICE     = 200,
+};
+enum 
+{
+	AK47_PRICE      = 2500,
+	AWP_PRICE       = 4750,
+	DEAGLE_PRICE    = 650,
+	G3SG1_PRICE     = 5000,
+	SG550_PRICE     = 4200,
+	GLOCK18_PRICE   = 400,
+	M249_PRICE      = 5750,
+	M3_PRICE        = 1700,
+	M4A1_PRICE      = 3100,
+	AUG_PRICE       = 3500,
+	MP5NAVY_PRICE   = 1500,
+	P228_PRICE      = 600,
+	P90_PRICE       = 2350,
+	UMP45_PRICE     = 1700,
+	MAC10_PRICE     = 1400,
+	SCOUT_PRICE     = 2750,
+	SG552_PRICE     = 3500,
+	TMP_PRICE       = 1250,
+	USP_PRICE       = 500,
+	ELITE_PRICE     = 800,
+	FIVESEVEN_PRICE = 750,
+	XM1014_PRICE    = 3000,
+	GALIL_PRICE     = 2000,
+	FAMAS_PRICE     = 2250,
+	SHIELDGUN_PRICE = 2200,
+};
 .float m_iJoiningState;
 entity m_pIntroCamera;
 .float m_fIntroCamTime;
@@ -123,3 +162,4 @@ float (float a, float b) mathlib_min =
 	else
 		return b;
 };
+
