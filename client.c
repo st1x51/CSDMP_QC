@@ -38,21 +38,7 @@ void() Show_Menu_Team=
 	stuffcmd (self, "menu_team \n");
 	self.m_iMenu = Menu_ChooseTeam;
 }
-/*
-void()Menu_Commands=
-{
-		switch (self.m_iMenu)
-		{
-			case Menu_OFF:
-			break;	
-			
-			case Menu_ChooseTeam:	
-			Show_Menu_Team();
-			self.m_iMenu = Menu_ChooseTeam;
-			break;
-		}
-}
-*/
+
 void()TraceTexture=
 {
 	//============================texture trace test================================
@@ -250,28 +236,6 @@ void() PlayerJump =
  };
  void() JoiningThink =
  {
-	 /*
-	switch (self.m_iJoiningState)
-	{
-		case JOINED:
-		{
-			return;
-		}
-		case SHOWLTEXT:
-		self.m_iJoiningState = SHOWTEAMSELECT;
-		break;
-		
-		case READINGLTEXT:
-		self.m_iJoiningState = SHOWTEAMSELECT;
-		self.m_iMenu = Menu_ChooseTeam;
-		break;
-		
-		case GETINTOGAME:
-		self.m_iJoiningState = JOINED;
-		break;
-		
-	}
-	*/
 	if (m_pIntroCamera && time >= self.m_fIntroCamTime)
 	{
 		 m_pIntroCamera = find(m_pIntroCamera,classname, "trigger_camera");
@@ -310,7 +274,6 @@ void() PlayerPreThink =
 		return;
 	if (BotPreFrame()) // FrikBot
 		return;
-	//Menu_Commands();
 	WaterMove ();
 	SetClientFrame();
 	if (self.m_iJoiningState != JOINED)
@@ -463,7 +426,6 @@ void() PutClientInServer =
 {
 	self.solid = SOLID_NOT;
 	self.takedamage = DAMAGE_NO;
-	//self.deadflag = DEAD_DEAD;
 	self.velocity = '0 0 0';
 	self.punchangle = '0 0 0';
 	self.m_iJoiningState = READINGLTEXT;
@@ -473,7 +435,6 @@ void() PutClientInServer =
 	setmodel (self, "progs/player.mdl");
 	self.crosshair = cvar("crosshair");
 	cvar_set("mp_startmoney","800");
-	//self.m_iMenu = Menu_OFF;
 	self.think = Show_Menu_Team;
 	self.nextthink = time + 2;
 	local entity Target;
@@ -496,7 +457,6 @@ void() PutClientInServer =
 	}
 	else
 	{
-		//self.m_iTeam = UNASSIGNED;
 		self.v_angle = '0 0 0';
 		self.angles = v_forward;
 	}
