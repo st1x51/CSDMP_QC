@@ -55,8 +55,8 @@ void() precaches =
 	
 	precache_model("progs/glass.mdl"); 
 	precache_model("progs/cindergibs.mdl");
+	precache_sound("weapons/357_cock1.wav");
 	//sounds
-	precache_sound("player/jump.wav");
 	precache_sound("weapons/knife_slash1.wav");
 	precache_sound("weapons/knife_hit1.wav");
 	precache_sound("weapons/knife_hit2.wav");

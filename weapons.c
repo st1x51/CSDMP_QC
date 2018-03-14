@@ -391,6 +391,11 @@ void() WeaponAttack =
 	{
 		KNIFE_PrimaryAttack();
 	}
+	if(self.currentammo == 0 && self.ammo_shells == 0 && self.weapon != IT_KNIFE)
+	{
+		sound (self, CHAN_AUTO,"weapons/357_cock1.wav", 1, ATTN_NORM);	
+		self.attack_finished = time + 0.2;
+	}
 	if(self.weapon == IT_M3)
 	{
 		M3_PrimaryAttack();
