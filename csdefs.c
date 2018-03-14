@@ -106,6 +106,20 @@ enum
 	FAMAS_PRICE     = 2250,
 	SHIELDGUN_PRICE = 2200,
 };
+enum 
+{
+	matGlass = 0,
+	matWood,
+	matMetal,
+	matFlesh,
+	matCinderBlock,
+	matCeilingTile,
+	matComputer,
+	matUnbreakableGlass,
+	matRocks,
+	matNone,
+	matLastMaterial,
+};
 .float m_iJoiningState;
 entity m_pIntroCamera;
 .float m_fIntroCamTime;

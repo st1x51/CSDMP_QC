@@ -40,9 +40,9 @@ void() StartFrame =
 void() precaches =
 {
 	//models
-	precache_model ("progs/player.mdl");
-	precache_model ("progs/v_usp.mdl");
-	precache_model ("progs/v_knife.mdl"); 
+	precache_model("progs/player.mdl");
+	precache_model("progs/v_usp.mdl");
+	precache_model("progs/v_knife.mdl"); 
 	precache_model("progs/v_usp_silencer.mdl");
 	precache_model("progs/v_glock18.mdl");
 	precache_model("progs/v_deagle.mdl");
@@ -50,10 +50,11 @@ void() precaches =
 	precache_model("progs/v_hegrenade.mdl");
 	precache_model("progs/w_grenade.mdl");
 	 
-	precache_model ("progs/gign.mdl"); 
-	precache_model ("progs/leet.mdl"); 
+	precache_model("progs/gign.mdl"); 
+	precache_model("progs/leet.mdl"); 
 	
-	precache_model ("progs/glass.mdl"); 
+	precache_model("progs/glass.mdl"); 
+	precache_model("progs/cindergibs.mdl");
 	//sounds
 	precache_sound("player/jump.wav");
 	precache_sound("weapons/knife_slash1.wav");
@@ -170,4 +171,5 @@ void() precaches =
 	precache_sound ("player/pl_snow4.wav");
 	
 	precache_sound ("debris/bustglass2.wav");
+	precache_sound ("debris/bustconcrete1.wav");
 };

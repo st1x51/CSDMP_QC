@@ -1001,6 +1001,6 @@ void() BotAI =
 	
 	if (self.b_aiflags)
 		bot_handle_ai(); 
-	else
-		bot_chat(); // don't want chat to screw him up if he's rjing or something
+	//else
+	//	bot_chat(); // don't want chat to screw him up if he's rjing or something
 };

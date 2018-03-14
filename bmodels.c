@@ -21,6 +21,7 @@ void() func_wall =
 };
 
 float m_flHealth,m_angle,m_flDelay;
+.float material; 
 vector g_vecAttackDir;
 //TODO: make more materials and sounds
 //its not like cs,but better then nothing
@@ -32,7 +33,17 @@ void() spawn_material=
 	{
     new = spawn();
     new.origin = self.origin;
-	setmodel (new, "progs/glass.mdl" );
+	if(self.material == matGlass)
+	{
+		setmodel (new, "progs/glass.mdl" );
+		sound (self, CHAN_AUTO,"debris/bustglass2.wav", 1, ATTN_NORM);	
+	}
+	if(self.material == matCinderBlock)
+	{
+		setmodel (new, "progs/cindergibs.mdl" );
+		sound (self, CHAN_AUTO,"debris/bustconcrete1.wav", 1, ATTN_NORM);	
+	}
+
 	setsize (new, '0 0 0', '0 0 0');
 	new.velocity_x = 70 * crandom();
 	new.velocity_y = 70 * crandom();
@@ -44,7 +55,7 @@ void() spawn_material=
 	new.avelocity_z = random()*600;
 	new.nextthink = time + 2 + random()*3;
 	new.think = SUB_Remove;
-	sound (self, CHAN_AUTO,"debris/bustglass2.wav", 1, ATTN_NORM);	
+
 	self.absmin = self.origin + self.mins;
 	self.absmax = self.origin + self.maxs;
 	tmpvec_x = self.absmin_x + (random() * (self.absmax_x - self.absmin_x));
