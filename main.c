@@ -169,7 +169,11 @@ void() precaches =
 	precache_sound ("player/pl_snow2.wav");
 	precache_sound ("player/pl_snow3.wav");
 	precache_sound ("player/pl_snow4.wav");
-	
+	//death
+	precache_sound ("player/die1.wav");
+	precache_sound ("player/die2.wav");
+	precache_sound ("player/die3.wav");
+	precache_sound ("player/death6.wav");
 	precache_sound ("debris/bustglass2.wav");
 	precache_sound ("debris/bustconcrete1.wav");
 };

@@ -58,6 +58,19 @@ void()	die_anim17=[192, die_anim18]{self.nextthink = time + 0.05;};
 void()	die_anim18=[194, die_anim19]{self.nextthink = time + 0.05;};
 void()	die_anim19=[196, die_anim20]{self.nextthink = time + 0.05;};
 void()	die_anim20=[198, PlayerDead]{};
+void()DeathSound=
+
+{	local float r;
+	r = floor(random()*4);
+	if (r == 0)
+		sound (self, CHAN_VOICE, "player/die1.wav", 1, ATTN_NORM);
+	else if (r == 1)
+		sound (self, CHAN_VOICE, "player/die2.wav", 1, ATTN_NORM);
+	else if (r == 2)
+		sound (self, CHAN_VOICE, "player/die3.wav", 1, ATTN_NORM);
+	else if (r == 3)
+		sound (self, CHAN_VOICE, "player/death6.wav", 1, ATTN_NORM);
+}
 void () PlayerDie =
 {
 	self.deadflag = DEAD_DEAD;
@@ -70,4 +83,5 @@ void () PlayerDie =
     if (self.velocity_z < 10)
         self.velocity_z = self.velocity_z + random()*300;
 	die_anim1();
+	DeathSound();
 };
