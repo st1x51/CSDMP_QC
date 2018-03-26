@@ -23,6 +23,8 @@ frikbot/bot_move.qc
 frikbot/bot_ed.qc
 main.c    
 subs.c                                         // Main subroutines
+button.c
+door.c
 damage.c
 player.c
 client.c                                           // Client subroutines

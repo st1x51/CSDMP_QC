@@ -401,8 +401,21 @@ void(vector o, vector d, float color, float count) particle = #48;// start a par
 void(string s) bprint				= #23;
 //void(entity client, string s) sprint		= #24;
 void() SUB_Remove = {remove(self);};
+//
+// subs
+//
+.void()		think1;
+.vector		finaldest, finalangle;
 // End
-
+float	STATE_TOP		= 0;
+float	STATE_BOTTOM	= 1;
+float	STATE_UP		= 2;
+float	STATE_DOWN		= 3;
+.entity		trigger_field;	// door's trigger entity
+void(vector tdest, float tspeed, void() func) SUB_CalcMove;
+void(entity ent, vector tdest, float tspeed, void() func) SUB_CalcMoveEnt;
+void()  SUB_CalcMoveDone;
+void() SUB_UseTargets;
 // Damage.qc
 entity damage_attacker;
 .float pain_finished, air_finished, dmg, dmgtime;

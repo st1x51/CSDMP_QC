@@ -262,6 +262,7 @@ void() CheckImpulses =
 		else
 			centerprint(self,"You are not in the buy zone\n");
 	}
-	
+	if(self.impulse == 120)
+		use_button();
 	stop: self.impulse = 0;                              // Clear impulse list.
 };
