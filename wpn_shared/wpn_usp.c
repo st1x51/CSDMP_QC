@@ -1,5 +1,4 @@
 void()UpdateWeapon;
-void(float startframe)Reload;
 void()usp_silencer=
 {
 	if(self.weaponframe == 114)
@@ -60,8 +59,6 @@ void() USP_Reload=
 	if(self.weaponframe == 246)
 	{
 		self.weaponframe = 0;
-		self.ammo_45acp -= 12;
-		self.uspclip = 12;
 		UpdateWeapon();
 		self.state = 0;
 		return;
@@ -81,8 +78,6 @@ void() USP_Silencer_Reload=
 	if(self.weaponframe == 130)
 	{
 		self.weaponframe = 1;
-		self.uspclip = 12;
-		self.ammo_45acp -= 12;
 		UpdateWeapon();
 		self.state = 0;
 		return;
@@ -97,14 +92,15 @@ void() USP_Silencer_Reload=
 	self.think = USP_Silencer_Reload;
 	self.nextthink = time + 0.025;
 } 
+
 void()USP_Attack=
 {
 	if(self.uspclip == 0)
 		{
 			if(self.silencer == 1)
-				Reload(32);
+				ReloadWeaponUSP(32);
 			else
-				Reload(147);
+				ReloadWeaponUSP(147);
 			return;
 		}
 	self.attack_finished = time + 0.15;
@@ -121,4 +117,5 @@ void()USP_Attack=
 		DefaultFire(1, 30, "weapons/usp1.wav");
 	}
 	self.uspclip -=1;
+	self.usp_fired +=1;
 }

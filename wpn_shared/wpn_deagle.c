@@ -15,8 +15,6 @@ void() Deagle_Reload=
 	if(self.weaponframe == 113) 
 	{
 		self.weaponframe = 1;
-		self.deagleclip = 7;
-		self.ammo_deagle -=7;
 		UpdateWeapon();
 		self.state = 0;
 		return;
@@ -33,7 +31,7 @@ void()DEAGLE_Attack=
 {
 	if(self.deagleclip == 0)
 	{
-		Reload(51);
+		ReloadWeaponDeagle(51);
 		return;
 	}
 	self.attack_finished = time + 0.18;
@@ -41,4 +39,5 @@ void()DEAGLE_Attack=
 	anim_deagle_attack();
 	DefaultFire(1, 47, "weapons/deagle-1.wav");
 	self.deagleclip -=1;
+	self.deagle_fired +=1;
 }

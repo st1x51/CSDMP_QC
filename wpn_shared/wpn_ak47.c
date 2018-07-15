@@ -14,11 +14,12 @@ void()AK47_PrimaryAttack=
 {
 	if(self.ak47clip <= 0)
 	{
-		Reload(18); 
+		ReloadAK47(18); 
 		return;
 	}
 	self.weaponframe = 140;
 	self.ak47clip -= 1;
+	self.ak47_fired += 1;
 	anim_ak47_attack();
 	DefaultFire(1,20,"weapons/ak47-1.wav");
 	self.attack_finished = time + 0.1;
@@ -29,8 +30,6 @@ void()AK47_Reload=
 	if(self.weaponframe == 108) 
 	{
 		self.weaponframe = 1;
-		self.ak47clip = 30;
-		self.ammo_ak47 -=30;
 		UpdateWeapon();
 		self.state = 0;
 		return;

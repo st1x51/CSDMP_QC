@@ -1,3 +1,4 @@
+
 void()anim_knife_attack=
 {
 	if(self.weaponframe == 214)

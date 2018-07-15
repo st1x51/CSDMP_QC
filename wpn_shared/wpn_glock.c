@@ -15,14 +15,36 @@ void()anim_glock_attack=
 void()anim_burst_glock_attack=
 {
 	if(self.weaponframe == 63)
-		{
-			self.weaponframe = 1;
-			return;
-		}		
-	if(self.weaponframe == 35 || self.weaponframe == 37|| self.weaponframe == 39)	
 	{
-		self.glockclip -=1;
-		DefaultFire(1,21,"weapons/glock18-2.wav");
+		self.weaponframe = 1;
+		return;
+	}		
+	if(self.weaponframe == 35)	
+	{
+		if(self.glockclip >= 3)
+		{
+			self.glockclip -=1;
+			self.glock_fired +=1;
+			DefaultFire(1,21,"weapons/glock18-2.wav");
+		}
+	}
+	if(self.weaponframe == 37)
+	{
+		if(self.glockclip >= 2)
+		{
+			self.glockclip -=1;
+			self.glock_fired +=1;
+			DefaultFire(1,21,"weapons/glock18-2.wav");
+		}
+	}
+	if(self.weaponframe == 39)
+	{
+		if(self.glockclip >= 1)
+		{
+			self.glockclip -=1;
+			self.glock_fired +=1;
+			DefaultFire(1,21,"weapons/glock18-2.wav");
+		}
 	}
 	self.weaponframe += 1;
 	self.think = anim_burst_glock_attack;
@@ -33,8 +55,6 @@ void() Glock_Reload=
 	if(self.weaponframe == 212) 
 	{
 		self.weaponframe = 1;
-		self.glockclip = 20;
-		self.ammo_glock -= 20;
 		UpdateWeapon();
 		self.state = 0;
 		return;
@@ -51,28 +71,22 @@ void() Glock_Reload=
 }
 void()GLOCK_Attack=
 {
+	if(self.glockclip == 0)
+	{
+		ReloadWeaponGlock(144); 
+		return;
+	}
 	if(self.autofire == 0)
 	{
-		if(self.glockclip == 0)
-			{
-				Reload(144); 
-				return;
-			}
-		//self.attack_finished = time + 0.085;
 		self.attack_finished = time + 0.2;
 		DefaultFire(1,21, "weapons/glock18-2.wav" );
 		self.weaponframe = 94;
 		anim_glock_attack();
 		self.glockclip -=1;
+		self.glock_fired +=1;
 	}
 	else
 	{
-		//will be bug with burst mode,fix later
-		if(self.glockclip <= 0)
-		{
-			Reload(144); 
-			return;
-		}
 		self.attack_finished = time + 1;
 		self.weaponframe = 33;
 		anim_burst_glock_attack();

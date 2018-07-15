@@ -14,11 +14,12 @@ void()M4A1_PrimaryAttack=
 {
 	if(self.m4a1clip <= 0)
 	{
-		Reload(102); 
+		ReloadM4A1(102); 
 		return;
 	}
 	self.weaponframe = 9;
 	self.m4a1clip -= 1;
+	self.m4a1_fired +=1;
 	anim_m4a1_attack();
 	DefaultFire(1,31,"weapons/m4a1-1.wav");
 	self.attack_finished = time + 0.0875;
@@ -29,8 +30,6 @@ void()M4A1_Reload=
 	if(self.weaponframe == 215) 
 	{
 		self.weaponframe = 1;
-		self.m4a1clip = 30;
-		self.ammo_m4a1 -=30;
 		UpdateWeapon();
 		self.state = 0;
 		return;

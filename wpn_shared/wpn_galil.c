@@ -21,8 +21,6 @@ void()Galil_Reload=
 	if(self.weaponframe == 92)
 	{
 		self.state = 0;
-		self.galilclip = 35;
-		self.ammo_galil -= 35;
 		UpdateWeapon();
 		self.weaponframe = 1;
 		return;
@@ -36,11 +34,12 @@ void()Galil_PrimaryAttack=
 {
 	if(self.galilclip <= 0)
 	{
-		Reload(2); 
+		ReloadGalil(2); 
 		return;
 	}
 	self.weaponframe = 190;
 	self.galilclip -= 1;
+	self.galil_fired += 1;
 	anim_galil_attack();
 	DefaultFire(1,29,"weapons/galil-1.wav");
 	self.attack_finished = time + 0.0875;	

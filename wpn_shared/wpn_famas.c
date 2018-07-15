@@ -18,10 +18,32 @@ void()anim_burst_famas_attack=
 		self.weaponframe = 1;
 		return;
 	}		
-	if(self.weaponframe == 187 || self.weaponframe == 188|| self.weaponframe == 189)	
+	if(self.weaponframe == 187)	
 	{
-		self.famasclip -=1;
-		DefaultFire(1,29,string_null);
+		if(self.famasclip >= 3)
+		{
+			self.famasclip -=1;
+			self.famas_fired +=1;
+			DefaultFire(1,29,string_null);
+		}
+	}
+	if(self.weaponframe == 188)
+	{
+		if(self.famasclip >= 2)
+		{
+			self.famasclip -=1;
+			self.famas_fired +=1;
+			DefaultFire(1,29,string_null);
+		}
+	}
+	if(self.weaponframe == 189)
+	{
+		if(self.famasclip >= 1)
+		{
+			self.famasclip -=1;
+			self.famas_fired +=1;
+			DefaultFire(1,29,string_null);
+		}
 	}
 	self.weaponframe += 1;
 	self.think = anim_burst_famas_attack;
@@ -38,8 +60,6 @@ void()Famas_Reload=
 	if(self.weaponframe == 90)
 	{
 		self.state = 0;
-		self.famasclip = 25;
-		self.ammo_famas -= 25;
 		UpdateWeapon();
 		self.weaponframe = 1;
 		return;
@@ -55,11 +75,12 @@ void()Famas_PrimaryAttack=
 	{
 		if(self.famasclip <= 0)
 		{
-			Reload(2); 
+			ReloadFamas(2); 
 			return;
 		}
 		self.weaponframe = 180;
 		self.famasclip -= 1;
+		self.famas_fired += 1;
 		anim_famas_attack();
 		DefaultFire(1,29,"weapons/famas-1.wav");
 		self.attack_finished = time + 0.0825;	
@@ -68,7 +89,7 @@ void()Famas_PrimaryAttack=
 	{
 		if(self.famasclip <= 0)
 		{
-			Reload(2); 
+			ReloadFamas(2); 
 			return;
 		}
 		sound (self, CHAN_AUTO, "weapons/famas-burst.wav", 1, ATTN_NORM);	

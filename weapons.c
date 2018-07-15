@@ -355,35 +355,6 @@ void() UpdateWeapon=
 	}
 }
 
-void(float startframe)Reload=
-{	
-	if(self.ammo_shells == 0)
-		return;
-	self.weaponframe = startframe;
-	self.state = RELOADING;
-	if(self.weapon == IT_USP && self.silencer == 0)
-		USP_Reload();
-	if(self.weapon == IT_USP && self.silencer == 1)	
-		USP_Silencer_Reload();
-	if(self.weapon == IT_GLOCK)	
-		Glock_Reload();	
-	if(self.weapon == IT_DEAGLE)	
-		Deagle_Reload();	
-	if(self.weapon == IT_M3)	
-		M3_Reload();	
-	if(self.weapon == IT_AK47)
-		AK47_Reload();
-	if(self.weapon == IT_AWP)
-		AWP_Reload();
-	if(self.weapon == IT_GALIL)
-		Galil_Reload();
-	if(self.weapon == IT_AUG)
-		Aug_Reload();
-	if(self.weapon == IT_FAMAS)
-		Famas_Reload();
-	if(self.weapon == IT_M4A1)
-		M4A1_Reload();
-}
 void() WeaponAttack =
 {
 	makevectors(self.v_angle);

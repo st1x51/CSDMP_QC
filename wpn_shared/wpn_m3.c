@@ -18,8 +18,6 @@ void() M3_Reload_End=
 	if(self.weaponframe == 147) 
 	{
 		self.weaponframe = 1;
-		self.m3clip = 7;
-		self.ammo_m3 -= 7;
 		UpdateWeapon();
 		self.state = 0;
 		return;
@@ -30,6 +28,15 @@ void() M3_Reload_End=
 }
 void() M3_Reload=
 {
+	if(self.ammo_m3 == 0)
+	{	
+		if(self.m3clip == m3a)
+		{
+			self.weaponframe = 116;
+			M3_Reload_End();
+			return;
+		}
+	}
 	if(self.m3clip == 7)
 	{
 		self.weaponframe = 116;
@@ -52,7 +59,7 @@ void()M3_PrimaryAttack=
 	local vector vecSrc,vecAcc,vecAim;
 	if(self.m3clip == 0)
 	{
-		Reload(88); 
+		ReloadWeaponM3(88); 
 		return;
 	}
 	sound (self, CHAN_AUTO, "weapons/m3-1.wav", 1, ATTN_NORM);
@@ -66,4 +73,5 @@ void()M3_PrimaryAttack=
 	anim_m3_attack();
 	self.m3clip -=1;
 	self.currentammo -= 1;
+	self.m3_fired += 1;
 }

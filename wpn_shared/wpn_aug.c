@@ -17,11 +17,12 @@ void()Aug_PrimaryAttack=
 		stuffcmd(self,"fov 90\n");
 		self.fov = 90;
 		self.scope = 0;
-		Reload(9); 
+		ReloadAug(9); 
 		return;
 	}
 	self.weaponframe = 202;
 	self.augclip -= 1;
+	self.aug_fired += 1;
 	anim_aug_attack();
 	DefaultFire(1,32,"weapons/aug-1.wav");
 	if(!self.scope)
@@ -35,8 +36,6 @@ void()Aug_Reload=
 	if(self.weaponframe == 140) 
 	{
 		self.weaponframe = 1;
-		self.augclip = 30;
-		self.ammo_aug -= 30;
 		UpdateWeapon();
 		self.state = 0;
 		return;

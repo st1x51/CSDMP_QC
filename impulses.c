@@ -264,5 +264,33 @@ void() CheckImpulses =
 	}
 	if(self.impulse == 120)
 		use_button();
+	if(self.impulse == 122)
+	{
+		if(self.weapon == IT_USP)
+		{
+			if(self.silencer == 1)
+				ReloadWeaponUSP(32);
+			else
+				ReloadWeaponUSP(147);
+		}
+		if(self.weapon == IT_GLOCK)
+			ReloadWeaponGlock(144); 
+		if(self.weapon == IT_M3)
+			ReloadWeaponM3(88); 
+		if(self.weapon == IT_DEAGLE)
+			ReloadWeaponDeagle(51);
+		if(self.weapon == IT_AK47)
+			ReloadAK47(18); 
+		if(self.weapon == IT_AWP)
+			ReloadAWP(138); 
+		if(self.weapon == IT_GALIL)
+			ReloadGalil(2); 
+		if(self.weapon == IT_AUG)
+			ReloadAug(9); 
+		if(self.weapon == IT_FAMAS)
+			ReloadFamas(2); 
+		if(self.weapon == IT_M4A1)
+			ReloadM4A1(102); 
+	}
 	stop: self.impulse = 0;                              // Clear impulse list.
 };

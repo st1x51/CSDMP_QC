@@ -25,8 +25,6 @@ void()AWP_Reload=
 	if(self.weaponframe == 222) 
 	{
 		self.weaponframe = 1;
-		self.awpclip = 10;
-		self.ammo_awp -= 10;
 		UpdateWeapon();
 		self.state = 0;
 		return;
@@ -46,10 +44,10 @@ void()AWP_PrimaryAttack=
 		stuffcmd(self,"scope 0\n");
 		self.fov = 90;
 		self.scope = 0;
-		Reload(138); 
+		ReloadAWP(138); 
 		return;
 	}
-	if((!self.flags & FL_ONGROUND))
+	if(!self.flags && FL_ONGROUND)
 		vecAcc = '0.85 0.85 0.85';
 	else if((vlen(self.velocity) > 140) || !self.scope)
 		vecAcc = '0.25 0.25 0.25';
@@ -60,6 +58,7 @@ void()AWP_PrimaryAttack=
 	self.state = ATTACK;
 	self.awpclip -= 1;
 	self.currentammo -= 1;
+	self.awp_fired += 1;
 	FireBullets(1,vecSrc,vecAim,vecAcc,8192,114);
 	stuffcmd(self,"fov 90\n");
 	stuffcmd(self,"scope 0\n");

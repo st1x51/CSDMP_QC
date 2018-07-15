@@ -25,11 +25,13 @@ main.c
 subs.c                                         // Main subroutines
 button.c
 door.c
+hl_doors.qc
 damage.c
 player.c
 client.c                                           // Client subroutines
 lights.c
 impulses.c
+wpn_shared/wpn_reload.c
 wpn_shared/wpn_knife.c
 wpn_shared/wpn_usp.c
 wpn_shared/wpn_glock.c
