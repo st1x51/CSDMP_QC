@@ -166,6 +166,7 @@ void()SecondaryAttack=
 		{
 			stuffcmd(self,"fov 40\n");
 			stuffcmd(self,"scope 1\n");
+			stuffcmd(self,"sensitivity 1\n");
 			self.scope = 1;
 			self.fov = 40;
 		}
@@ -173,12 +174,14 @@ void()SecondaryAttack=
 		{
 			self.fov = 10;
 			stuffcmd(self,"fov 10\n");
+			stuffcmd(self,"sensitivity 1\n");
 		}
 		else
 		{
 			self.fov = 90;
 			stuffcmd(self,"fov 90\n");
 			stuffcmd(self,"scope 0\n");
+			stuffcmd(self,"sensitivity 5\n");
 			self.scope = 0;
 		}
 		sound (self, CHAN_AUTO, "weapons/zoom.wav", 1, ATTN_NORM);
@@ -472,6 +475,7 @@ void() ChangeWeapon =
 	{
 		stuffcmd(self,"fov 90\n");
 		stuffcmd(self,"scope 0\n");
+		stuffcmd(self,"sensitivity 5\n");
 		self.fov = 90;
 		self.scope = 0;		
 	}

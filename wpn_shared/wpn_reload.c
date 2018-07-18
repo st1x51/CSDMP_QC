@@ -12,7 +12,10 @@ void(float r_frame)ReloadWeaponUSP=
 		UpdateWeapon(); 
 		self.usp_fired = 0;
 		self.weaponframe = r_frame;
-		USP_Silencer_Reload();
+		if(self.silencer == 1)
+			USP_Silencer_Reload();
+		else
+			USP_Reload();
 		return; 
 	} 
 	self.ammo_45acp -= self.usp_fired;

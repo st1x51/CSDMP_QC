@@ -43,7 +43,11 @@ void() spawn_material=
 		setmodel (new, "progs/cindergibs.mdl" );
 		sound (self, CHAN_AUTO,"debris/bustconcrete1.wav", 1, ATTN_NORM);	
 	}
-
+	if(self.material == matMetal)
+	{		
+		setmodel (new, "progs/metalplategibs.mdl" );
+		sound (self, CHAN_AUTO,"debris/bustmetal2.wav", 1, ATTN_NORM);	
+	}
 	setsize (new, '0 0 0', '0 0 0');
 	new.velocity_x = 70 * crandom();
 	new.velocity_y = 70 * crandom();
