@@ -48,3 +48,12 @@ lightstyle(10,"mmamammmmammamamaaamammma");          // Style 10: Fluro
 lightstyle(11,"abcdefghijklmnopqrrqponmlkjihgfedcba"); 
 };
 
+void()env_glow=
+{
+	self.solid = SOLID_NOT;
+	self.movetype = MOVETYPE_NONE;
+	self.effects = 0;
+
+	precache_model(self.model);
+	setmodel(self,self.model);	
+}
