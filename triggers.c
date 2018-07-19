@@ -192,3 +192,52 @@ void() func_buyzone=
 		self.team = UNASSIGNED;
 	}
 }
+
+void() multi_wait =
+{
+	self.think = SUB_Null;
+};
+
+void() multi_trigger =
+{
+	if (self.nextthink > time)
+	{
+		return;		// allready been triggered
+	}
+	if (self.noise)
+		sound (self, CHAN_VOICE, self.noise, 1, ATTN_NORM);
+
+	activator = self.enemy;
+	
+	SUB_UseTargets();
+
+	if (self.wait > 0)	
+	{
+		self.think = multi_wait;
+		self.nextthink = time + self.wait;
+	}
+	else
+	{	// we can't just remove (self) here, because this is a touch function
+		// called wheil C code is looping through area links...
+		self.touch = SUB_Null;
+		self.nextthink = time + 0.1;
+		self.think = SUB_Remove;
+	}
+};
+
+void() multi_touch =
+{
+	if (other.classname != "player")
+		return;
+	self.enemy = other;
+	multi_trigger ();
+};
+
+void() trigger_multiple =
+{
+	if (!self.wait)
+		self.wait = 0.2;
+
+	InitTrigger ();
+	self.touch = multi_touch;
+};
