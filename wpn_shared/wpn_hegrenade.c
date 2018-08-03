@@ -51,6 +51,34 @@ void() BounceTouch=
 		++m_iBounceCount;
 	}
 }
+
+void()	s_explode1	=	[0,	s_explode2] {self.nextthink = time + 0.1;};
+void()	s_explode2	=	[1,	s_explode3] {self.nextthink = time + 0.1;};
+void()	s_explode3	=	[2,	s_explode4] {self.nextthink = time + 0.1;};
+void()	s_explode4	=	[3,	s_explode5] {self.nextthink = time + 0.1;};
+void()	s_explode5	=	[4,	s_explode6] {self.nextthink = time + 0.1;};
+void()	s_explode6	=	[5,	s_explode7] {self.nextthink = time + 0.1;};
+void()	s_explode7	=	[6,	s_explode8] {self.nextthink = time + 0.1;};
+void()	s_explode8	=	[7,	s_explode9] {self.nextthink = time + 0.1;};
+void()	s_explode9	=	[8,	s_explode10] {self.nextthink = time + 0.1;};
+void()	s_explode10	=	[9,	s_explode11] {self.nextthink = time + 0.1;};
+void()	s_explode11	=	[10,s_explode12] {self.nextthink = time + 0.1;};
+void()	s_explode12	=	[11,s_explode13] {self.nextthink = time + 0.1;};
+void()	s_explode13	=	[12,s_explode14] {self.nextthink = time + 0.1;};
+void()	s_explode14	=	[13,s_explode15] {self.nextthink = time + 0.1;};
+void()	s_explode15	=	[14,SUB_Remove] {};
+
+void() BecomeExplosion =
+{
+	self.movetype = MOVETYPE_NONE;
+	self.velocity = '0 0 0';
+	self.origin_z += 30 ;
+	self.touch = SUB_Null;
+	setmodel (self, "sprites/zerogxplode.spr");
+	self.solid = SOLID_NOT;
+	
+	s_explode1 ();
+};
 void() GrenadeExplode =
 {
 	_RadiusDamage(self,self.owner,self.dmg,0,0);
@@ -60,7 +88,10 @@ void() GrenadeExplode =
 	WriteCoord (MSG_BROADCAST, self.origin_x);
 	WriteCoord (MSG_BROADCAST, self.origin_y);
 	WriteCoord (MSG_BROADCAST, self.origin_z);
-	SUB_Remove();
+	sound(self, CHAN_VOICE, "weapons/explode3.wav", 0.5, ATTN_NORM);
+	
+	BecomeExplosion();
+	//SUB_Remove();
 };
 void()ThrowGrenade=
 {

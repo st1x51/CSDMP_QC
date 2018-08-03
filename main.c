@@ -53,9 +53,6 @@ void() precaches =
 	precache_model("progs/gign.mdl"); 
 	precache_model("progs/leet.mdl"); 
 	
-	precache_model("progs/glass.mdl"); 
-	precache_model("progs/cindergibs.mdl");
-	precache_model("progs/metalplategibs.mdl");
 	precache_sound("weapons/357_cock1.wav");
 	//sounds
 	precache_sound("weapons/knife_slash1.wav");
@@ -175,7 +172,7 @@ void() precaches =
 	precache_sound ("player/die2.wav");
 	precache_sound ("player/die3.wav");
 	precache_sound ("player/death6.wav");
-	precache_sound ("debris/bustglass2.wav");
-	precache_sound ("debris/bustconcrete1.wav");
-	precache_sound ("debris/bustmetal2.wav");
+	precache_sound("weapons/explode3.wav");
+	precache_model("sprites/pistol_smoke1.spr");
+	precache_model("sprites/zerogxplode.spr");
 };

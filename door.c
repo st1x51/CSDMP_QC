@@ -1,13 +1,10 @@
-/*
-TODO:add movesnd and stopsnd for doors
-*/
-#define	SF_DOOR_START_OPEN			1
-#define SF_DOOR_PASSABLE			8
+#define	SF_DOOR_START_OPEN			0
+#define SF_DOOR_PASSABLE			5
 #define SF_DOOR_ONEWAY				16
 #define	SF_DOOR_NO_AUTO_RETURN			32
-#define SF_DOOR_USE_ONLY			256	// door must be opened by player's use button.
+#define SF_DOOR_USE_ONLY			8	// door must be opened by player's use button.
 #define SF_DOOR_NOMONSTERS			512	// Monster can't open
-
+.float movesnd,stopsnd;
 enum
 {
 	TS_AT_TOP,
@@ -34,7 +31,7 @@ void() door_blocked =
 
 void() door_hit_top =
 {
-	sound (self, CHAN_VOICE, self.noise1, 1, ATTN_NORM);
+	sound (self, CHAN_VOICE, self.noise2, 1, ATTN_NORM);
 	self.state = TS_AT_TOP;
 	if (self.spawnflags & SF_DOOR_NO_AUTO_RETURN)
 	{
@@ -51,7 +48,7 @@ void() door_hit_top =
 
 void() door_hit_bottom =
 {
-	sound (self, CHAN_VOICE, self.noise1, 1, ATTN_NORM);
+	sound (self, CHAN_VOICE, self.noise2, 1, ATTN_NORM);
 	self.state = TS_AT_BOTTOM;
 	if(self.spawnflags & SF_DOOR_USE_ONLY)
 	{	
@@ -66,7 +63,7 @@ void() door_hit_bottom =
 
 void() door_go_down =
 {
-	sound (self, CHAN_VOICE, self.noise2, 1, ATTN_NORM);
+	sound (self, CHAN_VOICE, self.noise1, 1, ATTN_NORM);
 
 	self.state = TS_GOING_DOWN;
 	SUB_CalcMove (self.pos1, self.speed, door_hit_bottom);
@@ -74,7 +71,7 @@ void() door_go_down =
 
 void() door_go_up =
 {
-	sound (self, CHAN_VOICE, self.noise2, 1, ATTN_NORM);
+	sound (self, CHAN_VOICE, self.noise1, 1, ATTN_NORM);
 	self.state = TS_GOING_UP;
 	SUB_CalcMove (self.pos2, self.speed, door_hit_top);
 };
@@ -115,7 +112,7 @@ void() func_door =
 
 	self.blocked = door_blocked;
 	self.use = door_activate; //weird,but working
-	
+	self.th_use = door_touch;
 	if (!self.speed)
 		self.speed = 100;
 	if (!self.wait)
@@ -139,4 +136,100 @@ void() func_door =
 	}
 	else
 		self.touch = door_touch;
+
+	self.touch = SUB_Null;
+	switch(self.movesnd)
+	{
+		case 0:
+		precache_sound("common/null.wav");
+		self.noise1 =("common/null.wav");
+		break;
+		case 1:
+		precache_sound("doors/doormove1.wav");
+		self.noise1 =("doors/doormove1.wav");
+		break;
+		case 2:
+		precache_sound("doors/doormove2.wav");
+		self.noise1 =("doors/doormove2.wav");
+		break;
+		case 3:
+		precache_sound("doors/doormove3.wav");
+		self.noise1 =("doors/doormove3.wav");
+		break;
+		case 4:
+		precache_sound("doors/doormove4.wav");
+		self.noise1 =("doors/doormove4.wav");
+		break;
+		case 5:
+		precache_sound("doors/doormove5.wav");
+		self.noise1 =("doors/doormove5.wav");
+		break;
+		case 6:
+		precache_sound("doors/doormove6.wav");
+		self.noise1 =("doors/doormove6.wav");
+		break;
+		case 7:
+		precache_sound("doors/doormove7.wav");
+		self.noise1 =("doors/doormove7.wav");
+		break;
+		case 8:
+		precache_sound("doors/doormove8.wav");
+		self.noise1 =("doors/doormove8.wav");
+		break;
+		case 9:
+		precache_sound("doors/doormove9.wav");
+		self.noise1 =("doors/doormove9.wav");
+		break;
+		case 10:
+		precache_sound("doors/doormove10.wav");
+		self.noise1 =("doors/doormove10.wav");
+		break;
+		default:
+		precache_sound("common/null.wav");
+		self.noise1 =("common/null.wav");
+		break;
+	}
+	switch(self.stopsnd)
+	{
+		case 0:
+		precache_sound("common/null.wav");
+		self.noise2 =("common/null.wav");
+		break;
+		case 1:
+		precache_sound("doors/doorstop1.wav");
+		self.noise2 =("doors/doorstop1.wav");
+		break;
+		case 2:
+		precache_sound("doors/doorstop2.wav");
+		self.noise2 =("doors/doorstop2.wav");
+		break;
+		case 3:
+		precache_sound("doors/doorstop3.wav");
+		self.noise2 =("doors/doorstop3.wav");
+		break;
+		case 4:
+		precache_sound("doors/doorstop4.wav");
+		self.noise2 =("doors/doorstop4.wav");
+		break;
+		case 5:
+		precache_sound("doors/doorstop5.wav");
+		self.noise2 =("doors/doorstop5.wav");
+		break;
+		case 6:
+		precache_sound("doors/doorstop6.wav");
+		self.noise2 =("doors/doorstop6.wav");
+		break;
+		case 7:
+		precache_sound("doors/doorstop7.wav");
+		self.noise2 =("doors/doorstop7.wav");
+		break;
+		case 8:
+		precache_sound("doors/doorstop8.wav");
+		self.noise2 =("doors/doorstop8.wav");
+		break;
+		default:
+		precache_sound("common/null.wav");
+		self.noise2 =("common/null.wav");
+		break;
+	}
 };

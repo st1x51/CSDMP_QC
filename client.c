@@ -461,6 +461,7 @@ void() PutClientInServer =
 		self.angles = v_forward;
 	}
 };
+
 void() ResetAmmo =
 {
 	if(self.team == CT_SIDE)
@@ -493,8 +494,27 @@ void() ResetAmmo =
 	self.ammo_m4a1 = 0;
 	self.m4a1clip = 0;
 	self.he_grenades = 0;
+	//reset fired bullets
+	self.usp_fired = 0;
+	self.glock_fired = 0;
+	self.deagle_fired = 0;
+	self.m3_fired = 0;
+	self.ak47_fired = 0;
+	self.awp_fired = 0;
+	self.galil_fired = 0;
+	self.aug_fired = 0;
+	self.famas_fired = 0;
+	self.m4a1_fired = 0;
 }
-
+void()Decal_Hack=
+{
+	WriteByte (MSG_BROADCAST, SVC_TEMPENTITY);
+	WriteByte (MSG_BROADCAST, TE_GUNSHOT);
+	WriteCoord (MSG_BROADCAST, self.origin_x);
+	WriteCoord (MSG_BROADCAST, self.origin_y);
+	WriteCoord (MSG_BROADCAST, self.origin_z);
+	WriteShort (MSG_BROADCAST, etoi(self));	
+}
 void() PutClientCTInServer =
 {
 	local	entity spot;
@@ -530,6 +550,7 @@ void() PutClientCTInServer =
 	stuffcmd(self,"fov 90\n");
 	stuffcmd(self,"scope 0\n");
 	UpdateWeapon();
+	Decal_Hack();
 }
 void() PutClientTInServer =
 {
@@ -566,6 +587,7 @@ void() PutClientTInServer =
 	stuffcmd(self,"fov 90\n");
 	stuffcmd(self,"scope 0\n");
 	UpdateWeapon();
+	Decal_Hack();
 }
 void() trigger_camera=
 {};

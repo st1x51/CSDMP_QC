@@ -187,13 +187,13 @@ string(string s) precache_sound2		= #76;	// registered version only
 string(string s) precache_file2			= #77;	// registered version only
 //void(entity e) setspawnparms			= #78;	// set parm1... to the
 //new
-float(float l, float h)randomlong = #33; // randomlong
-float(float l, float h)randomfloat = #50; // randomfloat
-string( entity e, vector start, vector end ) tracetexture = #42; //texture trace
-void (vector a, vector b, vector c, vector d, float e, entity f)tracearea = #39; //tracearea
-float(entity s) etoi = #71;
-float(vector v) vlen2d = #79;
-string( entity e, vector start, vector end ) tracematerial = #80; //material trace
+float(float l, float h)randomlong = #50; // randomlong
+float(float l, float h)randomfloat = #42; // randomfloat
+string( entity e, vector start, vector end ) tracetexture = #39; //texture trace
+void (vector a, vector b, vector c, vector d, float e, entity f)tracearea = #33; //tracearea
+float(entity s) etoi	                = #60;
+float(vector v) vlen2d				    = #61;	
+string( entity e, vector start, vector end ) tracematerial = #71; //material trace
 
 //
 // constants
@@ -328,6 +328,7 @@ float	SVC_FINALE		= 31;
 float	SVC_CDTRACK		= 32;
 float	SVC_SELLSCREEN		= 33;
 float	SVC_CUTSCENE		= 34;	// 1998-08-08 Complete SVC list by Zhenga
+float   SVC_BSPDECAL        = 38;
 float   SVC_SCREENFADE 		= 43;   //[float]duration [float]holdtime [short]flags [byte]r [byte]g [byte]b [byte]a
 float	SVC_ROOMTYPE		= 44;
 

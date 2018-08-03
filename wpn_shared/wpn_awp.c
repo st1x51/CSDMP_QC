@@ -42,6 +42,7 @@ void()AWP_PrimaryAttack=
 	{
 		stuffcmd(self,"fov 90\n");
 		stuffcmd(self,"scope 0\n");
+		stuffcmd(self,"sensitivity 5\n");
 		self.fov = 90;
 		self.scope = 0;
 		ReloadAWP(138); 
@@ -62,6 +63,7 @@ void()AWP_PrimaryAttack=
 	FireBullets(1,vecSrc,vecAim,vecAcc,8192,114);
 	stuffcmd(self,"fov 90\n");
 	stuffcmd(self,"scope 0\n");
+	stuffcmd(self,"sensitivity 5\n");
 	self.fov = 90;
 	self.scope = 0;
 	self.attack_finished = time + 1.45;

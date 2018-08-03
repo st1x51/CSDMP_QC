@@ -25,7 +25,7 @@ main.c
 subs.c                                         // Main subroutines
 button.c
 door.c
-hl_doors.qc
+hl_doors.c
 damage.c
 player.c
 client.c                                           // Client subroutines

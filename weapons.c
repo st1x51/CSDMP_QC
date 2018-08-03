@@ -37,6 +37,33 @@ void(entity hit, float damage) AddMultiDamage =
 	else
 		multi_damage = multi_damage + damage;
 };
+void()spark1 =
+{
+	if(self.frame == 29)
+		SUB_Remove();
+	self.frame +=1;
+	self.think = spark1;
+	self.nextthink = time + 0.025;
+}
+void(vector org) SparkTrace =
+{
+	local entity spark;
+
+	spark = spawn();
+
+	spark.owner = self;
+	spark.classname = "spark";
+	spark.movetype = MOVETYPE_NONE;
+	spark.velocity = '0 0 0';
+	spark.origin = org;
+	spark.touch = SUB_Null;
+	setmodel (spark, "sprites/pistol_smoke1.spr");
+	spark.rendermode = 3;
+	spark.solid = SOLID_NOT;
+	spark.frame = 1;
+	spark.think = spark1;
+	spark.nextthink = time + 0.01;
+};
 
 /*
 -=-=-=-=-=-=
@@ -65,6 +92,8 @@ void(float damage, vector dir) TraceAttack=
 		WriteCoord (MSG_BROADCAST, org_x);
 		WriteCoord (MSG_BROADCAST, org_y);
 		WriteCoord (MSG_BROADCAST, org_z);
+		WriteShort (MSG_BROADCAST, etoi(trace_ent));
+		SparkTrace(org);
 	}
 };
 void(float cShots,vector vecSrc,vector vecDirShooting,vector vecSpread,float flDistance,float iDamage)FireBullets=
@@ -108,6 +137,7 @@ void(float cShots,vector vecSrc,vector vecDirShooting,vector vecSpread,float flD
 				WriteCoord (MSG_BROADCAST, trace_endpos_x);
 				WriteCoord (MSG_BROADCAST, trace_endpos_y);
 				WriteCoord (MSG_BROADCAST, trace_endpos_z);
+				WriteShort (MSG_BROADCAST, etoi(trace_ent));
 				newDamage /= 2;
 				unit /= 2;
 				vecSrc = trace_endpos;
