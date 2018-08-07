@@ -146,6 +146,7 @@ void() GrenadeExplode =
 	BecomeExplosion2();
 	self.nextthink = time + 0.55;
 	self.think = Smoke3_C;
+	SUB_Remove();
 };
 void()ThrowGrenade=
 {
