@@ -51,33 +51,85 @@ void() BounceTouch=
 		++m_iBounceCount;
 	}
 }
-
-void()	s_explode1	=	[0,	s_explode2] {self.nextthink = time + 0.1;};
-void()	s_explode2	=	[1,	s_explode3] {self.nextthink = time + 0.1;};
-void()	s_explode3	=	[2,	s_explode4] {self.nextthink = time + 0.1;};
-void()	s_explode4	=	[3,	s_explode5] {self.nextthink = time + 0.1;};
-void()	s_explode5	=	[4,	s_explode6] {self.nextthink = time + 0.1;};
-void()	s_explode6	=	[5,	s_explode7] {self.nextthink = time + 0.1;};
-void()	s_explode7	=	[6,	s_explode8] {self.nextthink = time + 0.1;};
-void()	s_explode8	=	[7,	s_explode9] {self.nextthink = time + 0.1;};
-void()	s_explode9	=	[8,	s_explode10] {self.nextthink = time + 0.1;};
-void()	s_explode10	=	[9,	s_explode11] {self.nextthink = time + 0.1;};
-void()	s_explode11	=	[10,s_explode12] {self.nextthink = time + 0.1;};
-void()	s_explode12	=	[11,s_explode13] {self.nextthink = time + 0.1;};
-void()	s_explode13	=	[12,s_explode14] {self.nextthink = time + 0.1;};
-void()	s_explode14	=	[13,s_explode15] {self.nextthink = time + 0.1;};
-void()	s_explode15	=	[14,SUB_Remove] {};
-
+entity fexplo,exp,smoke;
+void() smoke_amim =
+{
+	if(smoke.frame == 15)
+	{
+		SUB_Remove();
+	}
+	smoke.frame += 1;
+	smoke.think = smoke_amim;
+	smoke.nextthink = time + 0.1;
+}
+void()Smoke3_C=
+{
+	smoke = spawn();
+	smoke.owner = self;
+	smoke.movetype = MOVETYPE_NONE;
+	smoke.velocity = '0 0 0';
+	setsize (smoke, '0 0 0', '0 0 0');	
+	smoke.origin = self.origin;
+	smoke.origin_z -= 5;
+	smoke.touch = SUB_Null;
+	setmodel (smoke, "sprites/steam1.spr");
+	smoke.solid = SOLID_NOT;
+	smoke.frame = 1;
+	
+	smoke_amim();
+}
+void() eexplo =
+{
+	if(exp.frame == 23)
+	{
+		SUB_Remove();
+		return;
+	}
+	exp.frame += 1;
+	exp.think = eexplo;
+	exp.nextthink = time + 0.1;
+}
+void() fexplo_anim =
+{
+	if(fexplo.frame == 29)
+	{
+		SUB_Remove();
+	}
+	fexplo.frame += 1;
+	fexplo.think = fexplo_anim;
+	fexplo.nextthink = time + 0.1;
+}
 void() BecomeExplosion =
 {
-	self.movetype = MOVETYPE_NONE;
-	self.velocity = '0 0 0';
-	self.origin_z += 30 ;
-	self.touch = SUB_Null;
-	setmodel (self, "sprites/zerogxplode.spr");
-	self.solid = SOLID_NOT;
-	
-	s_explode1 ();
+	fexplo = spawn();
+	fexplo.owner = self;
+	fexplo.movetype = MOVETYPE_NONE;
+	fexplo.velocity = '0 0 0';
+	setsize (fexplo, '0 0 0', '0 0 0');	
+	fexplo.origin = self.origin;
+	fexplo.origin_z += 20 ;
+	fexplo.touch = SUB_Null;
+	setmodel (fexplo, "sprites/fexplo.spr");
+	fexplo.solid = SOLID_NOT;
+	fexplo.frame = 1;
+	fexplo_anim();
+};
+void() BecomeExplosion2 =
+{
+	exp = spawn();
+	exp.owner = self;
+	exp.movetype = MOVETYPE_NONE;
+	exp.velocity = '0 0 0';
+	setsize (exp, '0 0 0', '0 0 0');	
+	exp.origin = fexplo.origin;
+	exp.origin_x += randomfloat(-64,64);
+	exp.origin_y += randomfloat(-64,64);
+	exp.origin_z += randomfloat(30,35);
+	exp.touch = SUB_Null;
+	setmodel (exp, "sprites/eexplo.spr");
+	exp.solid = SOLID_NOT;
+	exp.frame = 1;
+	eexplo();
 };
 void() GrenadeExplode =
 {
@@ -91,7 +143,9 @@ void() GrenadeExplode =
 	sound(self, CHAN_VOICE, "weapons/explode3.wav", 0.5, ATTN_NORM);
 	
 	BecomeExplosion();
-	//SUB_Remove();
+	BecomeExplosion2();
+	self.nextthink = time + 0.55;
+	self.think = Smoke3_C;
 };
 void()ThrowGrenade=
 {

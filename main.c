@@ -174,5 +174,7 @@ void() precaches =
 	precache_sound ("player/death6.wav");
 	precache_sound("weapons/explode3.wav");
 	precache_model("sprites/pistol_smoke1.spr");
-	precache_model("sprites/zerogxplode.spr");
+	precache_model("sprites/fexplo.spr");
+	precache_model("sprites/eexplo.spr");
+	precache_model("sprites/steam1.spr");
 };
