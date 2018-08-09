@@ -219,7 +219,7 @@ _z maximum range bot can be to be effective (lg/axe) (move in)
 vector(float wep) weapon_range =
 {
 	if (wep == 1) // IT_AXE
-		return '32 0 64';
+		return '32 0 128';
 	else if (wep == 2) // IT_SHOTGUN
 		return '180 48 3000';
 	else if (wep == 4) // IT_SUPER_SHOTGUN
@@ -254,6 +254,7 @@ void(float brange) bot_weapon_switch =
 
 	while(it)
 	{
+	
 		if ((self.ammo_rockets >= 1) && (it & 32))
 		{
 			flag = 32;
@@ -304,6 +305,7 @@ void(float brange) bot_weapon_switch =
 		}
 
 		v = weapon_range(flag);
+		
 		if (brange < v_y || brange > v_z)
 			it = it - flag;
 		else
@@ -367,7 +369,13 @@ void() bot_fight_style =
 	// decide if I should shoot
 
 	foedist = vlen(org - self.origin);
-	v = weapon_range(self.weapon);
+	if(self.ammo_shells == 0 && self.currentammo == 0)
+	{
+		self.weapon = IT_KNIFE;
+		v = weapon_range(IT_KNIFE);
+	}
+	else
+		v = weapon_range(self.weapon);
 	if (foedist > v_y && foedist < v_z)
 	{
 		traceline(self.origin + self.view_ofs, self.origin + self.view_ofs + v_forward * v_z, FALSE, self);
@@ -381,7 +389,8 @@ void() bot_fight_style =
 		}
 	}
 	//else
-	//	bot_weapon_switch(foedist);
+		//self.weapon = IT_KNIFE;
+		//bot_weapon_switch(foedist);
 
 	if (!(self.b_aiflags & (AI_PRECISION | AI_BLIND | AI_OBSTRUCTED)))
 	{

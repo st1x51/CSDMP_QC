@@ -169,8 +169,8 @@ void(vector vecSrc, entity pevInflictor, entity pevAttacker, float flDamage, flo
 		if (!pEntity)
 			return;
 		
-		if (pEntity.takedamage == DAMAGE_NO || pEntity.deadflag != DEAD_NO)
-			continue;
+		//if (pEntity.takedamage == DAMAGE_NO || pEntity.deadflag != DEAD_NO)
+		//	continue;
 
 		if (bInWater && pEntity.waterlevel == 0)
 			continue;

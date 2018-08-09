@@ -437,6 +437,7 @@ void() PutClientInServer =
 	cvar_set("mp_startmoney","800");
 	self.think = Show_Menu_Team;
 	self.nextthink = time + 2;
+	
 	local entity Target;
 	Target = find(world,classname,"trigger_camera");
 	m_pIntroCamera = Target;
@@ -460,6 +461,7 @@ void() PutClientInServer =
 		self.v_angle = '0 0 0';
 		self.angles = v_forward;
 	}
+	
 };
 
 void() ResetAmmo =
@@ -549,6 +551,11 @@ void() PutClientCTInServer =
 	self.money = cvar("mp_startmoney");
 	stuffcmd(self,"fov 90\n");
 	stuffcmd(self,"scope 0\n");
+	if(self.crosshair == 0)
+	{
+		self.crosshair = 1;
+		stuffcmd(self,"crosshair 1 \n");
+	}
 	UpdateWeapon();
 	Decal_Hack();
 }
@@ -586,6 +593,11 @@ void() PutClientTInServer =
 	self.money = cvar("mp_startmoney");
 	stuffcmd(self,"fov 90\n");
 	stuffcmd(self,"scope 0\n");
+	if(self.crosshair == 0)
+	{
+		self.crosshair = 1;
+		stuffcmd(self,"crosshair 1 \n");
+	}
 	UpdateWeapon();
 	Decal_Hack();
 }

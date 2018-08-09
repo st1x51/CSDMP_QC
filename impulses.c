@@ -67,7 +67,10 @@ void() CheckImpulses =
 	if(self.impulse == 41)	
 	{
 		if(self.he_grenades == 1)
+		{
+			goto stop;
 			return;
+		}
 		if(self.money < HEGRENADE_PRICE)
 		{
 			bprint("Not enough money \n");
