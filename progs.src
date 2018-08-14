@@ -29,6 +29,7 @@ hl_doors.c
 damage.c
 player.c
 client.c                                           // Client subroutines
+other.c
 lights.c
 impulses.c
 wpn_shared/wpn_reload.c

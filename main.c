@@ -54,6 +54,7 @@ void() precaches =
 	precache_model("progs/leet.mdl"); 
 	
 	precache_sound("weapons/357_cock1.wav");
+	precache_sound("player/sprayer.wav");
 	//sounds
 	precache_sound("weapons/knife_slash1.wav");
 	precache_sound("weapons/knife_hit1.wav");

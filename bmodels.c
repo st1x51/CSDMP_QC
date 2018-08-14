@@ -231,16 +231,3 @@ void() func_breakable =
 	precache_model( self.gib_model2 );
 	precache_model( self.gib_model3 );
 };
-.string texture;
-void() infodecal =
-{
-	WriteByte  (MSG_ALL, SVC_BSPDECAL);
-	WriteString(MSG_ALL, self.texture);
-
-	WriteCoord (MSG_ALL, self.origin_x);
-	WriteCoord (MSG_ALL, self.origin_y);
-	WriteCoord (MSG_ALL, self.origin_z);
-
-	setsize (self, '-16 -16 0', '16 16 56');
-};
-

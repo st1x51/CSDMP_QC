@@ -5,6 +5,7 @@ void()usp_silencer;
 float()GetWeaponId;
 void() CheckImpulses =
 {
+	
 	if (self.impulse == 121)
 		ChangeWeapon ();
 	if(self.impulse == 20)	
@@ -295,5 +296,17 @@ void() CheckImpulses =
 		if(self.weapon == IT_M4A1)
 			ReloadM4A1(102); 
 	}
+	
+	if(self.impulse == 125)
+	{
+		if (time < m_flNextDecalTime)
+		{
+			goto stop;
+			return;
+		}
+		m_flNextDecalTime = time + 30;
+		CSprayCan();
+	}
+
 	stop: self.impulse = 0;                              // Clear impulse list.
 };

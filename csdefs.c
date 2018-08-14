@@ -159,7 +159,7 @@ float m_bMapHasBuyZone,buyTime;
 .float m_bInBuyZone;
 .float fov,crosshair;
 .float direction,wp;
-
+float m_flNextDecalTime; 
 
 /*
 -----------------------------------------
