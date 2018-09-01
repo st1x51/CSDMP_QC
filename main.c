@@ -3,7 +3,10 @@ void() LightStyles_setup;
 void() main = {};
 void()CheckRules=
 {
-	m_bMapHasBuyZone = find(world,classname,"func_buyzone") != 0;
+	local entity e;
+	e = find(world,classname,"func_buyzone");
+	if(e)
+		m_bMapHasBuyZone = 1;
 }
 .float money;
 float BUY = 0;

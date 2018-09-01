@@ -1219,8 +1219,8 @@ void() BotFrame =
 	}
 	WaypointWatch();
 
-	if (saved_bots)
-		bot_return();
+//if (saved_bots)
+	//	bot_return();
 };
 
 /*
