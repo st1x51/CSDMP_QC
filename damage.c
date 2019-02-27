@@ -186,7 +186,7 @@ void(vector vecSrc, entity pevInflictor, entity pevAttacker, float flDamage, flo
 		if(flAdjustedDamage < 0)
 			flAdjustedDamage = 0;
 		T_Damage (pEntity, pevInflictor, pevAttacker, flAdjustedDamage);
-		pEntity = pEntity.chain;
+		pEntity = nextent(pEntity);
 	}
 }
 
