@@ -251,9 +251,6 @@ void()SecondaryAttack=
 }
 void() UpdateWeapon=
 {
-	stuffcmd(self,"crosshair ");
-	stuffcmd(self,ftos(self.crosshair));
-	stuffcmd(self,"\n");
 	if(self.weapon == IT_KNIFE)
 	{
 		self.weaponmodel = "progs/v_knife.mdl";
@@ -334,8 +331,6 @@ void() UpdateWeapon=
 		self.weaponmodel = "progs/v_awp.mdl";
 		self.weaponframe = 1;
 		self.currentammo = self.awpclip;
-		self.crosshair = cvar("crosshair");
-		stuffcmd(self,"crosshair 0\n");
 		self.ammo_shells = self.ammo_awp;
 		MaxSpreadX = 5;
 		MaxSpreadY = 5;

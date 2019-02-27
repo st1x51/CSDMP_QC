@@ -157,7 +157,7 @@ string sound_step4;
 
 float m_bMapHasBuyZone,buyTime;
 .float m_bInBuyZone;
-.float fov,crosshair;
+.float fov;
 .float direction,wp;
 float m_flNextDecalTime; 
 

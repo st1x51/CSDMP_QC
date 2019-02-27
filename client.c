@@ -272,6 +272,10 @@ void() PlayerPreThink =
 {
 	if(self.deadflag == DEAD_DEAD)
 		return;
+	if(self.weapon == IT_AWP)
+		stuffcmd(self,"crosshair 0\n");
+	else
+		stuffcmd(self,"crosshair 1\n");
 	if (BotPreFrame()) // FrikBot
 		return;
 	WaterMove ();
@@ -433,7 +437,6 @@ void() PutClientInServer =
 	self.m_iTeam = UNASSIGNED;
 	self.fixangle = 1;
 	setmodel (self, "progs/player.mdl");
-	self.crosshair = cvar("crosshair");
 	cvar_set("mp_startmoney","800");
 	self.think = Show_Menu_Team;
 	self.nextthink = time + 2;
@@ -551,11 +554,6 @@ void() PutClientCTInServer =
 	self.money = cvar("mp_startmoney");
 	stuffcmd(self,"fov 90\n");
 	stuffcmd(self,"scope 0\n");
-	if(self.crosshair == 0)
-	{
-		self.crosshair = 1;
-		stuffcmd(self,"crosshair 1 \n");
-	}
 	UpdateWeapon();
 	Decal_Hack();
 }
@@ -593,11 +591,6 @@ void() PutClientTInServer =
 	self.money = cvar("mp_startmoney");
 	stuffcmd(self,"fov 90\n");
 	stuffcmd(self,"scope 0\n");
-	if(self.crosshair == 0)
-	{
-		self.crosshair = 1;
-		stuffcmd(self,"crosshair 1 \n");
-	}
 	UpdateWeapon();
 	Decal_Hack();
 }
