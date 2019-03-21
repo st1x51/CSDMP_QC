@@ -133,7 +133,7 @@ void() BecomeExplosion2 =
 };
 void() GrenadeExplode =
 {
-	_RadiusDamage(self,self.owner,self.dmg,0,0);
+	_RadiusDamage(self,self.owner,self.dmg,world,0);
 	//RadiusFlash(self.origin, self, self.owner, 4, 0, 0);
 	WriteByte (MSG_BROADCAST, SVC_TEMPENTITY);
 	WriteByte (MSG_BROADCAST, TE_EXPLOSION);

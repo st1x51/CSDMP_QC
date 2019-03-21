@@ -1,9 +1,10 @@
 void()anim_deagle_attack=
 {
-	if(self.weaponframe == 25)
+	if(self.weaponframe == 23)
 		{
 			self.state = 0;
-			self.weaponframe = 1;
+			self.sequence = 0;
+			self.weaponframe = 0;
 			return;
 		}
 	self.weaponframe += 1;
@@ -12,16 +13,17 @@ void()anim_deagle_attack=
 }
 void() Deagle_Reload=
 {
-	if(self.weaponframe == 113) 
+	if(self.weaponframe == 65) 
 	{
-		self.weaponframe = 1;
+		self.sequence = 0;
+		self.weaponframe = 0;
 		UpdateWeapon();
 		self.state = 0;
 		return;
 	}	
-	if(self.weaponframe == 68)
+	if(self.weaponframe == 14)
 		sound (self, CHAN_AUTO, "weapons/de_clipout.wav", 1, ATTN_NORM);
-	if(self.weaponframe == 94)
+	if(self.weaponframe == 34)
 		sound (self, CHAN_AUTO, "weapons/de_clipin.wav", 1, ATTN_NORM);
 	self.weaponframe += 1;
 	self.think = Deagle_Reload;
@@ -31,11 +33,12 @@ void()DEAGLE_Attack=
 {
 	if(self.deagleclip == 0)
 	{
-		ReloadWeaponDeagle(51);
+		ReloadWeaponDeagle(0);
 		return;
 	}
 	self.attack_finished = time + 0.18;
-	self.weaponframe = 1;
+	self.sequence = 2;
+	self.weaponframe = 0;
 	anim_deagle_attack();
 	DefaultFire(1, 47, "weapons/deagle-1.wav");
 	self.deagleclip -=1;

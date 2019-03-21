@@ -146,7 +146,7 @@ float(entity targ, entity inflictor) CanDamage =
 	return FALSE;
 };
 
-void(vector vecSrc, entity pevInflictor, entity pevAttacker, float flDamage, float flRadius, float iClassIgnore, float bitsDamageType)RadiusDamage=
+void(vector vecSrc, entity pevInflictor, entity pevAttacker, float flDamage, float flRadius, entity iClassIgnore, float bitsDamageType)RadiusDamage=
 {
 	local entity pEntity;
 	local float flAdjustedDamage,falloff;
@@ -165,28 +165,31 @@ void(vector vecSrc, entity pevInflictor, entity pevAttacker, float flDamage, flo
 	pEntity = findradius(vecSrc,flRadius);
 	while(pEntity)
 	{
-		pEntity = checkclient();
-		if (!pEntity)
-			return;
-		
-		//if (pEntity.takedamage == DAMAGE_NO || pEntity.deadflag != DEAD_NO)
-		//	continue;
+		if (pEntity != iClassIgnore)
+		{
+			pEntity = checkclient();
+			if (!pEntity)
+				return;
+			
+			//if (pEntity.takedamage == DAMAGE_NO || pEntity.deadflag != DEAD_NO)
+			//	continue;
 
-		if (bInWater && pEntity.waterlevel == 0)
-			continue;
+			if (bInWater && pEntity.waterlevel == 0)
+				continue;
 
-		if (!bInWater && pEntity.waterlevel == 3)
-			continue;
+			if (!bInWater && pEntity.waterlevel == 3)
+				continue;
 
-		local float damageRatio = 1;
-		local float length = vlen(vecSrc - pEntity.origin);
-		
-		flAdjustedDamage = flDamage - length * falloff;
-		
-		if(flAdjustedDamage < 0)
-			flAdjustedDamage = 0;
-		T_Damage (pEntity, pevInflictor, pevAttacker, flAdjustedDamage);
-		pEntity = nextent(pEntity);
+			local float damageRatio = 1;
+			local float length = vlen(vecSrc - pEntity.origin);
+			
+			flAdjustedDamage = flDamage - length * falloff;
+			
+			if(flAdjustedDamage < 0)
+				flAdjustedDamage = 0;
+			T_Damage (pEntity, pevInflictor, pevAttacker, flAdjustedDamage);
+		}
+		pEntity = pEntity.chain;
 	}
 }
 
@@ -314,7 +317,7 @@ void() WaterMove =
     }
 };
 
-void(entity pevInflictor, entity pevAttacker, float flDamage, float iClassIgnore, float bitsDamageType) _RadiusDamage =
+void(entity pevInflictor, entity pevAttacker, float flDamage, entity iClassIgnore, float bitsDamageType) _RadiusDamage =
 {
 	if (flDamage > 80)
 		RadiusDamage(self.origin, pevInflictor, pevAttacker, flDamage, flDamage * 3.5, iClassIgnore, bitsDamageType);

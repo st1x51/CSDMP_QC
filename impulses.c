@@ -141,7 +141,7 @@ void() CheckImpulses =
 		self.weapon = IT_AWP;
 		self.awpclip = 10;
 		self.ammo_awp = 30;
-		self.crosshair = cvar("crosshair");
+		//self.crosshair = cvar("crosshair");
 		UpdateWeapon();	
 	}
 	if(self.impulse == 89)
@@ -270,31 +270,37 @@ void() CheckImpulses =
 		use_button();
 	if(self.impulse == 122)
 	{
+		if(self.state == RELOADING)
+		{
+			goto stop;
+			return;
+		}
+		//todo: move this to wep_reload
 		if(self.weapon == IT_USP)
 		{
 			if(self.silencer == 1)
-				ReloadWeaponUSP(32);
+				ReloadWeaponUSP(0);
 			else
-				ReloadWeaponUSP(147);
+				ReloadWeaponUSP(0);
 		}
 		if(self.weapon == IT_GLOCK)
-			ReloadWeaponGlock(144); 
+			ReloadWeaponGlock(0); 
 		if(self.weapon == IT_M3)
-			ReloadWeaponM3(88); 
+			ReloadWeaponM3(0); 
 		if(self.weapon == IT_DEAGLE)
-			ReloadWeaponDeagle(51);
+			ReloadWeaponDeagle(0);
 		if(self.weapon == IT_AK47)
-			ReloadAK47(18); 
+			ReloadAK47(0); 
 		if(self.weapon == IT_AWP)
-			ReloadAWP(138); 
+			ReloadAWP(0); 
 		if(self.weapon == IT_GALIL)
-			ReloadGalil(2); 
+			ReloadGalil(0); 
 		if(self.weapon == IT_AUG)
-			ReloadAug(9); 
+			ReloadAug(0); 
 		if(self.weapon == IT_FAMAS)
-			ReloadFamas(2); 
+			ReloadFamas(0); 
 		if(self.weapon == IT_M4A1)
-			ReloadM4A1(102); 
+			ReloadM4A1(0); 
 	}
 	
 	if(self.impulse == 125)

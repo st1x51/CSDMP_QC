@@ -46,7 +46,6 @@ void() precaches =
 	precache_model("progs/player.mdl");
 	precache_model("progs/v_usp.mdl");
 	precache_model("progs/v_knife.mdl"); 
-	precache_model("progs/v_usp_silencer.mdl");
 	precache_model("progs/v_glock18.mdl");
 	precache_model("progs/v_deagle.mdl");
 	precache_model("progs/v_m3.mdl");

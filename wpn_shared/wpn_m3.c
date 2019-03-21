@@ -1,23 +1,25 @@
 void(float cShots,vector vecSrc,vector vecDirShooting,vector vecSpread,float flDistance,float iDamage)FireBullets;
 void()anim_m3_attack=
 {
-	if(self.weaponframe == 48)
-		{
-			self.weaponframe = 1;
-			self.state = 0;
-			return;
-		}
+	if(self.weaponframe == 37)
+	{
+		self.sequence = 0;	
+		self.weaponframe = 0;
+		self.state = 0;
+		return;
+	}
 	self.weaponframe += 1;
 	self.think = anim_m3_attack;
 	self.nextthink = time + 0.03;
 }
 void() M3_Reload_End=
 {
-	if(self.weaponframe == 130)
+	if(self.weaponframe == 14)
 		sound (self, CHAN_AUTO, "weapons/m3_pump.wav", 1, ATTN_NORM);
-	if(self.weaponframe == 147) 
+	if(self.weaponframe == 33) 
 	{
-		self.weaponframe = 1;
+		self.sequence = 0;
+		self.weaponframe = 0;
 		UpdateWeapon();
 		self.state = 0;
 		return;
@@ -32,34 +34,49 @@ void() M3_Reload=
 	{	
 		if(self.m3clip == m3a)
 		{
-			self.weaponframe = 116;
+			self.sequence = 4;
+			self.weaponframe = 0;
 			M3_Reload_End();
 			return;
 		}
 	}
 	if(self.m3clip == 7)
 	{
-		self.weaponframe = 116;
+		self.sequence = 4;
+		self.weaponframe = 0;
 		M3_Reload_End();
 		return;
 	}
-	if(self.weaponframe == 103) 
+	if(self.weaponframe == 12) 
 		sound (self, CHAN_AUTO, "weapons/m3_insertshell.wav", 1, ATTN_NORM);
-	if(self.weaponframe == 114) 
+	if(self.weaponframe == 27) 
 	{
-		self.weaponframe = 88;
+		self.weaponframe = 0;
 		self.m3clip += 1;
 	}		
 	self.weaponframe += 1;
 	self.think = M3_Reload;
 	self.nextthink = time + 0.02;
 }
+void() M3_Reload_Start=
+{
+	if(self.weaponframe == 15) 
+	{
+		self.sequence = 3;
+		self.weaponframe = 0;
+		M3_Reload();
+		return;
+	}		
+	self.weaponframe += 1;
+	self.think = M3_Reload_Start;
+	self.nextthink = time + 0.02;	
+}
 void()M3_PrimaryAttack=
 {
 	local vector vecSrc,vecAcc,vecAim;
 	if(self.m3clip == 0)
 	{
-		ReloadWeaponM3(88); 
+		ReloadWeaponM3(0); 
 		return;
 	}
 	sound (self, CHAN_AUTO, "weapons/m3-1.wav", 1, ATTN_NORM);
@@ -69,7 +86,8 @@ void()M3_PrimaryAttack=
 	vecAim = GetAutoaimVector(AUTOAIM_2DEGREES);
 	FireBullets(9,vecSrc,vecAim,vecAcc,8192,20);
 	self.punchangle_x -= 5;
-	self.weaponframe = 10;
+	self.sequence = 2;
+	self.weaponframe = 0;
 	anim_m3_attack();
 	self.m3clip -=1;
 	self.currentammo -= 1;

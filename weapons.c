@@ -164,12 +164,14 @@ void()SecondaryAttack=
 		self.state = SILENCER;
 		if(self.silencer == 1)
 		{
-			self.weaponframe = 134;
+			self.sequence = 15;
+			self.weaponframe = 0;
 			usp_unsilencer();
 		}	
 		else		
 		{		
-			self.weaponframe = 1;
+			self.sequence = 7;
+			self.weaponframe = 0;
 			usp_silencer();
 		}
 	}
@@ -251,23 +253,30 @@ void()SecondaryAttack=
 }
 void() UpdateWeapon=
 {
+	//stuffcmd(self,"crosshair ");
+	//stuffcmd(self,ftos(self.crosshair));
+	//stuffcmd(self,"\n");
 	if(self.weapon == IT_KNIFE)
 	{
 		self.weaponmodel = "progs/v_knife.mdl";
+		self.sequence = 0;
 		self.weaponframe = 0;
 		self.currentammo = 0;
 		self.ammo_shells = 0;
 	}
 	if(self.weapon == IT_USP)
 	{
+		self.weaponmodel = "progs/v_usp.mdl";
 		if(self.silencer == 1)
-			self.weaponmodel = "progs/v_usp_silencer.mdl";
-		else	
-			self.weaponmodel = "progs/v_usp.mdl";
-		if(self.silencer == 1)
-			self.weaponframe = 1;
-		else
+		{
+			self.sequence = 0;
 			self.weaponframe = 0;
+		}
+		else
+		{
+			self.sequence = 8;
+			self.weaponframe = 0;
+		}
 		self.currentammo = self.uspclip;
 		self.ammo_shells = self.ammo_45acp;
 		MaxSpreadX = 5;
@@ -278,7 +287,8 @@ void() UpdateWeapon=
 	if(self.weapon == IT_GLOCK)
 	{
 		self.weaponmodel = "progs/v_glock18.mdl";
-		self.weaponframe = 1;
+		self.sequence = 0;
+		self.weaponframe = 0;
 		self.currentammo = self.glockclip;
 		self.ammo_shells = self.ammo_glock;
 		MaxSpreadX = 2;
@@ -289,6 +299,7 @@ void() UpdateWeapon=
 	if(self.weapon == IT_DEAGLE)
 	{
 		self.weaponmodel = "progs/v_deagle.mdl";
+		self.sequence = 0;
 		self.weaponframe = 0;
 		self.currentammo = self.deagleclip;
 		self.ammo_shells = self.ammo_deagle;
@@ -307,7 +318,8 @@ void() UpdateWeapon=
 	if(self.weapon == IT_M3)
 	{
 		self.weaponmodel = "progs/v_m3.mdl";
-		self.weaponframe = 1;
+		self.sequence = 0;
+		self.weaponframe = 0;
 		self.currentammo = self.m3clip;
 		self.ammo_shells = self.ammo_m3;
 		MaxSpreadX = 2;
@@ -331,6 +343,8 @@ void() UpdateWeapon=
 		self.weaponmodel = "progs/v_awp.mdl";
 		self.weaponframe = 1;
 		self.currentammo = self.awpclip;
+		//self.crosshair = cvar("crosshair");
+		//stuffcmd(self,"crosshair 0\n");
 		self.ammo_shells = self.ammo_awp;
 		MaxSpreadX = 5;
 		MaxSpreadY = 5;
