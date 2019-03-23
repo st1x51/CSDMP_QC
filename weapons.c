@@ -175,6 +175,23 @@ void()SecondaryAttack=
 			usp_silencer();
 		}
 	}
+	if(self.weapon == IT_M4A1)
+	{
+		self.m_flNextSecondaryAttack = time + 0.3;
+		self.state = SILENCER;
+		if(self.m4a1silencer == 1)
+		{
+			self.sequence = 13;
+			self.weaponframe = 0;
+			m4a1_unsilencer();
+		}	
+		else		
+		{		
+			self.sequence = 6;
+			self.weaponframe = 0;
+			m4a1_silencer();
+		}
+	}
 	if(self.weapon == IT_GLOCK)
 	{
 		self.m_flNextSecondaryAttack = time + 0.3;
@@ -330,7 +347,8 @@ void() UpdateWeapon=
 	if(self.weapon == IT_AK47)
 	{
 		self.weaponmodel = "progs/v_ak47.mdl";
-		self.weaponframe = 1;
+		self.sequence = 0;
+		self.weaponframe = 0;
 		self.currentammo = self.ak47clip;
 		self.ammo_shells = self.ammo_ak47;
 		MaxSpreadX = 2;
@@ -341,7 +359,8 @@ void() UpdateWeapon=
 	if(self.weapon == IT_AWP)
 	{
 		self.weaponmodel = "progs/v_awp.mdl";
-		self.weaponframe = 1;
+		self.sequence = 0;
+		self.weaponframe = 0;
 		self.currentammo = self.awpclip;
 		//self.crosshair = cvar("crosshair");
 		//stuffcmd(self,"crosshair 0\n");
@@ -354,7 +373,8 @@ void() UpdateWeapon=
 	if(self.weapon == IT_GALIL)
 	{
 		self.weaponmodel = "progs/v_galil.mdl";
-		self.weaponframe = 1;
+		self.sequence = 0;
+		self.weaponframe = 0;
 		self.currentammo = self.galilclip;
 		self.ammo_shells = self.ammo_galil;
 		MaxSpreadX = 2;
@@ -365,7 +385,8 @@ void() UpdateWeapon=
 	if(self.weapon == IT_AUG)
 	{
 		self.weaponmodel = "progs/v_aug.mdl";
-		self.weaponframe = 1;
+		self.sequence = 0;
+		self.weaponframe = 0;
 		self.currentammo = self.augclip;
 		self.ammo_shells = self.ammo_aug;
 		MaxSpreadX = 2;
@@ -376,7 +397,8 @@ void() UpdateWeapon=
 	if(self.weapon == IT_FAMAS)
 	{
 		self.weaponmodel = "progs/v_famas.mdl";
-		self.weaponframe = 1;
+		self.sequence = 0;
+		self.weaponframe = 0;
 		self.currentammo = self.famasclip;
 		self.ammo_shells = self.ammo_famas;
 		MaxSpreadX = 2;
@@ -387,7 +409,17 @@ void() UpdateWeapon=
 	if(self.weapon == IT_M4A1)
 	{
 		self.weaponmodel = "progs/v_m4a1.mdl";
-		self.weaponframe = 1;
+		if(self.m4a1silencer == 1)
+		{
+			self.sequence = 0;
+			self.weaponframe = 0;
+		}
+		else
+		{
+			self.sequence = 7;
+			self.weaponframe = 0;
+		}
+	
 		self.currentammo = self.m4a1clip;
 		self.ammo_shells = self.ammo_m4a1;
 		MaxSpreadX = 5;

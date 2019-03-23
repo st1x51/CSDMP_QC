@@ -31,7 +31,7 @@ float m_iNumTerrorist,m_iNumCT;
 .float ammo_galil,galilclip,galil_fired;
 .float ammo_aug,augclip,aug_fired;
 .float ammo_famas,famasclip,famasburst,famas_fired;
-.float ammo_m4a1,m4a1clip,m4a1_fired;
+.float ammo_m4a1,m4a1clip,m4a1_fired,m4a1silencer;
 .float he_grenades;
 .float attack_finished;
 .float iSlot;

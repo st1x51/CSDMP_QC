@@ -2,11 +2,11 @@
 void()anim_knife_attack=
 {
 	if(self.weaponframe == 64)
-		{
-			self.state = 0;
-			//self.weaponframe = 0;
-			return;
-		}
+	{
+		self.state = 0;
+		//self.weaponframe = 0;
+		return;
+	}
 	self.weaponframe += 1;
 	self.think = anim_knife_attack;
 	self.nextthink = time + 0.005;
@@ -14,11 +14,11 @@ void()anim_knife_attack=
 void()anim_sec_knife_attack=
 {
 	if(self.weaponframe == 46)
-		{
-			self.state = 0;
-			//self.weaponframe = 0;
-			return;
-		}
+	{
+		self.state = 0;
+		//self.weaponframe = 0;
+		return;
+	}
 	self.weaponframe += 1;
 	self.think = anim_sec_knife_attack;
 	self.nextthink = time + 0.025;

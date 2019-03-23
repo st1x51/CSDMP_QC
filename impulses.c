@@ -25,6 +25,7 @@ void() CheckImpulses =
 		self.weapon = IT_GLOCK;
 		self.glockclip = 20;
 		self.ammo_glock = 120;
+		self.glock_fired = 0;
 		UpdateWeapon();
 	}
 	if(self.impulse == 21)	
@@ -44,6 +45,7 @@ void() CheckImpulses =
 		self.weapon = IT_USP;
 		self.uspclip = 12;
 		self.ammo_45acp = 100;
+		self.usp_fired = 0;
 		UpdateWeapon();
 	}
 	if(self.impulse == 22)	
@@ -63,6 +65,7 @@ void() CheckImpulses =
 		self.weapon = IT_DEAGLE;
 		self.deagleclip = 7;
 		self.ammo_deagle = 35;
+		self.deagle_fired = 0;
 		UpdateWeapon();
 	}
 	if(self.impulse == 41)	
@@ -103,6 +106,7 @@ void() CheckImpulses =
 		self.weapon = IT_M3;
 		self.ammo_m3 = 32;
 		self.m3clip = 7;
+		self.m3_fired = 0;
 		UpdateWeapon();
 	}
 	if(self.impulse == 43)
@@ -122,6 +126,7 @@ void() CheckImpulses =
 		self.weapon = IT_AK47;
 		self.ak47clip = 30;
 		self.ammo_ak47 = 90;
+		self.ak47_fired = 0;
 		UpdateWeapon();
 	}
 	if(self.impulse == 46)
@@ -180,6 +185,7 @@ void() CheckImpulses =
 		self.weapon = IT_AUG;
 		self.augclip = 30;
 		self.ammo_aug = 90;
+		self.awp_fired = 0;
 		UpdateWeapon();
 	}
 	if(self.impulse == 84)
@@ -199,6 +205,7 @@ void() CheckImpulses =
 		self.weapon = IT_FAMAS;
 		self.famasclip = 25;
 		self.ammo_famas = 90;
+		self.famas_fired = 0;
 		UpdateWeapon();
 	}
 	if(self.impulse == 45)
@@ -218,6 +225,7 @@ void() CheckImpulses =
 		self.weapon = IT_M4A1;
 		self.m4a1clip = 30;
 		self.ammo_m4a1 = 90;
+		self.m4a1_fired = 0;
 		UpdateWeapon();
 	}
 	if (self.impulse == 94)
@@ -270,7 +278,7 @@ void() CheckImpulses =
 		use_button();
 	if(self.impulse == 122)
 	{
-		if(self.state == RELOADING)
+		if(self.state > 0)
 		{
 			goto stop;
 			return;

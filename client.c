@@ -476,6 +476,7 @@ void() ResetAmmo =
 		self.glockclip = 0;
 		self.famasburst = 0;
 		self.silencer = 1;
+		self.m4a1silencer = 1;
 	}
 	else
 	{

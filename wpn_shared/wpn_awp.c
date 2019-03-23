@@ -1,14 +1,15 @@
 void()awp_attack_anim=
 {
-	if(self.weaponframe == 26) 
+	if(self.weaponframe == 15) 
 		sound (self, CHAN_AUTO, "weapons/boltup.wav", 1, ATTN_NORM);
-	if(self.weaponframe == 32) 
+	if(self.weaponframe == 19) 
 		sound (self, CHAN_AUTO, "weapons/boltpull1.wav", 1, ATTN_NORM);
-	if(self.weaponframe == 42) 
+	if(self.weaponframe == 32) 
 		sound (self, CHAN_AUTO, "weapons/boltdown.wav", 1, ATTN_NORM);
-	if(self.weaponframe == 52) 
+	if(self.weaponframe == 41) 
 	{
-		self.weaponframe = 1;
+		self.sequence = 0;
+		self.weaponframe = 0;
 		self.state = 0;
 		return;
 	}
@@ -18,13 +19,14 @@ void()awp_attack_anim=
 }
 void()AWP_Reload=
 {
-	if(self.weaponframe == 162)
+	if(self.weaponframe == 26)
 		sound (self, CHAN_AUTO, "weapons/awp_clipout.wav", 1, ATTN_NORM);
-	if(self.weaponframe == 196)
+	if(self.weaponframe == 53)
 		sound (self, CHAN_AUTO, "weapons/awp_clipin.wav", 1, ATTN_NORM);
-	if(self.weaponframe == 222) 
+	if(self.weaponframe == 87) 
 	{
-		self.weaponframe = 1;
+		self.sequence = 0;
+		self.weaponframe = 0;
 		UpdateWeapon();
 		self.state = 0;
 		return;
@@ -45,7 +47,7 @@ void()AWP_PrimaryAttack=
 		stuffcmd(self,"sensitivity 5\n");
 		self.fov = 90;
 		self.scope = 0;
-		ReloadAWP(138); 
+		ReloadAWP(0); 
 		return;
 	}
 	if(!self.flags && FL_ONGROUND)
@@ -67,7 +69,8 @@ void()AWP_PrimaryAttack=
 	self.fov = 90;
 	self.scope = 0;
 	self.attack_finished = time + 1.45;
-	self.weaponframe = 8;
+	self.sequence = 1;
+	self.weaponframe = 0;
 	sound (self, CHAN_AUTO, "weapons/awp1.wav", 1, ATTN_NORM);
 	awp_attack_anim();
 }

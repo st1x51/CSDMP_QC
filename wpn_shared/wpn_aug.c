@@ -1,9 +1,10 @@
 void()anim_aug_attack=
 {
-	if(self.weaponframe == 214)
+	if(self.weaponframe == 30)
 		{
 			self.state = 0;
-			self.weaponframe = 1;
+			self.sequence = 0;
+			self.weaponframe = 0;
 			return;
 		}
 	self.weaponframe += 1;
@@ -17,10 +18,11 @@ void()Aug_PrimaryAttack=
 		stuffcmd(self,"fov 90\n");
 		self.fov = 90;
 		self.scope = 0;
-		ReloadAug(9); 
+		ReloadAug(0); 
 		return;
 	}
-	self.weaponframe = 202;
+	self.sequence = 3;
+	self.weaponframe = 0;
 	self.augclip -= 1;
 	self.aug_fired += 1;
 	anim_aug_attack();
@@ -33,20 +35,21 @@ void()Aug_PrimaryAttack=
 
 void()Aug_Reload=
 {
-	if(self.weaponframe == 140) 
+	if(self.weaponframe == 132) 
 	{
-		self.weaponframe = 1;
+		self.sequence = 0;
+		self.weaponframe = 0;
 		UpdateWeapon();
 		self.state = 0;
 		return;
 	}	
-	if(self.weaponframe == 21)
+	if(self.weaponframe == 10)
 		sound (self, CHAN_AUTO, "weapons/aug_boltpull.wav", 1, ATTN_NORM);
-	if(self.weaponframe == 61)	
+	if(self.weaponframe == 50)	
 		sound (self, CHAN_AUTO, "weapons/aug_clipout.wav", 1, ATTN_NORM);
-	if(self.weaponframe == 97)	
+	if(self.weaponframe == 88)	
 		sound (self, CHAN_AUTO, "weapons/aug_clipin.wav", 1, ATTN_NORM);
-	if(self.weaponframe == 122)	
+	if(self.weaponframe == 112)	
 		sound (self, CHAN_AUTO, "weapons/aug_boltslap.wav", 1, ATTN_NORM);
 	self.weaponframe += 1;
 	self.think = Aug_Reload;

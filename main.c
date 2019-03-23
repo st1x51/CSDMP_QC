@@ -133,6 +133,9 @@ void() precaches =
 	precache_sound("weapons/m4a1_clipout.wav");
 	precache_sound("weapons/m4a1_clipin.wav");
 	precache_sound("weapons/m4a1_boltpull.wav");
+	precache_sound("weapons/m4a1_silencer_on.wav");
+	precache_sound("weapons/m4a1_silencer_off.wav");
+	precache_sound("weapons/m4a1_unsil-1.wav");
 	//footsteps
 	precache_sound ("player/pl_step1.wav");
 	precache_sound ("player/pl_step2.wav");
