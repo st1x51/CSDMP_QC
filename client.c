@@ -556,6 +556,7 @@ void() PutClientCTInServer =
 	self.money = cvar("mp_startmoney");
 	stuffcmd(self,"fov 90\n");
 	stuffcmd(self,"scope 0\n");
+	stuffcmd(self,"sensitivity 5\n");
 	/*
 	if(self.crosshair == 0)
 	{
