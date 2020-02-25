@@ -136,6 +136,28 @@ void() precaches =
 	precache_sound("weapons/m4a1_silencer_on.wav");
 	precache_sound("weapons/m4a1_silencer_off.wav");
 	precache_sound("weapons/m4a1_unsil-1.wav");
+	//p228
+	precache_model("progs/v_p228.mdl");
+	precache_sound("weapons/p228-1.wav");
+	precache_sound("weapons/p228_clipout.wav");
+	precache_sound("weapons/p228_clipin.wav");
+	precache_sound("weapons/p228_sliderelease.wav");
+	precache_sound("weapons/p228_slidepull.wav");
+	//elite
+	precache_model("progs/v_elite.mdl");
+	precache_sound("weapons/elite_fire.wav");
+	precache_sound("weapons/elite_reloadstart.wav");
+	precache_sound("weapons/elite_leftclipin.wav");
+	precache_sound("weapons/elite_clipout.wav");
+	precache_sound("weapons/elite_sliderelease.wav");
+	precache_sound("weapons/elite_rightclipin.wav");
+	precache_sound("weapons/elite_deploy.wav");
+	//xm1014
+	precache_model("progs/v_xm1014.mdl");
+	precache_sound("items/cliprelease1.wav");
+	precache_sound("weapons/reload1.wav");
+	precache_sound("weapons/reload3.wav");
+	precache_sound("weapons/xm1014-1.wav");
 	//footsteps
 	precache_sound ("player/pl_step1.wav");
 	precache_sound ("player/pl_step2.wav");

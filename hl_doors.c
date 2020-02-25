@@ -2,10 +2,6 @@
 Rotating doors are based on "Chris '06 Hinge Doors".
 Doors needs to be made like in HalfLife using origin brush.
 Swings from both sides, avelocity overshot issue resolved using .ltime.
-/*
--=-=-=-
-Defines
--=-=-=-
 */
 .float RSTATE, reverse;
 void() door_open;

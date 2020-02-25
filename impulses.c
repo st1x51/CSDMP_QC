@@ -5,10 +5,9 @@ void()usp_silencer;
 float()GetWeaponId;
 void() CheckImpulses =
 {
-	
 	if (self.impulse == 121)
 		ChangeWeapon ();
-	if(self.impulse == 20)	
+	if(self.impulse == 20)
 	{
 		if(self.money < GLOCK18_PRICE)
 		{
@@ -28,7 +27,7 @@ void() CheckImpulses =
 		self.glock_fired = 0;
 		UpdateWeapon();
 	}
-	if(self.impulse == 21)	
+	if(self.impulse == 21)
 	{
 		if(self.money < USP_PRICE)
 		{
@@ -48,7 +47,7 @@ void() CheckImpulses =
 		self.usp_fired = 0;
 		UpdateWeapon();
 	}
-	if(self.impulse == 22)	
+	if(self.impulse == 22)
 	{
 		if(self.money < DEAGLE_PRICE)
 		{
@@ -68,7 +67,47 @@ void() CheckImpulses =
 		self.deagle_fired = 0;
 		UpdateWeapon();
 	}
-	if(self.impulse == 41)	
+	if(self.impulse == 23)
+	{
+		if(self.money < P228_PRICE)
+		{
+			sprint(self, "Not enough money \n");
+			goto stop;
+			return;
+		}
+		AddAccount(self,P228_PRICE,BUY);
+		bprint("Bought P228 \n");
+		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
+		self.iSlot = SECONDARY;
+		self.items = self.items - (self.items & GetWeaponId());
+		self.items = self.items | IT_P228;
+		self.weapon = IT_P228;
+		self.p228clip = 13;
+		self.ammo_p228 = 52;
+		self.p228_fired = 0;
+		UpdateWeapon();
+	}
+	if(self.impulse == 25)
+	{
+		if(self.money < ELITE_PRICE)
+		{
+			sprint(self, "Not enough money \n");
+			goto stop;
+			return;
+		}
+		AddAccount(self,ELITE_PRICE,BUY);
+		bprint("Bought Elite \n");
+		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
+		self.iSlot = SECONDARY;
+		self.items = self.items - (self.items & GetWeaponId());
+		self.items = self.items | IT_ELITE;
+		self.weapon = IT_ELITE;
+		self.eliteclip = 30;
+		self.ammo_elite = 120;
+		self.elite_fired = 0;
+		UpdateWeapon();
+	}
+	if(self.impulse == 41)
 	{
 		if(self.he_grenades == 1)
 		{
@@ -89,7 +128,7 @@ void() CheckImpulses =
 		self.he_grenades += 1;
 		UpdateWeapon();
 	}
-	if(self.impulse == 62)	
+	if(self.impulse == 62)
 	{
 		if(self.money < M3_PRICE)
 		{
@@ -107,6 +146,26 @@ void() CheckImpulses =
 		self.ammo_m3 = 32;
 		self.m3clip = 7;
 		self.m3_fired = 0;
+		UpdateWeapon();
+	}
+	if(self.impulse == 63)
+	{
+		if(self.money < XM1014_PRICE)
+		{
+			bprint("Not enough money \n");
+			goto stop;
+			return;
+		}
+		AddAccount(self,XM1014_PRICE,BUY);
+		bprint("Bought XM \n");
+		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
+		self.iSlot = PRIMARY;
+		self.items = self.items - (self.items & GetWeaponId());
+		self.items = self.items | IT_XM;
+		self.weapon = IT_XM;
+		self.ammo_xm = 32;
+		self.xmclip = 7;
+		self.xm_fired = 0;
 		UpdateWeapon();
 	}
 	if(self.impulse == 43)
@@ -147,7 +206,7 @@ void() CheckImpulses =
 		self.awpclip = 10;
 		self.ammo_awp = 30;
 		//self.crosshair = cvar("crosshair");
-		UpdateWeapon();	
+		UpdateWeapon();
 	}
 	if(self.impulse == 89)
 	{
@@ -236,7 +295,7 @@ void() CheckImpulses =
 		{
 			bprint("Too many players in team\n");
 		}
-		else	
+		else
 		{
 			bprint (self.netname);
 			bprint (" Joining Counter-Terrorist team\n");
@@ -253,7 +312,7 @@ void() CheckImpulses =
 		{
 			bprint("Too many players in team\n");
 		}
-		else	
+		else
 		{
 			bprint (self.netname);
 			bprint (" Joining Terrorist team\n");
@@ -292,25 +351,27 @@ void() CheckImpulses =
 				ReloadWeaponUSP(0);
 		}
 		if(self.weapon == IT_GLOCK)
-			ReloadWeaponGlock(0); 
+			ReloadWeaponGlock(0);
 		if(self.weapon == IT_M3)
-			ReloadWeaponM3(0); 
+			ReloadWeaponM3(0);
 		if(self.weapon == IT_DEAGLE)
 			ReloadWeaponDeagle(0);
 		if(self.weapon == IT_AK47)
-			ReloadAK47(0); 
+			ReloadAK47(0);
 		if(self.weapon == IT_AWP)
-			ReloadAWP(0); 
+			ReloadAWP(0);
 		if(self.weapon == IT_GALIL)
-			ReloadGalil(0); 
+			ReloadGalil(0);
 		if(self.weapon == IT_AUG)
-			ReloadAug(0); 
+			ReloadAug(0);
 		if(self.weapon == IT_FAMAS)
-			ReloadFamas(0); 
+			ReloadFamas(0);
 		if(self.weapon == IT_M4A1)
-			ReloadM4A1(0); 
+			ReloadM4A1(0);
+		if(self.weapon == IT_XM)
+			ReloadWeaponXM(0);	
 	}
-	
+
 	if(self.impulse == 125)
 	{
 		if (time < m_flNextDecalTime)

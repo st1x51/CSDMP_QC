@@ -27,7 +27,7 @@ void(entity hit, float damage) AddMultiDamage =
 {
 	if (!hit)
 		return;
-	
+
 	if (hit != multi_ent)
 	{
 		ApplyMultiDamage ();
@@ -73,7 +73,7 @@ TraceAttack
 void(float damage, vector dir) TraceAttack=
 {
 	local	vector	vel, org;
-	
+
 	vel = normalize(dir + v_up*crandom() + v_right*crandom());
 	vel = vel + 2*trace_plane_normal;
 	vel = vel * 200;
@@ -102,11 +102,11 @@ void(float cShots,vector vecSrc,vector vecDirShooting,vector vecSpread,float flD
 	local vector vecUp = v_up;
 	local float x,y,z;
 	local float newDamage = iDamage;
-	
+
 	ClearMultiDamage ();
 	for(float iShot = 1; iShot <= cShots; iShot++)
 	{
-		
+
 		do{
 			x = RANDOM_LONG(-0.5,0.5) + RANDOM_LONG(-0.5,0.5);
 			y = RANDOM_LONG(-0.5,0.5) + RANDOM_LONG(-0.5,0.5);
@@ -146,7 +146,7 @@ void(float cShots,vector vecSrc,vector vecDirShooting,vector vecSpread,float flD
 				TraceAttack(newDamage,vecDir);
 			}
 		}
-	}	
+	}
 	}
 	ApplyMultiDamage ();
 }
@@ -167,9 +167,9 @@ void()SecondaryAttack=
 			self.sequence = 15;
 			self.weaponframe = 0;
 			usp_unsilencer();
-		}	
-		else		
-		{		
+		}
+		else
+		{
 			self.sequence = 7;
 			self.weaponframe = 0;
 			usp_silencer();
@@ -184,9 +184,9 @@ void()SecondaryAttack=
 			self.sequence = 13;
 			self.weaponframe = 0;
 			m4a1_unsilencer();
-		}	
-		else		
-		{		
+		}
+		else
+		{
 			self.sequence = 6;
 			self.weaponframe = 0;
 			m4a1_silencer();
@@ -196,7 +196,7 @@ void()SecondaryAttack=
 	{
 		self.m_flNextSecondaryAttack = time + 0.3;
 		if(self.autofire == 1)
-		{	
+		{
 			centerprint(self,"Switched to semi-automatic\n");
 			self.autofire = 0;
 		}
@@ -257,7 +257,7 @@ void()SecondaryAttack=
 	{
 		self.m_flNextSecondaryAttack = time + 0.3;
 		if(self.famasburst  == 1)
-		{	
+		{
 			centerprint(self,"Switched to Full Auto\n");
 			self.famasburst = 0;
 		}
@@ -325,6 +325,30 @@ void() UpdateWeapon=
 		SpreadX = 3.5;
 		SpreadY = 3.5;
 	}
+	if(self.weapon == IT_P228)
+	{
+		self.weaponmodel = "progs/v_p228.mdl";
+		self.sequence = 0;
+		self.weaponframe = 0;
+		self.currentammo = self.p228clip;
+		self.ammo_shells = self.ammo_p228;
+		MaxSpreadX = 2;
+		MaxSpreadY = 2;
+		SpreadX = 1.5;
+		SpreadY = 1.5;
+	}
+	if(self.weapon == IT_ELITE)
+	{
+		self.weaponmodel = "progs/v_elite.mdl";
+		self.sequence = 0;
+		self.weaponframe = 0;
+		self.currentammo = self.eliteclip;
+		self.ammo_shells = self.ammo_elite;
+		MaxSpreadX = 2;
+		MaxSpreadY = 5;
+		SpreadX = 2.5;
+		SpreadY = 2.5;
+	}
 	if(self.weapon == IT_HEGRENADE)
 	{
 		self.weaponmodel = "progs/v_hegrenade.mdl";
@@ -355,7 +379,7 @@ void() UpdateWeapon=
 		MaxSpreadY = 5;
 		SpreadX = 2;
 		SpreadY = 2;
-	}	
+	}
 	if(self.weapon == IT_AWP)
 	{
 		self.weaponmodel = "progs/v_awp.mdl";
@@ -419,13 +443,25 @@ void() UpdateWeapon=
 			self.sequence = 7;
 			self.weaponframe = 0;
 		}
-	
+
 		self.currentammo = self.m4a1clip;
 		self.ammo_shells = self.ammo_m4a1;
 		MaxSpreadX = 5;
 		MaxSpreadY = 5;
 		SpreadX = 1.5;
 		SpreadY = 1.5;
+	}
+	if(self.weapon == IT_XM)
+	{
+		self.weaponmodel = "progs/v_xm1014.mdl";
+		self.sequence = 0;
+		self.weaponframe = 0;
+		self.currentammo = self.xmclip;
+		self.ammo_shells = self.ammo_xm;
+		MaxSpreadX = 2;
+		MaxSpreadY = 4;
+		SpreadX = 2;
+		SpreadY = 2;
 	}
 }
 
@@ -438,7 +474,7 @@ void() WeaponAttack =
 	}
 	if(self.currentammo == 0 && self.ammo_shells == 0 && self.weapon != IT_KNIFE)
 	{
-		sound (self, CHAN_AUTO,"weapons/357_cock1.wav", 1, ATTN_NORM);	
+		sound (self, CHAN_AUTO,"weapons/357_cock1.wav", 1, ATTN_NORM);
 		self.attack_finished = time + 0.2;
 	}
 	if(self.weapon == IT_M3)
@@ -465,6 +501,10 @@ void() WeaponAttack =
 	{
 		M4A1_PrimaryAttack();
 	}
+	if(self.weapon == IT_XM)
+	{
+		XM_PrimaryAttack();
+	}
 	if(!self.semi)
 	{
 		self.semi = 1;
@@ -479,6 +519,14 @@ void() WeaponAttack =
 		if(self.weapon == IT_DEAGLE)
 		{
 			DEAGLE_Attack();
+		}
+		if(self.weapon == IT_P228)
+		{
+			P228_Attack();
+		}
+		if(self.weapon == IT_ELITE)
+		{
+			ELITE_Attack();
 		}
 		if(self.weapon == IT_AWP)
 		{
@@ -495,7 +543,7 @@ void() WeaponFrameAll=
 	if(time < self.attack_finished || self.state > 0)
 		return;
 	if (!self.button0)
-        self.semi = 0;			
+        self.semi = 0;
 	if(self.button0)
 		WeaponAttack();
 	if(self.button1)
@@ -506,51 +554,57 @@ float() GetWeaponId=
 	if(self.iSlot == PRIMARY)
 	{
 		if(self.items == self.items | IT_M3)
-			return IT_M3;	
+			return IT_M3;
 		else if(self.items == self.items | IT_AK47)
 			return IT_AK47;
 		else if(self.items == self.items | IT_AWP)
 			return IT_AWP;
 		else if(self.items == self.items | IT_GALIL)
-			return IT_GALIL; 
+			return IT_GALIL;
 		else if(self.items == self.items | IT_AUG)
 			return IT_AUG;
 		else if(self.items == self.items | IT_FAMAS)
 			return IT_FAMAS;
 		else if(self.items == self.items | IT_M4A1)
 			return IT_M4A1;
+		else if(self.items == self.items | IT_XM)	
+			return IT_XM;
 	}
 	if(self.iSlot == SECONDARY)
 	{
 		if(self.items == self.items | IT_USP)
 			return IT_USP;
 		else if(self.items == self.items | IT_GLOCK)
-			return IT_GLOCK;	
+			return IT_GLOCK;
 		else if(self.items == self.items | IT_DEAGLE)
-			return IT_DEAGLE;		
+			return IT_DEAGLE;
+		else if(self.items == self.items | IT_P228)
+			return IT_P228;
+		else if(self.items == self.items | IT_ELITE)
+				return IT_ELITE;
 	}
 	if(self.iSlot == GRENADES)
 	{
 		if(self.items == self.items | IT_HEGRENADE)
-			return IT_HEGRENADE;	
+			return IT_HEGRENADE;
 	}
-	
+
 	return 0; //just shut up compiler warning
 }
 void() ChangeWeapon =
 {
 	if(time < self.attack_finished || self.state > 0)
 		return;
-	
+
 	if(self.scope)
 	{
 		stuffcmd(self,"fov 90\n");
 		stuffcmd(self,"scope 0\n");
 		stuffcmd(self,"sensitivity 5\n");
 		self.fov = 90;
-		self.scope = 0;		
+		self.scope = 0;
 	}
-	
+
 	while(1)
 	{
 		if(self.iSlot == PRIMARY)
@@ -573,10 +627,10 @@ void() ChangeWeapon =
 			self.iSlot = PRIMARY;
 			self.weapon = GetWeaponId();
 		}
-		if((self.items & self.weapon))	
+		if((self.items & self.weapon))
 		{
 			UpdateWeapon();
-			return;	
-		}	
+			return;
+		}
 	}
 }

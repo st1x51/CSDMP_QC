@@ -3,9 +3,13 @@ void() Light_setup;                  // Definition from Lights.qc
 
 void() light =                       // Basic Light
 {
- Light_setup();                          // Setup Light
+// Light_setup();                          // Setup Light
+lightstyle(self.style, "g");
 }; 
-
+void()light_environment=
+{
+	lightstyle(self.style, "g");
+}
 void() light_fluoro =                // Light with hum ambient
 {
  Light_setup();                          // Setup Light
