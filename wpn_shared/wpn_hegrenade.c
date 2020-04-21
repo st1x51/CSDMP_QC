@@ -184,13 +184,13 @@ void()ThrowGrenade=
 void() he_anim_attack=
 {
 	if(self.weaponframe == 75)
-		{
-			self.weaponframe = 1;
-			self.state = 0;
-			self.items = self.items - (self.items & IT_HEGRENADE);
-			ChangeWeapon();
-			return;
-		}
+	{
+		self.weaponframe = 1;
+		self.state = 0;
+		//self.items = self.items - (self.items & IT_HEGRENADE);
+		ChangeWeapon();
+		return;
+	}
 	if(self.weaponframe == 63)
 		ThrowGrenade();
 	self.weaponframe += 1;
@@ -200,8 +200,8 @@ void() he_anim_attack=
 
 void()HE_Attack=
 {
-			self.weaponframe = 1;
-			self.state = ATTACK;
-			he_anim_attack();
-			self.attack_finished = time + 0.2;
+	self.weaponframe = 1;
+	self.state = ATTACK;
+	he_anim_attack();
+	self.attack_finished = time + 0.2;
 }

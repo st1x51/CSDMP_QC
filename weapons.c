@@ -463,6 +463,18 @@ void() UpdateWeapon=
 		SpreadX = 2;
 		SpreadY = 2;
 	}
+	if(self.weapon == IT_MAC10)
+	{
+		self.weaponmodel = "progs/v_mac10.mdl";
+		self.sequence = 0;
+		self.weaponframe = 0;
+		self.currentammo = self.mac10clip;
+		self.ammo_shells = self.ammo_mac10;
+		MaxSpreadX = 2;
+		MaxSpreadY = 5;
+		SpreadX = 1.5;
+		SpreadY = 1.5;
+	}
 }
 
 void() WeaponAttack =
@@ -504,6 +516,10 @@ void() WeaponAttack =
 	if(self.weapon == IT_XM)
 	{
 		XM_PrimaryAttack();
+	}
+	if(self.weapon == IT_MAC10)
+	{
+		Mac10_PrimaryAttack();
 	}
 	if(!self.semi)
 	{
@@ -549,6 +565,8 @@ void() WeaponFrameAll=
 	if(self.button1)
 		SecondaryAttack();
 }
+//we dont need this now
+/*
 float() GetWeaponId=
 {
 	if(self.iSlot == PRIMARY)
@@ -591,6 +609,7 @@ float() GetWeaponId=
 
 	return 0; //just shut up compiler warning
 }
+*/
 void() ChangeWeapon =
 {
 	if(time < self.attack_finished || self.state > 0)
@@ -610,7 +629,7 @@ void() ChangeWeapon =
 		if(self.iSlot == PRIMARY)
 		{
 			self.iSlot = SECONDARY;
-			self.weapon = GetWeaponId();
+			self.weapon = self.secondaryweapon;
 		}
 		else if(self.iSlot == SECONDARY)
 		{
@@ -620,14 +639,17 @@ void() ChangeWeapon =
 		else if(self.iSlot == KNIFE)
 		{
 			self.iSlot = GRENADES;
-			self.weapon = GetWeaponId();
+			if(!self.he_grenades)
+				self.weapon = 0;
+			else
+				self.weapon = IT_HEGRENADE;
 		}
 		else if(self.iSlot == GRENADES)
 		{
 			self.iSlot = PRIMARY;
-			self.weapon = GetWeaponId();
+			self.weapon = self.primaryweapon;
 		}
-		if((self.items & self.weapon))
+		if((self.weapon))
 		{
 			UpdateWeapon();
 			return;

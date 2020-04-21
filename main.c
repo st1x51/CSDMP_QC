@@ -158,6 +158,12 @@ void() precaches =
 	precache_sound("weapons/reload1.wav");
 	precache_sound("weapons/reload3.wav");
 	precache_sound("weapons/xm1014-1.wav");
+	//mac10
+	precache_model("progs/v_mac10.mdl");
+	precache_sound("weapons/mac10-1.wav");
+	precache_sound("weapons/mac10_clipout.wav");
+	precache_sound("weapons/mac10_clipin.wav");
+	precache_sound("weapons/mac10_boltpull.wav");
 	//footsteps
 	precache_sound ("player/pl_step1.wav");
 	precache_sound ("player/pl_step2.wav");

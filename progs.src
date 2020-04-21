@@ -10,6 +10,7 @@
 */
 ../server.so                                        // Output File
 #pragma autoproto
+
 defs.c                                             // Definitions
 csdefs.c
 frikbot/bot.qc
@@ -47,6 +48,7 @@ wpn_shared/wpn_m4a1.c
 wpn_shared/wpn_p228.c
 wpn_shared/wpn_elite.c
 wpn_shared/wpn_xm.c
+wpn_shared/wpn_mac10.c
 weapons.c
 triggers.c
 bmodels.c

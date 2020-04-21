@@ -367,3 +367,30 @@ void(float r_frame)ReloadM4A1=
 	self.weaponframe = r_frame;
 	M4A1_Reload();
 }
+
+void(float r_frame)ReloadMac10=
+{
+	if(self.ammo_mac10 == 0)
+		return;
+	if(self.mac10clip == 12)
+		return;
+	self.state = RELOADING;
+	if(self.mac10_fired >= self.ammo_mac10)
+	{
+		self.mac10clip += self.ammo_mac10;
+		self.ammo_mac10 = 0;
+		UpdateWeapon();
+		self.mac10_fired = 0;
+		self.sequence = 1;
+		self.weaponframe = r_frame;
+		Mac10_Reload();
+		return;
+	}
+	self.ammo_mac10 -= self.mac10_fired;
+	self.mac10clip += self.mac10_fired;
+	UpdateWeapon();
+	self.mac10_fired = 0;
+	self.sequence = 1;
+	self.weaponframe = r_frame;
+	Mac10_Reload();
+}

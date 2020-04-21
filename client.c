@@ -272,10 +272,6 @@ void() PlayerPreThink =
 {
 	if(self.deadflag == DEAD_DEAD)
 		return;
-	if(self.weapon == IT_AWP)
-		stuffcmd(self,"crosshair 0\n");
-	else
-		stuffcmd(self,"crosshair 1\n");
 	if (BotPreFrame()) // FrikBot
 		return;
 	WaterMove ();
@@ -548,7 +544,8 @@ void() PutClientCTInServer =
 	setsize(self,VEC_HULLHL_MIN,VEC_HULLHL_MAX);
 	self.iSlot = SECONDARY;
 	self.weapon = IT_USP;
-	self.items = self.items | IT_USP | IT_KNIFE;
+	self.secondaryweapon = IT_USP;
+	//self.items = self.items | IT_USP | IT_KNIFE;
 	m_iNumCT +=1;
 	self.m_iJoiningState = JOINED;
 	self.m_iMenu = Menu_OFF;
@@ -593,7 +590,8 @@ void() PutClientTInServer =
 	setsize(self,VEC_HULLHL_MIN,VEC_HULLHL_MAX);
 	self.iSlot = SECONDARY;
 	self.weapon = IT_GLOCK; 
-	self.items = self.items | IT_GLOCK | IT_KNIFE;
+	self.secondaryweapon = IT_GLOCK;
+	//self.items = self.items | IT_GLOCK | IT_KNIFE;
 	m_iNumTerrorist +=1;
 	self.m_iJoiningState = JOINED;
 	self.m_iMenu = Menu_OFF;

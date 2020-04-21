@@ -2,7 +2,6 @@ void()ChangeWeapon;
 void()KNIFE_SecondaryAttack;
 void()usp_unsilencer;
 void()usp_silencer;
-float()GetWeaponId;
 void() CheckImpulses =
 {
 	if (self.impulse == 121)
@@ -19,9 +18,8 @@ void() CheckImpulses =
 		bprint("Bought glock \n");
 		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = SECONDARY;
-		self.items = self.items - (self.items & GetWeaponId());
-		self.items = self.items | IT_GLOCK;
 		self.weapon = IT_GLOCK;
+		self.secondaryweapon = IT_GLOCK;
 		self.glockclip = 20;
 		self.ammo_glock = 120;
 		self.glock_fired = 0;
@@ -39,9 +37,8 @@ void() CheckImpulses =
 		bprint("Bought usp \n");
 		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = SECONDARY;
-		self.items = self.items - (self.items & GetWeaponId());
-		self.items = self.items | IT_USP;
 		self.weapon = IT_USP;
+		self.secondaryweapon = IT_USP;
 		self.uspclip = 12;
 		self.ammo_45acp = 100;
 		self.usp_fired = 0;
@@ -59,9 +56,8 @@ void() CheckImpulses =
 		bprint("Bought Deagle \n");
 		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = SECONDARY;
-		self.items = self.items - (self.items & GetWeaponId());
-		self.items = self.items | IT_DEAGLE;
 		self.weapon = IT_DEAGLE;
+		self.secondaryweapon = IT_DEAGLE;
 		self.deagleclip = 7;
 		self.ammo_deagle = 35;
 		self.deagle_fired = 0;
@@ -79,9 +75,8 @@ void() CheckImpulses =
 		bprint("Bought P228 \n");
 		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = SECONDARY;
-		self.items = self.items - (self.items & GetWeaponId());
-		self.items = self.items | IT_P228;
 		self.weapon = IT_P228;
+		self.secondaryweapon = IT_P228;
 		self.p228clip = 13;
 		self.ammo_p228 = 52;
 		self.p228_fired = 0;
@@ -99,9 +94,8 @@ void() CheckImpulses =
 		bprint("Bought Elite \n");
 		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = SECONDARY;
-		self.items = self.items - (self.items & GetWeaponId());
-		self.items = self.items | IT_ELITE;
 		self.weapon = IT_ELITE;
+		self.secondaryweapon = IT_ELITE;
 		self.eliteclip = 30;
 		self.ammo_elite = 120;
 		self.elite_fired = 0;
@@ -123,7 +117,6 @@ void() CheckImpulses =
 		AddAccount(self,HEGRENADE_PRICE,BUY);
 		bprint("Bought HE \n");
 		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
-		self.items = self.items | IT_HEGRENADE;
 		self.weapon = IT_HEGRENADE;
 		self.he_grenades += 1;
 		UpdateWeapon();
@@ -140,9 +133,8 @@ void() CheckImpulses =
 		bprint("Bought M3 \n");
 		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = PRIMARY;
-		self.items = self.items - (self.items & GetWeaponId());
-		self.items = self.items | IT_M3;
 		self.weapon = IT_M3;
+		self.primaryweapon = IT_M3;
 		self.ammo_m3 = 32;
 		self.m3clip = 7;
 		self.m3_fired = 0;
@@ -160,9 +152,8 @@ void() CheckImpulses =
 		bprint("Bought XM \n");
 		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = PRIMARY;
-		self.items = self.items - (self.items & GetWeaponId());
-		self.items = self.items | IT_XM;
 		self.weapon = IT_XM;
+		self.primaryweapon = IT_XM;
 		self.ammo_xm = 32;
 		self.xmclip = 7;
 		self.xm_fired = 0;
@@ -180,9 +171,8 @@ void() CheckImpulses =
 		bprint("Bought AK-47 \n");
 		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = PRIMARY;
-		self.items = self.items - (self.items & GetWeaponId());
-		self.items = self.items | IT_AK47;
 		self.weapon = IT_AK47;
+		self.primaryweapon = IT_AK47;
 		self.ak47clip = 30;
 		self.ammo_ak47 = 90;
 		self.ak47_fired = 0;
@@ -200,9 +190,8 @@ void() CheckImpulses =
 		bprint("Bought AWP \n");
 		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = PRIMARY;
-		self.items = self.items - (self.items & GetWeaponId());
-		self.items = self.items | IT_AWP;
 		self.weapon = IT_AWP;
+		self.primaryweapon = IT_AWP;
 		self.awpclip = 10;
 		self.ammo_awp = 30;
 		//self.crosshair = cvar("crosshair");
@@ -220,9 +209,8 @@ void() CheckImpulses =
 		bprint("Bought Galil \n");
 		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = PRIMARY;
-		self.items = self.items - (self.items & GetWeaponId());
-		self.items = self.items | IT_GALIL;
 		self.weapon = IT_GALIL;
+		self.primaryweapon = IT_GALIL;
 		self.galilclip = 35;
 		self.ammo_galil = 90;
 		UpdateWeapon();
@@ -239,9 +227,8 @@ void() CheckImpulses =
 		bprint("Bought AUG \n");
 		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = PRIMARY;
-		self.items = self.items - (self.items & GetWeaponId());
-		self.items = self.items | IT_AUG;
 		self.weapon = IT_AUG;
+		self.primaryweapon = IT_AUG;
 		self.augclip = 30;
 		self.ammo_aug = 90;
 		self.awp_fired = 0;
@@ -259,9 +246,8 @@ void() CheckImpulses =
 		bprint("Bought Famas \n");
 		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = PRIMARY;
-		self.items = self.items - (self.items & GetWeaponId());
-		self.items = self.items | IT_FAMAS;
 		self.weapon = IT_FAMAS;
+		self.primaryweapon = IT_FAMAS;
 		self.famasclip = 25;
 		self.ammo_famas = 90;
 		self.famas_fired = 0;
@@ -279,12 +265,30 @@ void() CheckImpulses =
 		bprint("Bought M4A1 \n");
 		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
 		self.iSlot = PRIMARY;
-		self.items = self.items - (self.items & GetWeaponId());
-		self.items = self.items | IT_M4A1;
 		self.weapon = IT_M4A1;
+		self.primaryweapon = IT_M4A1;
 		self.m4a1clip = 30;
 		self.ammo_m4a1 = 90;
 		self.m4a1_fired = 0;
+		UpdateWeapon();
+	}
+	if(self.impulse == 42)
+	{
+		if(self.money < MAC10_PRICE)
+		{
+			bprint("Not enough money \n");
+			goto stop;
+			return;
+		}
+		AddAccount(self,MAC10_PRICE,BUY);
+		bprint("Bought MAC10 \n");
+		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
+		self.iSlot = PRIMARY;
+		self.weapon = IT_MAC10;
+		self.primaryweapon = IT_MAC10;
+		self.mac10clip = 30;
+		self.ammo_mac10 = 100;
+		self.mac10_fired = 0;
 		UpdateWeapon();
 	}
 	if (self.impulse == 94)

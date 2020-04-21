@@ -35,6 +35,14 @@ float m_iNumTerrorist,m_iNumCT;
 .float ammo_p228,p228clip,p228_fired;
 .float ammo_elite,eliteclip,elite_fired;
 .float ammo_xm,xmclip,xm_fired;
+.float ammo_mac10,mac10clip,mac10_fired;
+typedef struct
+{
+	float ammo;
+	float clip;
+	float fired;
+} wep_t;
+
 .float he_grenades;
 .float attack_finished;
 .float iSlot;
@@ -136,6 +144,7 @@ entity m_pIntroCamera;
 .float m_flNextSecondaryAttack;
 float MaxSpreadY,MaxSpreadX,SpreadX,SpreadY;
 float LeftSpread;
+/*
 float IT_KNIFE = 1;
 float IT_USP = 2;
 float IT_GLOCK = 4;
@@ -151,6 +160,24 @@ float IT_M4A1 = 2048;
 float IT_P228 = 4096;
 float IT_ELITE = 8192;
 float IT_XM = 16384;
+float IT_XM = 16384;
+*/
+float IT_KNIFE = 1;
+float IT_USP = 2;
+float IT_GLOCK = 3;
+float IT_DEAGLE = 4;
+float IT_HEGRENADE = 5;
+float IT_M3 = 6;
+float IT_AK47 = 7;
+float IT_AWP = 8;
+float IT_GALIL = 9;
+float IT_AUG = 10;
+float IT_FAMAS = 11;
+float IT_M4A1 = 12;
+float IT_P228 = 13;
+float IT_ELITE = 14;
+float IT_XM = 15;
+float IT_MAC10 = 16;
 .float state;
 float RELOADING = 1;
 float SILENCER  = 2;
@@ -166,6 +193,8 @@ float m_bMapHasBuyZone,buyTime;
 .float fov;
 .float direction,wp;
 float m_flNextDecalTime; 
+.float crosshair;
+.float secondaryweapon,primaryweapon;
 
 /*
 -----------------------------------------
