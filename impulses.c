@@ -391,8 +391,10 @@ void() CheckImpulses =
 			ReloadFamas(0);
 		if(self.weapon == IT_M4A1)
 			ReloadM4A1(0);
-		if(self.weapon == IT_XM)
-			ReloadWeaponXM(0);
+		if(self.weapon == IT_MAC10)
+			ReloadMac10(0);
+		if(self.weapon == IT_MP5)
+			ReloadMp5(0);
 	}
 
 	if(self.impulse == 125)
