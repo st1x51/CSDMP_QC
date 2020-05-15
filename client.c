@@ -45,12 +45,12 @@ void()TraceTexture=
     local vector start;
     local vector end;
     local vector end_player;
-    
+
 	end_player = self.origin;
 
 	// Straight down
 	end_player_z = end_player_z - 64;
-	
+
 	traceline (self.origin, end_player, TRUE, self);
 	if (trace_fraction == 1.0)
 		return;
@@ -102,13 +102,13 @@ void()TraceTexture=
     	sound_step3 = "player/pl_snow3.wav";
     	sound_step4 = "player/pl_snow4.wav";
 	}
-	else 
+	else
 	{
     	sound_step1 = "player/pl_step1.wav";
     	sound_step2 = "player/pl_step2.wav";
     	sound_step3 = "player/pl_step3.wav";
     	sound_step4 = "player/pl_step4.wav";
-	}	
+	}
 }
 void()PlayerCrouching =
 {
@@ -116,7 +116,7 @@ void()PlayerCrouching =
 	{
 		return;
 	}
-	
+
 	setsize (self, VEC_DUCK_HULL_MIN, VEC_DUCK_HULL_MAX);
 	self.hull = 4;
 	self.crouch_time = time;
@@ -187,10 +187,10 @@ void()PlayerCrouch =
 
 void() PlayerJump =
 {
-	
+
 	if (self.flags & FL_WATERJUMP)
 		return;
-	
+
 	if (self.waterlevel >= 2)
 	{
 		if (self.watertype == CONTENT_WATER)
@@ -210,21 +210,21 @@ void() PlayerJump =
 
 	self.flags = self.flags - (self.flags & FL_JUMPRELEASED);
 	self.flags = self.flags - FL_ONGROUND;	// don't stairwalk
-	
+
 	self.button2 = 0;
 	self.velocity_z = self.velocity_z + 300;
 };
 //Called when a client issues the 'kill' command
  void() ClientKill = {};
  //Called when a client connected to the server
- void() ClientConnect = 
+ void() ClientConnect =
  {
 	bprint (self.netname);
 	bprint (" entered the game\n");
 	ClientInRankings();
 };
  //Called when a client disconnects from the server
- void() ClientDisconnect = 
+ void() ClientDisconnect =
  {
  	bprint (self.netname);
 	bprint (" left the game\n");
@@ -268,7 +268,7 @@ void() PlayerJump =
 }
  };
  //Called every frame, before physics.
-void() PlayerPreThink = 
+void() PlayerPreThink =
 {
 	if(self.deadflag == DEAD_DEAD)
 		return;
@@ -293,7 +293,7 @@ void() playerfootstep =
 {
 	local float r;
 
-	if (self.deadflag) 
+	if (self.deadflag)
 		return;
 	if (!(self.flags & FL_ONGROUND))
 		return;
@@ -329,7 +329,7 @@ void() playerfootstep =
     }
 };
  //Called every frame, AFTER physics.
- void() PlayerPostThink = 
+ void() PlayerPostThink =
  {
 	if (BotPostFrame()) // FrikBot
 		return;
@@ -414,11 +414,11 @@ entity() SelectSpawnPoint =
 				}
 			}
 		}
-	}	
+	}
 	spot = find (world, classname, "info_player_start");
 	if (!spot)
 		error ("PutClientInServer: no info_player_start on level");
-	
+
 	return spot;
 };
 //Called to spawn the clients player entity
@@ -434,15 +434,15 @@ void() PutClientInServer =
 	self.fixangle = 1;
 	setmodel (self, "progs/player.mdl");
 	//self.crosshair = cvar("crosshair");
-	cvar_set("mp_startmoney","800"); 
+	cvar_set("mp_startmoney","800");
 	self.think = Show_Menu_Team;
 	self.nextthink = time + 2;
-	
+
 	local entity Target;
 	Target = find(world,classname,"trigger_camera");
 	m_pIntroCamera = Target;
 	if(m_pIntroCamera)
-	{	
+	{
 		Target = find(world,targetname,m_pIntroCamera.target);
 	}
 	if(m_pIntroCamera && Target)
@@ -461,7 +461,7 @@ void() PutClientInServer =
 		self.v_angle = '0 0 0';
 		self.angles = v_forward;
 	}
-	
+
 };
 
 void() ResetAmmo =
@@ -497,6 +497,10 @@ void() ResetAmmo =
 	self.ammo_m4a1 = 0;
 	self.m4a1clip = 0;
 	self.he_grenades = 0;
+	self.ammo_mac10 = 0;
+	self.mac10clip = 0;
+	self.ammo_mp5 = 0;
+	self.mp5clip = 0;
 	//reset fired bullets
 	self.usp_fired = 0;
 	self.glock_fired = 0;
@@ -508,6 +512,8 @@ void() ResetAmmo =
 	self.aug_fired = 0;
 	self.famas_fired = 0;
 	self.m4a1_fired = 0;
+	self.mac10_fired = 0;
+	self.mp5_fired = 0;
 }
 void()Decal_Hack=
 {
@@ -516,7 +522,7 @@ void()Decal_Hack=
 	WriteCoord (MSG_BROADCAST, self.origin_x);
 	WriteCoord (MSG_BROADCAST, self.origin_y);
 	WriteCoord (MSG_BROADCAST, self.origin_z);
-	WriteShort (MSG_BROADCAST, etoi(self));	
+	WriteShort (MSG_BROADCAST, etoi(self));
 }
 void() PutClientCTInServer =
 {
@@ -576,7 +582,7 @@ void() PutClientTInServer =
 	self.flags = FL_CLIENT;
 	self.team = T_SIDE;
 	self.ammo_glock = 40;
-	self.glockclip = 20; 
+	self.glockclip = 20;
 	ResetAmmo();
 	self.th_die = PlayerDie;
 	self.deadflag = DEAD_NO;
@@ -589,7 +595,7 @@ void() PutClientTInServer =
 	self.view_ofs = DEFAULT_VIEWHEIGHT;
 	setsize(self,VEC_HULLHL_MIN,VEC_HULLHL_MAX);
 	self.iSlot = SECONDARY;
-	self.weapon = IT_GLOCK; 
+	self.weapon = IT_GLOCK;
 	self.secondaryweapon = IT_GLOCK;
 	//self.items = self.items | IT_GLOCK | IT_KNIFE;
 	m_iNumTerrorist +=1;

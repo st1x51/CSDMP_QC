@@ -472,6 +472,18 @@ void() UpdateWeapon=
 		self.ammo_shells = self.ammo_mac10;
 		MaxSpreadX = 2;
 		MaxSpreadY = 5;
+		SpreadX = 1.7;
+		SpreadY = 1.7;
+	}
+	if(self.weapon == IT_MP5)
+	{
+		self.weaponmodel = "progs/v_mp5.mdl";
+		self.sequence = 0;
+		self.weaponframe = 0;
+		self.currentammo = self.mp5clip;
+		self.ammo_shells = self.ammo_mp5;
+		MaxSpreadX = 2;
+		MaxSpreadY = 5;
 		SpreadX = 1.5;
 		SpreadY = 1.5;
 	}
@@ -520,6 +532,10 @@ void() WeaponAttack =
 	if(self.weapon == IT_MAC10)
 	{
 		Mac10_PrimaryAttack();
+	}
+	if(self.weapon == IT_MP5)
+	{
+		Mp5_PrimaryAttack();
 	}
 	if(!self.semi)
 	{
@@ -585,7 +601,7 @@ float() GetWeaponId=
 			return IT_FAMAS;
 		else if(self.items == self.items | IT_M4A1)
 			return IT_M4A1;
-		else if(self.items == self.items | IT_XM)	
+		else if(self.items == self.items | IT_XM)
 			return IT_XM;
 	}
 	if(self.iSlot == SECONDARY)

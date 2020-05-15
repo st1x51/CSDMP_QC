@@ -25,7 +25,7 @@ void(entity who,float amount,float type)AddAccount=
 	stuffcmd(who,"\n");
 }
 
-void() worldspawn = 
+void() worldspawn =
 {
 	lastspawn = world;
 	precaches();
@@ -35,26 +35,26 @@ void() worldspawn =
 };
 void() SetNewParms = {};
 void() SetChangeParms = {};
-void() StartFrame = 
+void() StartFrame =
 {
 	BotFrame();
 };
- 
+
 void() precaches =
 {
 	//models
 	precache_model("progs/player.mdl");
 	precache_model("progs/v_usp.mdl");
-	precache_model("progs/v_knife.mdl"); 
+	precache_model("progs/v_knife.mdl");
 	precache_model("progs/v_glock18.mdl");
 	precache_model("progs/v_deagle.mdl");
 	precache_model("progs/v_m3.mdl");
 	precache_model("progs/v_hegrenade.mdl");
 	precache_model("progs/w_grenade.mdl");
-	 
-	precache_model("progs/gign.mdl"); 
-	precache_model("progs/leet.mdl"); 
-	
+
+	precache_model("progs/gign.mdl");
+	precache_model("progs/leet.mdl");
+
 	precache_sound("weapons/357_cock1.wav");
 	precache_sound("player/sprayer.wav");
 	//sounds
@@ -164,6 +164,12 @@ void() precaches =
 	precache_sound("weapons/mac10_clipout.wav");
 	precache_sound("weapons/mac10_clipin.wav");
 	precache_sound("weapons/mac10_boltpull.wav");
+	//mp5
+	precache_model("progs/v_mp5.mdl");
+	precache_sound("weapons/mp5-1.wav");
+	precache_sound("weapons/mp5_clipout.wav");
+	precache_sound("weapons/mp5_clipin.wav");
+	precache_sound("weapons/mp5_slideback.wav");
 	//footsteps
 	precache_sound ("player/pl_step1.wav");
 	precache_sound ("player/pl_step2.wav");
@@ -174,7 +180,7 @@ void() precaches =
 	precache_sound ("player/pl_metal2.wav");
 	precache_sound ("player/pl_metal3.wav");
 	precache_sound ("player/pl_metal4.wav");
-	
+
 	precache_sound ("player/pl_dirt1.wav");
 	precache_sound ("player/pl_dirt2.wav");
 	precache_sound ("player/pl_dirt3.wav");
@@ -196,7 +202,7 @@ void() precaches =
 	precache_sound ("player/pl_tile3.wav");
 	precache_sound ("player/pl_tile4.wav");
 	precache_sound ("player/pl_tile5.wav");
-	
+
 	precache_sound ("player/pl_snow1.wav");
 	precache_sound ("player/pl_snow2.wav");
 	precache_sound ("player/pl_snow3.wav");

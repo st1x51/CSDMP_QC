@@ -13,10 +13,13 @@ vector  VEC_DUCK_HULL_MAX =  '16 16 18';
 #define SF_BREAK_PRESSURE		4	// can be broken by a player standing on it
 #define SF_BREAK_CROWBAR	256	// instant break if hit with crowbar
 // screen fade flags
-float FFADE_IN		    = 0;		// Just here so we don't pass 0 into the function
-float FFADE_OUT		    = 1;		// Fade out (not in)
-float FFADE_MODULATE	= 2;		// Modulate (don't blend)
-float FFADE_STAYOUT	    = 4;		// ignores the duration, stays faded out until new ScreenFade message received
+enum
+{
+	FFADE_IN = 0, // Just here so we don't pass 0 into the function
+	FFADE_OUT, 	// Fade out (not in)
+	FFADE_MODULATE, 	// Modulate (don't blend)
+	FFADE_STAYOUT // ignores the duration, stays faded out until new ScreenFade message received
+};
 float T_SIDE = 1;
 float CT_SIDE = 2;
 
@@ -36,6 +39,7 @@ float m_iNumTerrorist,m_iNumCT;
 .float ammo_elite,eliteclip,elite_fired;
 .float ammo_xm,xmclip,xm_fired;
 .float ammo_mac10,mac10clip,mac10_fired;
+.float ammo_mp5,mp5clip,mp5_fired;
 typedef struct
 {
 	float ammo;
@@ -89,7 +93,7 @@ enum
 	NVG_PRICE           = 1250,
 	DEFUSEKIT_PRICE     = 200,
 };
-enum 
+enum
 {
 	AK47_PRICE      = 2500,
 	AWP_PRICE       = 4750,
@@ -117,7 +121,7 @@ enum
 	FAMAS_PRICE     = 2250,
 	SHIELDGUN_PRICE = 2200,
 };
-enum 
+enum
 {
 	matGlass = 0,
 	matWood,
@@ -178,6 +182,7 @@ float IT_P228 = 13;
 float IT_ELITE = 14;
 float IT_XM = 15;
 float IT_MAC10 = 16;
+float IT_MP5 = 17;
 .float state;
 float RELOADING = 1;
 float SILENCER  = 2;
@@ -192,7 +197,7 @@ float m_bMapHasBuyZone,buyTime;
 .float m_bInBuyZone;
 .float fov;
 .float direction,wp;
-float m_flNextDecalTime; 
+float m_flNextDecalTime;
 .float crosshair;
 .float secondaryweapon,primaryweapon;
 
@@ -211,4 +216,3 @@ float (float a, float b) mathlib_min =
 	else
 		return b;
 };
-

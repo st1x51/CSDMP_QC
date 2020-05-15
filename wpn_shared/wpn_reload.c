@@ -180,7 +180,7 @@ void(float r_frame)ReloadWeaponELITE=
 	if(self.eliteclip == 30)
 		return;
 	self.state = RELOADING;
-	if(self.elite_fired >= self.ammo_elite) 
+	if(self.elite_fired >= self.ammo_elite)
 	{
 		self.eliteclip += self.ammo_elite;
 		self.ammo_elite = 0;
@@ -372,7 +372,7 @@ void(float r_frame)ReloadMac10=
 {
 	if(self.ammo_mac10 == 0)
 		return;
-	if(self.mac10clip == 12)
+	if(self.mac10clip == 30)
 		return;
 	self.state = RELOADING;
 	if(self.mac10_fired >= self.ammo_mac10)
@@ -393,4 +393,31 @@ void(float r_frame)ReloadMac10=
 	self.sequence = 1;
 	self.weaponframe = r_frame;
 	Mac10_Reload();
+}
+
+void(float r_frame)ReloadMp5=
+{
+	if(self.ammo_mp5 == 0)
+		return;
+	if(self.mp5clip == 30)
+		return;
+	self.state = RELOADING;
+	if(self.mp5_fired >= self.ammo_mp5)
+	{
+		self.mp5clip += self.ammo_mp5;
+		self.ammo_mp5 = 0;
+		UpdateWeapon();
+		self.mp5_fired = 0;
+		self.sequence = 1;
+		self.weaponframe = r_frame;
+		Mp5_Reload();
+		return;
+	}
+	self.ammo_mp5 -= self.mp5_fired;
+	self.mp5clip += self.mp5_fired;
+	UpdateWeapon();
+	self.mp5_fired = 0;
+	self.sequence = 1;
+	self.weaponframe = r_frame;
+	Mp5_Reload();
 }

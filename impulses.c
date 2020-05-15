@@ -291,6 +291,25 @@ void() CheckImpulses =
 		self.mac10_fired = 0;
 		UpdateWeapon();
 	}
+	if(self.impulse == 65)
+	{
+		if(self.money < MP5NAVY_PRICE)
+		{
+			bprint("Not enough money \n");
+			goto stop;
+			return;
+		}
+		AddAccount(self,MP5NAVY_PRICE,BUY);
+		bprint("Bought MP5 \n");
+		sound (self, CHAN_AUTO, "items/gunpickup2.wav", 1, ATTN_NORM);
+		self.iSlot = PRIMARY;
+		self.weapon = IT_MP5;
+		self.primaryweapon = IT_MP5;
+		self.mp5clip = 30;
+		self.ammo_mp5 = 120;
+		self.mp5_fired = 0;
+		UpdateWeapon();
+	}
 	if (self.impulse == 94)
 	{
 		if(self.team == T_SIDE)
@@ -373,7 +392,7 @@ void() CheckImpulses =
 		if(self.weapon == IT_M4A1)
 			ReloadM4A1(0);
 		if(self.weapon == IT_XM)
-			ReloadWeaponXM(0);	
+			ReloadWeaponXM(0);
 	}
 
 	if(self.impulse == 125)

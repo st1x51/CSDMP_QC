@@ -49,6 +49,7 @@ wpn_shared/wpn_p228.c
 wpn_shared/wpn_elite.c
 wpn_shared/wpn_xm.c
 wpn_shared/wpn_mac10.c
+wpn_shared/wpn_mp5.c
 weapons.c
 triggers.c
 bmodels.c
