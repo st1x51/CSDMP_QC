@@ -3,7 +3,7 @@ void()anim_mp5_attack=
 	if(self.weaponframe == 20)
 	{
 		self.state = 0;
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		return;
 	}
@@ -23,7 +23,7 @@ void()Mp5_Reload=
 	{
 		self.state = 0;
 		UpdateWeapon();
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		return;
 	}
@@ -38,7 +38,7 @@ void()Mp5_PrimaryAttack=
 		ReloadMp5(0);
 		return;
 	}
-	self.sequence = 3;
+	self.wepsequence = 3;
 	self.weaponframe = 0;
 	self.mp5clip -= 1;
 	self.mp5_fired += 1;

@@ -3,7 +3,7 @@ void()anim_p228_attack=
 	if(self.weaponframe == 25)
 	{
 			self.state = 0;
-			self.sequence = 0;
+			self.wepsequence = 0;
 			self.weaponframe = 0;
 			return;
 	}
@@ -15,7 +15,7 @@ void() P228_Reload=
 {
 	if(self.weaponframe == 95) 
 	{
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		UpdateWeapon();
 		self.state = 0;
@@ -39,7 +39,7 @@ void()P228_Attack=
 		return;
 	}
 	self.attack_finished = time + 0.15;
-	self.sequence = 2;
+	self.wepsequence = 2;
 	self.weaponframe = 0;
 	anim_p228_attack();
 	DefaultFire(1, 32, "weapons/p228-1.wav");

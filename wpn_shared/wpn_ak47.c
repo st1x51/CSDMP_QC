@@ -3,7 +3,7 @@ void()anim_ak47_attack=
 	if(self.weaponframe == 16)
 		{
 			self.state = 0;
-			self.sequence = 0;
+			self.wepsequence = 0;
 			self.weaponframe = 0;
 			return;
 		}
@@ -18,7 +18,7 @@ void()AK47_PrimaryAttack=
 		ReloadAK47(18); 
 		return;
 	}
-	self.sequence = 3;
+	self.wepsequence = 3;
 	self.weaponframe = 0;
 	self.ak47clip -= 1;
 	self.ak47_fired += 1;
@@ -31,7 +31,7 @@ void()AK47_Reload=
 {
 	if(self.weaponframe == 90) 
 	{
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 1;
 		UpdateWeapon();
 		self.state = 0;

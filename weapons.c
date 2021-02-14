@@ -164,13 +164,13 @@ void()SecondaryAttack=
 		self.state = SILENCER;
 		if(self.silencer == 1)
 		{
-			self.sequence = 15;
+			self.wepsequence = 15;
 			self.weaponframe = 0;
 			usp_unsilencer();
 		}
 		else
 		{
-			self.sequence = 7;
+			self.wepsequence = 7;
 			self.weaponframe = 0;
 			usp_silencer();
 		}
@@ -181,13 +181,13 @@ void()SecondaryAttack=
 		self.state = SILENCER;
 		if(self.m4a1silencer == 1)
 		{
-			self.sequence = 13;
+			self.wepsequence = 13;
 			self.weaponframe = 0;
 			m4a1_unsilencer();
 		}
 		else
 		{
-			self.sequence = 6;
+			self.wepsequence = 6;
 			self.weaponframe = 0;
 			m4a1_silencer();
 		}
@@ -276,7 +276,7 @@ void() UpdateWeapon=
 	if(self.weapon == IT_KNIFE)
 	{
 		self.weaponmodel = "progs/v_knife.mdl";
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		self.currentammo = 0;
 		self.ammo_shells = 0;
@@ -286,12 +286,12 @@ void() UpdateWeapon=
 		self.weaponmodel = "progs/v_usp.mdl";
 		if(self.silencer == 1)
 		{
-			self.sequence = 0;
+			self.wepsequence = 0;
 			self.weaponframe = 0;
 		}
 		else
 		{
-			self.sequence = 8;
+			self.wepsequence = 8;
 			self.weaponframe = 0;
 		}
 		self.currentammo = self.uspclip;
@@ -304,7 +304,7 @@ void() UpdateWeapon=
 	if(self.weapon == IT_GLOCK)
 	{
 		self.weaponmodel = "progs/v_glock18.mdl";
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		self.currentammo = self.glockclip;
 		self.ammo_shells = self.ammo_glock;
@@ -316,7 +316,7 @@ void() UpdateWeapon=
 	if(self.weapon == IT_DEAGLE)
 	{
 		self.weaponmodel = "progs/v_deagle.mdl";
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		self.currentammo = self.deagleclip;
 		self.ammo_shells = self.ammo_deagle;
@@ -328,7 +328,7 @@ void() UpdateWeapon=
 	if(self.weapon == IT_P228)
 	{
 		self.weaponmodel = "progs/v_p228.mdl";
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		self.currentammo = self.p228clip;
 		self.ammo_shells = self.ammo_p228;
@@ -340,7 +340,7 @@ void() UpdateWeapon=
 	if(self.weapon == IT_ELITE)
 	{
 		self.weaponmodel = "progs/v_elite.mdl";
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		self.currentammo = self.eliteclip;
 		self.ammo_shells = self.ammo_elite;
@@ -359,7 +359,7 @@ void() UpdateWeapon=
 	if(self.weapon == IT_M3)
 	{
 		self.weaponmodel = "progs/v_m3.mdl";
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		self.currentammo = self.m3clip;
 		self.ammo_shells = self.ammo_m3;
@@ -371,7 +371,7 @@ void() UpdateWeapon=
 	if(self.weapon == IT_AK47)
 	{
 		self.weaponmodel = "progs/v_ak47.mdl";
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		self.currentammo = self.ak47clip;
 		self.ammo_shells = self.ammo_ak47;
@@ -383,7 +383,7 @@ void() UpdateWeapon=
 	if(self.weapon == IT_AWP)
 	{
 		self.weaponmodel = "progs/v_awp.mdl";
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		self.currentammo = self.awpclip;
 		//self.crosshair = cvar("crosshair");
@@ -397,7 +397,7 @@ void() UpdateWeapon=
 	if(self.weapon == IT_GALIL)
 	{
 		self.weaponmodel = "progs/v_galil.mdl";
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		self.currentammo = self.galilclip;
 		self.ammo_shells = self.ammo_galil;
@@ -409,7 +409,7 @@ void() UpdateWeapon=
 	if(self.weapon == IT_AUG)
 	{
 		self.weaponmodel = "progs/v_aug.mdl";
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		self.currentammo = self.augclip;
 		self.ammo_shells = self.ammo_aug;
@@ -421,7 +421,7 @@ void() UpdateWeapon=
 	if(self.weapon == IT_FAMAS)
 	{
 		self.weaponmodel = "progs/v_famas.mdl";
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		self.currentammo = self.famasclip;
 		self.ammo_shells = self.ammo_famas;
@@ -435,12 +435,12 @@ void() UpdateWeapon=
 		self.weaponmodel = "progs/v_m4a1.mdl";
 		if(self.m4a1silencer == 1)
 		{
-			self.sequence = 0;
+			self.wepsequence = 0;
 			self.weaponframe = 0;
 		}
 		else
 		{
-			self.sequence = 7;
+			self.wepsequence = 7;
 			self.weaponframe = 0;
 		}
 
@@ -454,7 +454,7 @@ void() UpdateWeapon=
 	if(self.weapon == IT_XM)
 	{
 		self.weaponmodel = "progs/v_xm1014.mdl";
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		self.currentammo = self.xmclip;
 		self.ammo_shells = self.ammo_xm;
@@ -466,7 +466,7 @@ void() UpdateWeapon=
 	if(self.weapon == IT_MAC10)
 	{
 		self.weaponmodel = "progs/v_mac10.mdl";
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		self.currentammo = self.mac10clip;
 		self.ammo_shells = self.ammo_mac10;
@@ -478,7 +478,7 @@ void() UpdateWeapon=
 	if(self.weapon == IT_MP5)
 	{
 		self.weaponmodel = "progs/v_mp5.mdl";
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		self.currentammo = self.mp5clip;
 		self.ammo_shells = self.ammo_mp5;

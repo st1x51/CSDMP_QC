@@ -2,7 +2,7 @@ void()m4a1_silencer=
 {
 	if(self.weaponframe == 60)
 	{
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		self.m4a1silencer = 1;
 		self.state = 0;
@@ -19,7 +19,7 @@ void()m4a1_unsilencer=
 {
 	if(self.weaponframe == 60)
 	{
-		self.sequence = 7;
+		self.wepsequence = 7;
 		self.weaponframe = 0;
 		self.m4a1silencer = 0;
 		self.state = 0;
@@ -38,9 +38,9 @@ void()anim_m4a1_attack=
 	{
 		self.state = 0;
 		if(self.m4a1silencer)
-			self.sequence = 0;
+			self.wepsequence = 0;
 		else
-			self.sequence = 7;
+			self.wepsequence = 7;
 		self.weaponframe = 0;
 		return;
 	}
@@ -61,13 +61,13 @@ void()M4A1_PrimaryAttack=
 
 	if(self.m4a1silencer)
 	{
-		self.sequence = 1;
+		self.wepsequence = 1;
 		self.weaponframe = 0;
 		DefaultFire(1,31,"weapons/m4a1-1.wav");
 	}
 	else
 	{
-		self.sequence = 8;
+		self.wepsequence = 8;
 		self.weaponframe = 0;
 		DefaultFire(1,31,"weapons/m4a1_unsil-1.wav");
 	}
@@ -80,9 +80,9 @@ void()M4A1_Reload=
 	if(self.weaponframe == 113) 
 	{
 		if(self.m4a1silencer)
-			self.sequence = 0;
+			self.wepsequence = 0;
 		else
-			self.sequence = 7;
+			self.wepsequence = 7;
 		self.weaponframe = 0;
 		UpdateWeapon();
 		self.state = 0;

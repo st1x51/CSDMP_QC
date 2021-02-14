@@ -2,12 +2,12 @@
 void()anim_glock_attack=
 {
 	if(self.weaponframe == 20)
-		{
-			self.sequence = 0;
-			self.weaponframe = 0;
-			self.state = 0;
-			return;
-		}
+	{
+		self.wepsequence = 0;
+		self.weaponframe = 0;
+		self.state = 0;
+		return;
+	}
 	self.weaponframe += 1;
 	self.think = anim_glock_attack;
 	self.nextthink = time + 0.03;
@@ -17,7 +17,7 @@ void()anim_burst_glock_attack=
 {
 	if(self.weaponframe == 30)
 	{
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		return;
 	}		
@@ -56,7 +56,7 @@ void() Glock_Reload=
 {
 	if(self.weaponframe == 75) 
 	{
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		UpdateWeapon();
 		self.state = 0;
@@ -84,7 +84,7 @@ void()GLOCK_Attack=
 	{
 		self.attack_finished = time + 0.2;
 		DefaultFire(1,21, "weapons/glock18-2.wav" );
-		self.sequence = 5;
+		self.wepsequence = 5;
 		self.weaponframe = 0;
 		anim_glock_attack();
 		self.glockclip -=1;
@@ -93,7 +93,7 @@ void()GLOCK_Attack=
 	else
 	{
 		self.attack_finished = time + 1;
-		self.sequence = 4;
+		self.wepsequence = 4;
 		self.weaponframe = 0;
 		anim_burst_glock_attack();
 	}	

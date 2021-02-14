@@ -3,7 +3,7 @@ void()anim_famas_attack=
 	if(self.weaponframe == 30)
 	{
 		self.state = 0;
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		return;
 	}
@@ -16,7 +16,7 @@ void()anim_burst_famas_attack=
 	if(self.weaponframe == 30)
 	{
 		self.state = 0;
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		return;
 	}		
@@ -63,7 +63,7 @@ void()Famas_Reload=
 	{
 		self.state = 0;
 		UpdateWeapon();
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		return;
 	}
@@ -82,7 +82,7 @@ void()Famas_PrimaryAttack=
 			return;
 		}
 		self.state = ATTACK;
-		self.sequence = 3;
+		self.wepsequence = 3;
 		self.weaponframe = 0;
 		self.famasclip -= 1;
 		self.famas_fired += 1;
@@ -99,7 +99,7 @@ void()Famas_PrimaryAttack=
 		}
 		self.state = ATTACK;
 		sound (self, CHAN_AUTO, "weapons/famas-burst.wav", 1, ATTN_NORM);	
-		self.sequence = 3;
+		self.wepsequence = 3;
 		self.weaponframe = 0;
 		anim_burst_famas_attack();
 		self.attack_finished = time + 0.3825;	

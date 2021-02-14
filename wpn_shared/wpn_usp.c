@@ -34,7 +34,7 @@ void()anim_usp_attack_sil=
 {
 	if(self.weaponframe == 30)
 		{
-			self.sequence = 0;
+			self.wepsequence = 0;
 			self.weaponframe = 0;
 			self.state = 0;
 			return;
@@ -47,7 +47,7 @@ void()anim_usp_attack=
 {
 	if(self.weaponframe == 30)
 		{
-			self.sequence = 8;
+			self.wepsequence = 8;
 			self.weaponframe = 0;
 			self.state = 0;
 			return;
@@ -60,7 +60,7 @@ void() USP_Reload=
 {
 	if(self.weaponframe == 100)
 	{
-		self.sequence = 8;
+		self.wepsequence = 8;
 		self.weaponframe = 0;
 		UpdateWeapon();
 		self.state = 0;
@@ -80,7 +80,7 @@ void() USP_Silencer_Reload=
 {
 	if(self.weaponframe == 100)
 	{
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		UpdateWeapon();
 		self.state = 0;
@@ -110,14 +110,14 @@ void()USP_Attack=
 	self.attack_finished = time + 0.15;
 	if(!self.silencer )
 	{
-		self.sequence = 9;
+		self.wepsequence = 9;
 		self.weaponframe = 1;
 		anim_usp_attack();
 		DefaultFire(1, 30, "weapons/usp_unsil-1.wav");
 	}
 	else
 	{
-		self.sequence = 1;
+		self.wepsequence = 1;
 		self.weaponframe = 1;
 		anim_usp_attack_sil();
 		DefaultFire(1, 30, "weapons/usp1.wav");

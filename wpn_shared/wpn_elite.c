@@ -3,7 +3,7 @@ void()anim_elite_attack=
 	if(self.weaponframe == 40)
 	{
 			self.state = 0;
-			self.sequence = 0;
+			self.wepsequence = 0;
 			self.weaponframe = 0;
 			return;
 	}
@@ -15,7 +15,7 @@ void() ELITE_Reload=
 {
 	if(self.weaponframe == 137)
 	{
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		UpdateWeapon();
 		self.state = 0;
@@ -47,11 +47,11 @@ void()ELITE_Attack=
 	self.attack_finished = time + 0.15;
 	if(self.eliteclip % 2 == 0)
 	{
-		self.sequence = 2;
+		self.wepsequence = 2;
 	}
 	else
 	{
-		self.sequence = 8;
+		self.wepsequence = 8;
 	}
 	self.weaponframe = 0;
 	anim_elite_attack();

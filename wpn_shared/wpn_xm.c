@@ -3,7 +3,7 @@ void()anim_xm_attack=
 {
 	if(self.weaponframe == 20)
 	{
-		self.sequence = 0;	
+		self.wepsequence = 0;	
 		self.weaponframe = 0;
 		self.state = 0;
 		return;
@@ -17,7 +17,7 @@ void() XM_Reload_End=
 	if(self.weaponframe == 12) 
 	{
         sound (self, CHAN_AUTO, "weapons/reload3.wav", 1, ATTN_NORM);
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		UpdateWeapon();
 		self.state = 0;
@@ -33,7 +33,7 @@ void() XM_Reload=
 	{	
 		if(self.xmclip == xma)
 		{
-			self.sequence = 4;
+			self.wepsequence = 4;
 			self.weaponframe = 0;
 			XM_Reload_End();
 			return;
@@ -41,7 +41,7 @@ void() XM_Reload=
 	}
 	if(self.xmclip == 7)
 	{
-		self.sequence = 4;
+		self.wepsequence = 4;
 		self.weaponframe = 0;
 		XM_Reload_End();
 		return;
@@ -62,7 +62,7 @@ void() XM_Reload_Start=
 	if(self.weaponframe == 20) 
 	{
         sound (self, CHAN_AUTO, "items/cliprelease1.wav", 1, ATTN_NORM);
-		self.sequence = 3;
+		self.wepsequence = 3;
 		self.weaponframe = 0;
 		XM_Reload();
 		return;
@@ -86,7 +86,7 @@ void()XM_PrimaryAttack=
 	vecAim = GetAutoaimVector(AUTOAIM_2DEGREES);
 	FireBullets(6,vecSrc,vecAim,vecAcc,3048,20);
 	self.punchangle_x -= 3;
-	self.sequence = 2;
+	self.wepsequence = 2;
 	self.weaponframe = 0;
 	anim_xm_attack();
 	self.xmclip -=1;

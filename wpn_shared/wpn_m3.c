@@ -3,7 +3,7 @@ void()anim_m3_attack=
 {
 	if(self.weaponframe == 37)
 	{
-		self.sequence = 0;	
+		self.wepsequence = 0;	
 		self.weaponframe = 0;
 		self.state = 0;
 		return;
@@ -18,7 +18,7 @@ void() M3_Reload_End=
 		sound (self, CHAN_AUTO, "weapons/m3_pump.wav", 1, ATTN_NORM);
 	if(self.weaponframe == 33) 
 	{
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		UpdateWeapon();
 		self.state = 0;
@@ -34,7 +34,7 @@ void() M3_Reload=
 	{	
 		if(self.m3clip == m3a)
 		{
-			self.sequence = 4;
+			self.wepsequence = 4;
 			self.weaponframe = 0;
 			M3_Reload_End();
 			return;
@@ -42,7 +42,7 @@ void() M3_Reload=
 	}
 	if(self.m3clip == 7)
 	{
-		self.sequence = 4;
+		self.wepsequence = 4;
 		self.weaponframe = 0;
 		M3_Reload_End();
 		return;
@@ -62,7 +62,7 @@ void() M3_Reload_Start=
 {
 	if(self.weaponframe == 15) 
 	{
-		self.sequence = 3;
+		self.wepsequence = 3;
 		self.weaponframe = 0;
 		M3_Reload();
 		return;
@@ -86,7 +86,7 @@ void()M3_PrimaryAttack=
 	vecAim = GetAutoaimVector(AUTOAIM_2DEGREES);
 	FireBullets(9,vecSrc,vecAim,vecAcc,8192,20);
 	self.punchangle_x -= 5;
-	self.sequence = 2;
+	self.wepsequence = 2;
 	self.weaponframe = 0;
 	anim_m3_attack();
 	self.m3clip -=1;

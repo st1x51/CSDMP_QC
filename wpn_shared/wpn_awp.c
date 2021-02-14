@@ -8,7 +8,7 @@ void()awp_attack_anim=
 		sound (self, CHAN_AUTO, "weapons/boltdown.wav", 1, ATTN_NORM);
 	if(self.weaponframe == 41) 
 	{
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		self.state = 0;
 		return;
@@ -25,7 +25,7 @@ void()AWP_Reload=
 		sound (self, CHAN_AUTO, "weapons/awp_clipin.wav", 1, ATTN_NORM);
 	if(self.weaponframe == 87) 
 	{
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		UpdateWeapon();
 		self.state = 0;
@@ -69,7 +69,7 @@ void()AWP_PrimaryAttack=
 	self.fov = 90;
 	self.scope = 0;
 	self.attack_finished = time + 1.45;
-	self.sequence = 1;
+	self.wepsequence = 1;
 	self.weaponframe = 0;
 	sound (self, CHAN_AUTO, "weapons/awp1.wav", 1, ATTN_NORM);
 	awp_attack_anim();

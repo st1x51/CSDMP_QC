@@ -12,9 +12,9 @@ void(float r_frame)ReloadWeaponUSP=
 		UpdateWeapon();
 		self.usp_fired = 0;
 		if(self.silencer == 1)
-			self.sequence = 5;
+			self.wepsequence = 5;
 		else
-			self.sequence = 13;
+			self.wepsequence = 13;
 		self.weaponframe = r_frame;
 		if(self.silencer == 1)
 			USP_Silencer_Reload();
@@ -27,9 +27,9 @@ void(float r_frame)ReloadWeaponUSP=
 	UpdateWeapon();
 	self.usp_fired = 0;
 	if(self.silencer == 1)
-		self.sequence = 5;
+		self.wepsequence = 5;
 	else
-		self.sequence = 13;
+		self.wepsequence = 13;
 	self.weaponframe = r_frame;
 	if(self.silencer == 1)
 		USP_Silencer_Reload();
@@ -50,7 +50,7 @@ void(float r_frame)ReloadWeaponGlock=
 		self.ammo_glock = 0;
 		UpdateWeapon();
 		self.glock_fired = 0;
-		self.sequence = 7;
+		self.wepsequence = 7;
 		self.weaponframe = r_frame;
 		Glock_Reload();
 		return;
@@ -59,7 +59,7 @@ void(float r_frame)ReloadWeaponGlock=
 	self.glockclip += self.glock_fired;
 	UpdateWeapon();
 	self.glock_fired = 0;
-	self.sequence = 7;
+	self.wepsequence = 7;
 	self.weaponframe = r_frame;
 	Glock_Reload();
 }
@@ -79,7 +79,7 @@ void(float r_frame)ReloadWeaponM3=
 		self.ammo_m3 = 0;
 		UpdateWeapon();
 		self.m3_fired = 0;
-		self.sequence = 5;
+		self.wepsequence = 5;
 		self.weaponframe = r_frame;
 		M3_Reload_Start();
 		return;
@@ -87,7 +87,7 @@ void(float r_frame)ReloadWeaponM3=
 	self.ammo_m3 -= self.m3_fired;
 	UpdateWeapon();
 	self.m3_fired = 0;
-	self.sequence = 5;
+	self.wepsequence = 5;
 	self.weaponframe = r_frame;
 	M3_Reload_Start();
 }
@@ -106,7 +106,7 @@ void(float r_frame)ReloadWeaponXM=
 		self.ammo_xm = 0;
 		UpdateWeapon();
 		self.xm_fired = 0;
-		self.sequence = 5;
+		self.wepsequence = 5;
 		self.weaponframe = r_frame;
 		XM_Reload_Start();
 		return;
@@ -114,7 +114,7 @@ void(float r_frame)ReloadWeaponXM=
 	self.ammo_xm -= self.xm_fired;
 	UpdateWeapon();
 	self.xm_fired = 0;
-	self.sequence = 5;
+	self.wepsequence = 5;
 	self.weaponframe = r_frame;
 	XM_Reload_Start();
 }
@@ -132,7 +132,7 @@ void(float r_frame)ReloadWeaponDeagle=
 		self.ammo_deagle = 0;
 		UpdateWeapon();
 		self.deagle_fired = 0;
-		self.sequence = 4;
+		self.wepsequence = 4;
 		self.weaponframe = r_frame;
 		Deagle_Reload();
 		return;
@@ -141,7 +141,7 @@ void(float r_frame)ReloadWeaponDeagle=
 	self.deagleclip += self.deagle_fired;
 	UpdateWeapon();
 	self.deagle_fired = 0;
-	self.sequence = 4;
+	self.wepsequence = 4;
 	self.weaponframe = r_frame;
 	Deagle_Reload();
 }
@@ -159,7 +159,7 @@ void(float r_frame)ReloadWeaponP228=
 		self.ammo_p228 = 0;
 		UpdateWeapon();
 		self.p228_fired = 0;
-		self.sequence = 5;
+		self.wepsequence = 5;
 		self.weaponframe = r_frame;
 		P228_Reload();
 		return;
@@ -168,7 +168,7 @@ void(float r_frame)ReloadWeaponP228=
 	self.p228clip += self.p228_fired;
 	UpdateWeapon();
 	self.p228_fired = 0;
-	self.sequence = 5;
+	self.wepsequence = 5;
 	self.weaponframe = r_frame;
 	P228_Reload();
 }
@@ -186,7 +186,7 @@ void(float r_frame)ReloadWeaponELITE=
 		self.ammo_elite = 0;
 		UpdateWeapon();
 		self.elite_fired = 0;
-		self.sequence = 14;
+		self.wepsequence = 14;
 		self.weaponframe = r_frame;
 		ELITE_Reload();
 		return;
@@ -195,7 +195,7 @@ void(float r_frame)ReloadWeaponELITE=
 	self.eliteclip += self.elite_fired;
 	UpdateWeapon();
 	self.elite_fired = 0;
-	self.sequence = 14;
+	self.wepsequence = 14;
 	self.weaponframe = r_frame;
 	ELITE_Reload();
 }
@@ -213,7 +213,7 @@ void(float r_frame)ReloadAK47=
 		self.ammo_ak47 = 0;
 		UpdateWeapon();
 		self.ak47_fired = 0;
-		self.sequence = 1;
+		self.wepsequence = 1;
 		self.weaponframe = r_frame;
 		AK47_Reload();
 		return;
@@ -222,7 +222,7 @@ void(float r_frame)ReloadAK47=
 	self.ak47clip += self.ak47_fired;
 	UpdateWeapon();
 	self.ak47_fired = 0;
-	self.sequence = 1;
+	self.wepsequence = 1;
 	self.weaponframe = r_frame;
 	AK47_Reload();
 }
@@ -240,7 +240,7 @@ void(float r_frame)ReloadAWP=
 		self.ammo_awp = 0;
 		UpdateWeapon();
 		self.awp_fired = 0;
-		self.sequence = 4;
+		self.wepsequence = 4;
 		self.weaponframe = r_frame;
 		AWP_Reload();
 		return;
@@ -249,7 +249,7 @@ void(float r_frame)ReloadAWP=
 	self.awpclip += self.awp_fired;
 	UpdateWeapon();
 	self.awp_fired = 0;
-	self.sequence = 4;
+	self.wepsequence = 4;
 	self.weaponframe = r_frame;
 	AWP_Reload();
 }
@@ -267,7 +267,7 @@ void(float r_frame)ReloadGalil=
 		self.ammo_galil = 0;
 		UpdateWeapon();
 		self.galil_fired = 0;
-		self.sequence = 1;
+		self.wepsequence = 1;
 		self.weaponframe = r_frame;
 		Galil_Reload();
 		return;
@@ -276,7 +276,7 @@ void(float r_frame)ReloadGalil=
 	self.galilclip += self.galil_fired;
 	UpdateWeapon();
 	self.galil_fired = 0;
-	self.sequence = 1;
+	self.wepsequence = 1;
 	self.weaponframe = r_frame;
 	Galil_Reload();
 }
@@ -294,7 +294,7 @@ void(float r_frame)ReloadAug=
 		self.ammo_aug = 0;
 		UpdateWeapon();
 		self.aug_fired = 0;
-		self.sequence = 1;
+		self.wepsequence = 1;
 		self.weaponframe = r_frame;
 		Aug_Reload();
 		return;
@@ -303,7 +303,7 @@ void(float r_frame)ReloadAug=
 	self.augclip += self.aug_fired;
 	UpdateWeapon();
 	self.aug_fired = 0;
-	self.sequence = 1;
+	self.wepsequence = 1;
 	self.weaponframe = r_frame;
 	Aug_Reload();
 }
@@ -321,7 +321,7 @@ void(float r_frame)ReloadFamas=
 		self.ammo_famas = 0;
 		UpdateWeapon();
 		self.famas_fired = 0;
-		self.sequence = 1;
+		self.wepsequence = 1;
 		self.weaponframe = r_frame;
 		Famas_Reload();
 		return;
@@ -330,7 +330,7 @@ void(float r_frame)ReloadFamas=
 	self.famasclip += self.famas_fired;
 	UpdateWeapon();
 	self.famas_fired = 0;
-	self.sequence = 1;
+	self.wepsequence = 1;
 	self.weaponframe = r_frame;
 	Famas_Reload();
 }
@@ -349,9 +349,9 @@ void(float r_frame)ReloadM4A1=
 		UpdateWeapon();
 		self.m4a1_fired = 0;
 		if(self.m4a1silencer)
-			self.sequence = 4;
+			self.wepsequence = 4;
 		else
-			self.sequence = 11;
+			self.wepsequence = 11;
 		self.weaponframe = r_frame;
 		M4A1_Reload();
 		return;
@@ -361,9 +361,9 @@ void(float r_frame)ReloadM4A1=
 	UpdateWeapon();
 	self.m4a1_fired = 0;
 	if(self.m4a1silencer)
-		self.sequence = 4;
+		self.wepsequence = 4;
 	else
-		self.sequence = 11;
+		self.wepsequence = 11;
 	self.weaponframe = r_frame;
 	M4A1_Reload();
 }
@@ -381,7 +381,7 @@ void(float r_frame)ReloadMac10=
 		self.ammo_mac10 = 0;
 		UpdateWeapon();
 		self.mac10_fired = 0;
-		self.sequence = 1;
+		self.wepsequence = 1;
 		self.weaponframe = r_frame;
 		Mac10_Reload();
 		return;
@@ -390,7 +390,7 @@ void(float r_frame)ReloadMac10=
 	self.mac10clip += self.mac10_fired;
 	UpdateWeapon();
 	self.mac10_fired = 0;
-	self.sequence = 1;
+	self.wepsequence = 1;
 	self.weaponframe = r_frame;
 	Mac10_Reload();
 }
@@ -408,7 +408,7 @@ void(float r_frame)ReloadMp5=
 		self.ammo_mp5 = 0;
 		UpdateWeapon();
 		self.mp5_fired = 0;
-		self.sequence = 1;
+		self.wepsequence = 1;
 		self.weaponframe = r_frame;
 		Mp5_Reload();
 		return;
@@ -417,7 +417,7 @@ void(float r_frame)ReloadMp5=
 	self.mp5clip += self.mp5_fired;
 	UpdateWeapon();
 	self.mp5_fired = 0;
-	self.sequence = 1;
+	self.wepsequence = 1;
 	self.weaponframe = r_frame;
 	Mp5_Reload();
 }

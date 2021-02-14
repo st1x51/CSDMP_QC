@@ -3,7 +3,7 @@ void()anim_galil_attack=
 	if(self.weaponframe == 30)
 	{
 		self.state = 0;
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		return;
 	}
@@ -23,7 +23,7 @@ void()Galil_Reload=
 	{
 		self.state = 0;
 		UpdateWeapon();
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		return;
 	}
@@ -39,7 +39,7 @@ void()Galil_PrimaryAttack=
 		ReloadGalil(0); 
 		return;
 	}
-	self.sequence = 3;
+	self.wepsequence = 3;
 	self.weaponframe = 0;
 	self.galilclip -= 1;
 	self.galil_fired += 1;

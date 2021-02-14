@@ -3,7 +3,7 @@ void()anim_mac10_attack=
 	if(self.weaponframe == 25)
 	{
 		self.state = 0;
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		return;
 	}
@@ -23,7 +23,7 @@ void()Mac10_Reload=
 	{
 		self.state = 0;
 		UpdateWeapon();
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		return;
 	}
@@ -38,7 +38,7 @@ void()Mac10_PrimaryAttack=
 		ReloadMac10(0); 
 		return;
 	}
-	self.sequence = 3;
+	self.wepsequence = 3;
 	self.weaponframe = 0;
 	self.mac10clip -= 1;
 	self.mac10_fired += 1;

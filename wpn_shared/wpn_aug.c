@@ -3,7 +3,7 @@ void()anim_aug_attack=
 	if(self.weaponframe == 30)
 		{
 			self.state = 0;
-			self.sequence = 0;
+			self.wepsequence = 0;
 			self.weaponframe = 0;
 			return;
 		}
@@ -21,7 +21,7 @@ void()Aug_PrimaryAttack=
 		ReloadAug(0); 
 		return;
 	}
-	self.sequence = 3;
+	self.wepsequence = 3;
 	self.weaponframe = 0;
 	self.augclip -= 1;
 	self.aug_fired += 1;
@@ -37,7 +37,7 @@ void()Aug_Reload=
 {
 	if(self.weaponframe == 132) 
 	{
-		self.sequence = 0;
+		self.wepsequence = 0;
 		self.weaponframe = 0;
 		UpdateWeapon();
 		self.state = 0;
