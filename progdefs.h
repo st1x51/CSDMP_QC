@@ -155,6 +155,7 @@ typedef struct entvars_s
 	float	renderamt;
 	float	rendermode;
 	vec3_t	rendercolor;
+	float	renderfx;
 } entvars_t;
 
-#define PROGHEADER_CRC 2034
+#define PROGHEADER_CRC 46134

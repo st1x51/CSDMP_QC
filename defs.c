@@ -116,6 +116,7 @@ void		end_sys_globals;		// flag for structure dumping
 .float	 renderamt;
 .float	 rendermode;
 .vector	 rendercolor;
+.float   renderfx;
 void		end_sys_fields;			// flag for structure dumping
 // End. Lines below this MAY be altered, to some extent
 
