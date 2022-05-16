@@ -57,6 +57,7 @@ void() smoke_amim =
 	if(smoke.frame == 15)
 	{
 		SUB_Remove();
+		return;
 	}
 	smoke.frame += 1;
 	smoke.think = smoke_amim;
@@ -73,6 +74,8 @@ void()Smoke3_C=
 	smoke.origin_z -= 5;
 	smoke.touch = SUB_Null;
 	setmodel (smoke, "sprites/steam1.spr");
+	smoke.rendermode = 2; //FIXME
+	smoke.renderamt = 255;
 	smoke.solid = SOLID_NOT;
 	smoke.frame = 1;
 	
@@ -94,6 +97,7 @@ void() fexplo_anim =
 	if(fexplo.frame == 29)
 	{
 		SUB_Remove();
+		return
 	}
 	fexplo.frame += 1;
 	fexplo.think = fexplo_anim;
@@ -110,6 +114,11 @@ void() BecomeExplosion =
 	fexplo.origin_z += 20 ;
 	fexplo.touch = SUB_Null;
 	setmodel (fexplo, "sprites/fexplo.spr");
+	fexplo.rendermode = 5;
+	fexplo.renderamt = 255;
+	fexplo.rendercolor_x = 255;
+	fexplo.rendercolor_y = 255;	
+	fexplo.rendercolor_z = 255;	
 	fexplo.solid = SOLID_NOT;
 	fexplo.frame = 1;
 	fexplo_anim();
@@ -127,6 +136,11 @@ void() BecomeExplosion2 =
 	exp.origin_z += randomfloat(30,35);
 	exp.touch = SUB_Null;
 	setmodel (exp, "sprites/eexplo.spr");
+	exp.rendermode = 5;
+	exp.renderamt = 255;
+	exp.rendercolor_x = 255;
+	exp.rendercolor_y = 255;	
+	exp.rendercolor_z = 255;	
 	exp.solid = SOLID_NOT;
 	exp.frame = 1;
 	eexplo();
@@ -144,7 +158,7 @@ void() GrenadeExplode =
 	
 	BecomeExplosion();
 	BecomeExplosion2();
-	self.nextthink = time + 0.55;
+	self.nextthink = time + 0.1;
 	self.think = Smoke3_C;
 	SUB_Remove();
 };
@@ -187,7 +201,6 @@ void() he_anim_attack=
 	{
 		self.weaponframe = 1;
 		self.state = 0;
-		//self.items = self.items - (self.items & IT_HEGRENADE);
 		ChangeWeapon();
 		return;
 	}

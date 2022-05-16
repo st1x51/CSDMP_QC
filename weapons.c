@@ -59,12 +59,15 @@ void(vector org) SparkTrace =
 	spark.touch = SUB_Null;
 	setmodel (spark, "sprites/pistol_smoke1.spr");
 	spark.rendermode = 3;
+	spark.renderamt = 255;
+	spark.rendercolor_x = 255;
+	spark.rendercolor_y = 255;	
+	spark.rendercolor_z = 255;	
 	spark.solid = SOLID_NOT;
 	spark.frame = 1;
 	spark.think = spark1;
 	spark.nextthink = time + 0.01;
 };
-
 /*
 -=-=-=-=-=-=
 TraceAttack
