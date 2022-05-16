@@ -97,7 +97,7 @@ void() fexplo_anim =
 	if(fexplo.frame == 29)
 	{
 		SUB_Remove();
-		return
+		return;
 	}
 	fexplo.frame += 1;
 	fexplo.think = fexplo_anim;
