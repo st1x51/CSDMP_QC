@@ -128,14 +128,14 @@ void() breakable_die=
 		new.velocity_z = 140 + 70 * random();
 		new.movetype = MOVETYPE_BOUNCE;
 		new.solid = SOLID_BBOX;
-		/*
-		FIXME:engineside rendermode for hlmdl
-		new.rendermode = self.rendermode;
-		new.renderamt = self.renderamt;
-		new.rendercolor_x = self.rendercolor_x;
-		new.rendercolor_y = self.rendercolor_y;
-		new.rendercolor_x = self.rendercolor_z;
-		*/
+		
+		//FIXME: find solution for this
+		if(self.rendermode == 2)
+		{
+			new.rendermode = 5;
+			new.renderamt = self.renderamt * 2;
+		}
+		
 		new.avelocity_x = random()*600;
 		new.avelocity_y = random()*600;
 		new.avelocity_z = random()*600;
